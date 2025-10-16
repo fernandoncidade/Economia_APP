@@ -35,7 +35,7 @@ def calculate_investment(self):
         steps.append(f"VAUE = {vpl:.2f} * {factor_ap:.6f} = R$ {vaue:.2f}\n\n")
         steps.append(f"Conclusão: O projeto é {'viável' if vpl > 0 else 'inviável'} (VPL {'>' if vpl>0 else '<='} 0).\n")
 
-        self.invest_result.setText("".join(steps))
+        self.invest_result.append("".join(steps))
 
     except Exception as e:
-        self.invest_result.setText(f"Erro: {e}")
+        self.invest_result.append(f"Erro: {e}")

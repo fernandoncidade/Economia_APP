@@ -51,7 +51,8 @@ def calculate_gradient(self):
 
             result_text = "".join(steps)
 
-        self.grad_result.setText(result_text)
+        if result_text:
+            self.grad_result.append(result_text)
 
     except Exception as e:
-        self.grad_result.setText(f"Erro: {e}")
+        self.grad_result.append(f"Erro: {e}")

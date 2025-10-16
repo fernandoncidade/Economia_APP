@@ -16,6 +16,9 @@ from .ui import (
     generate_sam_table,
     set_amort_table_row,
     get_table_data,
+    export_to_pdf,
+    export_amortization_pdf,
+    create_menu_bar,
 )
 
 # Import dos serviços (cálculos) via source/services/__init__.py
@@ -49,6 +52,9 @@ class FinancialCalculatorApp(QMainWindow):
         self.create_investment_tab()
         self.create_depreciation_tab()
 
+        # Barra de menus
+        self.create_menu_bar()
+
 # Vincular as funções importadas como métodos da classe (disponíveis via self)
 FinancialCalculatorApp.create_layout = create_layout
 FinancialCalculatorApp.get_float_from_line_edit = get_float_from_line_edit
@@ -77,3 +83,9 @@ FinancialCalculatorApp.calculate_real_rate = calculate_real_rate
 FinancialCalculatorApp.calculate_amortization = calculate_amortization
 FinancialCalculatorApp.calculate_investment = calculate_investment
 FinancialCalculatorApp.calculate_depreciation = calculate_depreciation
+
+# Export PDF helper
+FinancialCalculatorApp.export_to_pdf = export_to_pdf
+FinancialCalculatorApp.export_amortization_pdf = export_amortization_pdf
+# Menu bar
+FinancialCalculatorApp.create_menu_bar = create_menu_bar

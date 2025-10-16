@@ -15,10 +15,10 @@ def calculate_rate_equivalence(self):
         steps.append(f"Cálculo intermediário: (1 + i)^(n2/n1) = {pow_val:.6f}\n")
         steps.append(f"i_eq = {pow_val:.6f} - 1 = {i_eq * 100:.6f} %\n")
 
-        self.rate_equiv_result.setText("".join(steps))
+        self.rate_equiv_result.append("".join(steps))
 
     except Exception as e:
-        self.rate_equiv_result.setText(f"Erro: {e}")
+        self.rate_equiv_result.append(f"Erro: {e}")
 
 def calculate_real_rate(self):
     try:
@@ -36,7 +36,7 @@ def calculate_real_rate(self):
             prod = (1 + r) * (1 + inflation)
             steps.append(f"Cálculo intermediário: (1 + r)*(1 + θ) = {prod:.6f}\n")
             steps.append(f"i = {prod:.6f} - 1 = {i * 100:.6f} %\n")
-            self.rate_real_result.setText("".join(steps))
+            self.rate_real_result.append("".join(steps))
 
         else: # Calcular Taxa Real
             i = self.get_float_from_line_edit(self.rate_real_i, is_percentage=True)
@@ -50,7 +50,7 @@ def calculate_real_rate(self):
             div = (1 + i) / (1 + inflation)
             steps.append(f"Cálculo intermediário: (1 + i)/(1 + θ) = {div:.6f}\n")
             steps.append(f"r = {div:.6f} - 1 = {r * 100:.6f} %\n")
-            self.rate_real_result.setText("".join(steps))
+            self.rate_real_result.append("".join(steps))
 
     except Exception as e:
-        self.rate_real_result.setText(f"Erro: {e}")
+        self.rate_real_result.append(f"Erro: {e}")

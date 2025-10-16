@@ -12,6 +12,9 @@ from .ui_11_generate_price_table import generate_price_table
 from .ui_12_generate_sam_table import generate_sam_table
 from .ui_13_set_amort_table_row import set_amort_table_row
 from .ui_14_get_table_data import get_table_data
+from .ui_15_export_pdf import export_to_pdf
+from .ui_15_export_pdf import export_amortization_pdf
+from .ui_16_menu_bar import create_menu_bar
 
 __all__ = [
     "create_layout",
@@ -28,4 +31,7 @@ __all__ = [
     "generate_sam_table",
     "set_amort_table_row",
     "get_table_data",
+    "export_to_pdf",
+    "export_amortization_pdf",
+    "create_menu_bar",
 ]

@@ -47,7 +47,8 @@ def calculate_depreciation(self):
 
             result_text = "".join(steps)
 
-        self.deprec_result.setText(result_text)
+        if result_text:
+            self.deprec_result.append(result_text)
 
     except Exception as e:
-        self.deprec_result.setText(f"Erro: {e}")
+        self.deprec_result.append(f"Erro: {e}")

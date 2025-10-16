@@ -45,7 +45,8 @@ def calculate_annuity(self):
                 steps.append(f"Prestação A' = {p:.2f} * {factor:.6f} = R$ {a:.2f}\n")
                 result_text = "".join(steps)
 
-            self.annuity_result.setText(result_text)
+            if result_text:
+                self.annuity_result.append(result_text)
 
         else: # Calcular P
             a = self.get_float_from_line_edit(self.annuity_a)
@@ -83,7 +84,8 @@ def calculate_annuity(self):
                 steps.append(f"P = {a:.2f} * {factor:.6f} = R$ {p:.2f}\n")
                 result_text = "".join(steps)
 
-            self.annuity_result.setText(result_text)
+            if result_text:
+                self.annuity_result.append(result_text)
 
     except Exception as e:
-        self.annuity_result.setText(f"Erro: {e}")
+        self.annuity_result.append(f"Erro: {e}")

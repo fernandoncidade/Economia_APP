@@ -1,4 +1,6 @@
-from PySide6.QtWidgets import QWidget, QHBoxLayout, QLineEdit, QPushButton, QComboBox, QTextEdit, QTableWidget, QTableWidgetItem, QHeaderView, QSizePolicy
+from PySide6.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLineEdit, QPushButton, QComboBox, QTableWidget, QTableWidgetItem, QHeaderView, QSizePolicy
+from PySide6.QtCore import Qt
+from .ui_17_history_container import HistoryContainer
 
 def create_amortization_tab(self):
     widget, layout, right_layout = self.create_layout()
@@ -20,8 +22,7 @@ def create_amortization_tab(self):
     self.amort_table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
     self.amort_table.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
 
-    self.amort_result = QTextEdit()
-    self.amort_result.setReadOnly(True)
+    self.amort_result = HistoryContainer(self)
     self.amort_result.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
 
     layout.addRow("Sistema de Amortização:", self.amort_system)
@@ -31,14 +32,51 @@ def create_amortization_tab(self):
     layout.addRow(calc_button)
 
     btn_widget = QWidget()
-    btn_layout = QHBoxLayout(btn_widget)
-    btn_layout.setContentsMargins(0, 0, 0, 0)
+    btn_widget.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
+    btn_vlayout = QVBoxLayout(btn_widget)
+    btn_vlayout.setContentsMargins(0,0,0,0)
+    btn_vlayout.setAlignment(Qt.AlignLeft)
+
+    top_row = QWidget()
+    top_layout = QHBoxLayout(top_row)
+    top_layout.setContentsMargins(0,0,0,0)
+    top_layout.setAlignment(Qt.AlignLeft)
+    top_layout.setSpacing(6)
     btn_clear_inputs = QPushButton("Limpar Entrada")
     btn_clear_output = QPushButton("Limpar Saída")
     btn_clear_all = QPushButton("Limpar Tudo")
-    btn_layout.addWidget(btn_clear_inputs)
-    btn_layout.addWidget(btn_clear_output)
-    btn_layout.addWidget(btn_clear_all)
+    top_layout.addWidget(btn_clear_inputs)
+    top_layout.addWidget(btn_clear_output)
+    top_layout.addWidget(btn_clear_all)
+    btn_vlayout.addWidget(top_row)
+
+    bottom_row = QWidget()
+    bottom_layout = QHBoxLayout(bottom_row)
+    bottom_layout.setContentsMargins(0,0,0,0)
+    bottom_layout.setAlignment(Qt.AlignLeft)
+    bottom_layout.setSpacing(6)
+    btn_edit = QPushButton("Editar Cálculo")
+    btn_delete = QPushButton("Excluir Seleção")
+    btn_export = QPushButton("Exportar PDF")
+    bottom_layout.addWidget(btn_edit)
+    bottom_layout.addWidget(btn_delete)
+    bottom_layout.addWidget(btn_export)
+    btn_vlayout.addWidget(bottom_row)
+
+    btn_export.clicked.connect(lambda: self.export_amortization_pdf("amortizacao.pdf"))
+    btn_delete.clicked.connect(lambda: self.amort_result.delete_selected())
+    def toggle_edit_amort():
+        if self.amort_result.is_editing():
+            self.amort_result.commit_edit()
+            btn_edit.setText("Editar Cálculo")
+
+        else:
+            ok = self.amort_result.edit_selected()
+            if ok:
+                btn_edit.setText("Salvar Edição")
+
+    btn_edit.clicked.connect(toggle_edit_amort)
+
     layout.addRow(btn_widget)
 
     def clear_inputs():

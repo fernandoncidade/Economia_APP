@@ -34,7 +34,7 @@ def calculate_amortization(self):
             steps.append(f" Juros J_1 = SD_0 * i = {p:.2f} * {i:.6f} = R$ {juros1:.2f}\n")
             steps.append(f" Prestação = A_1 + J_1 = {amort_const:.2f} + {juros1:.2f} = R$ {prest1:.2f}\n")
             steps.append(f" Saldo SD_1 = SD_0 - A_1 = {p:.2f} - {amort_const:.2f} = R$ {saldo1:.2f}\n")
-            self.amort_result.setText("".join(steps))
+            self.amort_result.append("".join(steps))
 
             self.generate_sac_table(p, i, n)
 
@@ -62,7 +62,7 @@ def calculate_amortization(self):
             steps.append(f" Juros J_1 = SD_0 * i = {p:.2f} * {i:.6f} = R$ {juros1:.2f}\n")
             steps.append(f" Amortização Amort_1 = A - J_1 = {prest:.2f} - {juros1:.2f} = R$ {amort1:.2f}\n")
             steps.append(f" Saldo SD_1 = SD_0 - Amort_1 = {p:.2f} - {amort1:.2f} = R$ {saldo1:.2f}\n")
-            self.amort_result.setText("".join(steps))
+            self.amort_result.append("".join(steps))
 
             self.generate_price_table(p, i, n)
 
@@ -101,7 +101,7 @@ def calculate_amortization(self):
             steps.append(f"Amort_1 = ({amort_const:.2f}+{price_amort1:.2f})/2 = {sam_amort1:.2f}, ")
             steps.append(f"SD_1 = ({sac_saldo1:.2f}+{price_saldo1:.2f})/2 = {sam_saldo1:.2f}\n")
 
-            self.amort_result.setText("".join(steps))
+            self.amort_result.append("".join(steps))
 
             self.generate_sam_table(p, i, n)
 
@@ -109,4 +109,4 @@ def calculate_amortization(self):
         self.amort_table.setRowCount(1)
         self.amort_table.setSpan(0,0,1,5)
         self.amort_table.setItem(0,0, QTableWidgetItem(f"Erro ao gerar tabela: {e}"))
-        self.amort_result.setText(f"Erro: {e}")
+        self.amort_result.append(f"Erro: {e}")

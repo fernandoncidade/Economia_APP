@@ -57,7 +57,9 @@ def calculate_interest(self):
                 steps.append(f"Principal: P = {f:.2f} / {denom:.6f} = R$ {p:.2f}\n")
                 result_text = "".join(steps)
 
-        self.interest_result.setText(result_text)
+        # Anexa o resultado preservando o anterior
+        if result_text:
+            self.interest_result.append(result_text)
 
     except Exception as e:
-        self.interest_result.setText(f"Erro: {e}")
+        self.interest_result.append(f"Erro: {e}")

@@ -1,0 +1,79 @@
+from PySide6.QtWidgets import QMainWindow, QTabWidget
+
+# Import das funções de UI (create_*) e helpers — usando os __init__.py de cada pacote
+from .ui import (
+    create_layout,
+    get_float_from_line_edit,
+    create_interest_tab,
+    create_annuity_tab,
+    create_gradient_tab,
+    create_rates_tab,
+    create_amortization_tab,
+    create_investment_tab,
+    create_depreciation_tab,
+    generate_sac_table,
+    generate_price_table,
+    generate_sam_table,
+    set_amort_table_row,
+    get_table_data,
+)
+
+# Import dos serviços (cálculos) via source/services/__init__.py
+from .services import (
+    calculate_interest,
+    calculate_annuity,
+    calculate_gradient,
+    calculate_rate_equivalence,
+    calculate_real_rate,
+    calculate_amortization,
+    calculate_investment,
+    calculate_depreciation,
+)
+
+
+class FinancialCalculatorApp(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle("Calculadora de Economia de Engenharia - TT007")
+        self.setGeometry(100, 100, 900, 600)
+
+        self.tabs = QTabWidget()
+        self.setCentralWidget(self.tabs)
+
+        # Chamadas de criação das abas — essas funções foram importadas acima
+        self.create_interest_tab()
+        self.create_annuity_tab()
+        self.create_gradient_tab()
+        self.create_rates_tab()
+        self.create_amortization_tab()
+        self.create_investment_tab()
+        self.create_depreciation_tab()
+
+# Vincular as funções importadas como métodos da classe (disponíveis via self)
+FinancialCalculatorApp.create_layout = create_layout
+FinancialCalculatorApp.get_float_from_line_edit = get_float_from_line_edit
+
+FinancialCalculatorApp.create_interest_tab = create_interest_tab
+FinancialCalculatorApp.create_annuity_tab = create_annuity_tab
+FinancialCalculatorApp.create_gradient_tab = create_gradient_tab
+FinancialCalculatorApp.create_rates_tab = create_rates_tab
+FinancialCalculatorApp.create_amortization_tab = create_amortization_tab
+FinancialCalculatorApp.create_investment_tab = create_investment_tab
+FinancialCalculatorApp.create_depreciation_tab = create_depreciation_tab
+
+# Amortization helpers
+FinancialCalculatorApp.generate_sac_table = generate_sac_table
+FinancialCalculatorApp.generate_price_table = generate_price_table
+FinancialCalculatorApp.generate_sam_table = generate_sam_table
+FinancialCalculatorApp.set_amort_table_row = set_amort_table_row
+FinancialCalculatorApp.get_table_data = get_table_data
+
+# Services (cálculos)
+FinancialCalculatorApp.calculate_interest = calculate_interest
+FinancialCalculatorApp.calculate_annuity = calculate_annuity
+FinancialCalculatorApp.calculate_gradient = calculate_gradient
+FinancialCalculatorApp.calculate_rate_equivalence = calculate_rate_equivalence
+FinancialCalculatorApp.calculate_real_rate = calculate_real_rate
+FinancialCalculatorApp.calculate_amortization = calculate_amortization
+FinancialCalculatorApp.calculate_investment = calculate_investment
+FinancialCalculatorApp.calculate_depreciation = calculate_depreciation

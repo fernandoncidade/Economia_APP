@@ -1,16 +1,18 @@
 from PySide6.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLineEdit, QPushButton, QComboBox, QSizePolicy
 from PySide6.QtGui import QDoubleValidator
+from PySide6.QtCore import QCoreApplication
 from .ui_17_history_container import HistoryContainer
 
 def create_interest_tab(self):
+    tr = QCoreApplication.translate
     widget, layout, right_layout = self.create_layout()
-    self.tabs.addTab(widget, "Juros Simples e Compostos")
+    self.tabs.addTab(widget, tr("App", "Juros Simples e Compostos"))
 
     self.interest_calc_type = QComboBox()
-    self.interest_calc_type.addItems(["Calcular Montante (F)", "Calcular Principal (P)"])
+    self.interest_calc_type.addItems([tr("App", "Calcular Montante (F)"), tr("App", "Calcular Principal (P)")])
 
     self.interest_regime = QComboBox()
-    self.interest_regime.addItems(["Juros Compostos", "Juros Simples"])
+    self.interest_regime.addItems([tr("App", "Juros Compostos"), tr("App", "Juros Simples")])
 
     self.interest_p = QLineEdit()
     self.interest_f = QLineEdit()
@@ -25,28 +27,27 @@ def create_interest_tab(self):
     self.interest_result = HistoryContainer(self)
     self.interest_result.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
 
-    calc_button = QPushButton("Calcular")
+    calc_button = QPushButton(tr("App", "Calcular"))
     calc_button.clicked.connect(self.calculate_interest)
 
     layout.addRow(self.interest_calc_type)
     layout.addRow(self.interest_regime)
-    layout.addRow("Valor Principal (P):", self.interest_p)
-    layout.addRow("Valor do Montante (F):", self.interest_f)
-    layout.addRow("Taxa de Juros (i % ao período):", self.interest_i)
-    layout.addRow("Número de Períodos (n):", self.interest_n)
+    layout.addRow(tr("App", "Valor Principal (P):"), self.interest_p)
+    layout.addRow(tr("App", "Valor do Montante (F):"), self.interest_f)
+    layout.addRow(tr("App", "Taxa de Juros (i % ao período):"), self.interest_i)
+    layout.addRow(tr("App", "Número de Períodos (n):"), self.interest_n)
     layout.addRow(calc_button)
 
     btn_widget = QWidget()
-
     btn_vlayout = QVBoxLayout(btn_widget)
     btn_vlayout.setContentsMargins(0, 0, 0, 0)
 
     top_row = QWidget()
     top_layout = QHBoxLayout(top_row)
     top_layout.setContentsMargins(0, 0, 0, 0)
-    btn_clear_inputs = QPushButton("Limpar Entrada")
-    btn_clear_output = QPushButton("Limpar Saída")
-    btn_clear_all = QPushButton("Limpar Tudo")
+    btn_clear_inputs = QPushButton(tr("App", "Limpar Entrada"))
+    btn_clear_output = QPushButton(tr("App", "Limpar Saída"))
+    btn_clear_all = QPushButton(tr("App", "Limpar Tudo"))
     top_layout.addWidget(btn_clear_inputs)
     top_layout.addWidget(btn_clear_output)
     top_layout.addWidget(btn_clear_all)
@@ -55,9 +56,9 @@ def create_interest_tab(self):
     bottom_row = QWidget()
     bottom_layout = QHBoxLayout(bottom_row)
     bottom_layout.setContentsMargins(0, 0, 0, 0)
-    btn_edit = QPushButton("Editar Cálculo")
-    btn_delete = QPushButton("Excluir Seleção")
-    btn_export = QPushButton("Exportar PDF")
+    btn_edit = QPushButton(tr("App", "Editar Cálculo"))
+    btn_delete = QPushButton(tr("App", "Excluir Seleção"))
+    btn_export = QPushButton(tr("App", "Exportar PDF"))
     bottom_layout.addWidget(btn_edit)
     bottom_layout.addWidget(btn_delete)
     bottom_layout.addWidget(btn_export)
@@ -69,13 +70,13 @@ def create_interest_tab(self):
     def toggle_edit():
         if self.interest_result.is_editing():
             self.interest_result.commit_edit()
-            btn_edit.setText("Editar Cálculo")
+            btn_edit.setText(tr("App", "Editar Cálculo"))
             self.interest_p.setFocus()
 
         else:
             ok = self.interest_result.edit_selected()
             if ok:
-                btn_edit.setText("Salvar Edição")
+                btn_edit.setText(tr("App", "Salvar Edição"))
 
             else:
                 pass
@@ -106,7 +107,7 @@ def create_interest_tab(self):
     right_layout.addWidget(self.interest_result)
 
     def toggle_fields():
-        if self.interest_calc_type.currentText() == "Calcular Montante (F)":
+        if self.interest_calc_type.currentText() == tr("App", "Calcular Montante (F)"):
             self.interest_p.setEnabled(True)
             self.interest_f.setEnabled(False)
             self.interest_f.clear()

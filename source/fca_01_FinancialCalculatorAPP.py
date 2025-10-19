@@ -1,4 +1,6 @@
 from PySide6.QtWidgets import QMainWindow, QTabWidget
+from language.tr_01_gerenciadorTraducao import GerenciadorTraducao
+from PySide6.QtCore import QCoreApplication
 
 # Import das funções de UI (create_*) e helpers — usando os __init__.py de cada pacote
 from .ui import (
@@ -37,11 +39,30 @@ from .services import (
 class FinancialCalculatorApp(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("Calculadora de Economia de Engenharia - TT007")
+        self.tr = lambda s: QCoreApplication.translate("App", s)
         self.setGeometry(100, 100, 900, 600)
 
         self.tabs = QTabWidget()
         self.setCentralWidget(self.tabs)
+
+        self.gerenciador = GerenciadorTraducao()
+
+        self.gerenciador.idioma_alterado.connect(self.on_language_changed)
+        self.gerenciador.aplicar_traducao()
+        self.setWindowTitle(self.tr("Calculadora de Economia de Engenharia - TT007"))
+        self.rebuild_ui()
+
+    def on_language_changed(self, codigo_idioma):
+        try:
+            self.setWindowTitle(self.tr("Calculadora de Economia de Engenharia - TT007"))
+            self.rebuild_ui()
+
+        except Exception as e:
+            print(f"Erro ao mudar idioma: {e}")
+
+    def rebuild_ui(self):
+        # Limpa abas e recria tudo para reaplicar traduções
+        self.tabs.clear()
 
         # Chamadas de criação das abas — essas funções foram importadas acima
         self.create_interest_tab()
@@ -52,7 +73,7 @@ class FinancialCalculatorApp(QMainWindow):
         self.create_investment_tab()
         self.create_depreciation_tab()
 
-        # Barra de menus
+        # Barra de menus (recria para atualizar textos traduzíveis)
         self.create_menu_bar()
 
 # Vincular as funções importadas como métodos da classe (disponíveis via self)

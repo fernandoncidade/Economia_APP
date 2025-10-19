@@ -1,17 +1,36 @@
 from PySide6.QtWidgets import QMenuBar, QTextEdit
 from PySide6.QtGui import QAction
+from PySide6.QtCore import QCoreApplication
 from html import escape
 from .ui_15_export_pdf import amort_table_to_html
 
 def create_menu_bar(self):
+    tr = QCoreApplication.translate
     menubar = QMenuBar(self)
-    file_menu = menubar.addMenu("Arquivos")
+    file_menu = menubar.addMenu(tr("App", "Arquivos"))
 
-    export_current_action = QAction("Exportar Atual", self)
-    export_all_action = QAction("Exportar Todos", self)
+    export_current_action = QAction(tr("App", "Exportar Atual"), self)
+    export_all_action = QAction(tr("App", "Exportar Todos"), self)
 
     file_menu.addAction(export_current_action)
     file_menu.addAction(export_all_action)
+
+    # Menu de configuração / idiomas
+    config_menu = menubar.addMenu(tr("App", "Configuração"))
+    idiomas_menu = config_menu.addMenu(tr("App", "Idiomas"))
+
+    action_pt = QAction(tr("App", "Português (Brasil)"), self)
+    action_en = QAction(tr("App", "English (United States)"), self)
+    idiomas_menu.addAction(action_pt)
+    idiomas_menu.addAction(action_en)
+
+    def set_language(code):
+        gm = getattr(self, "gerenciador", None)
+        if gm:
+            gm.definir_idioma(code)
+
+    action_pt.triggered.connect(lambda: set_language("pt_BR"))
+    action_en.triggered.connect(lambda: set_language("en_US"))
 
     def export_all():
         sections = []
@@ -24,18 +43,18 @@ def create_menu_bar(self):
             if text:
                 sections.append((title, text))
 
-        add_section("Juros (Simples/Compostos)", getattr(self, "interest_result", None))
-        add_section("Anuidades", getattr(self, "annuity_result", None))
-        add_section("Gradientes", getattr(self, "grad_result", None))
-        add_section("Equivalência de Taxas", getattr(self, "rate_equiv_result", None))
-        add_section("Taxa Real / Aparente", getattr(self, "rate_real_result", None))
-        add_section("Amortização", getattr(self, "amort_result", None))
-        add_section("Análise de Investimentos", getattr(self, "invest_result", None))
-        add_section("Depreciação", getattr(self, "deprec_result", None))
+        add_section(tr("App", "Juros (Simples/Compostos)"), getattr(self, "interest_result", None))
+        add_section(tr("App", "Anuidades"), getattr(self, "annuity_result", None))
+        add_section(tr("App", "Gradientes"), getattr(self, "grad_result", None))
+        add_section(tr("App", "Equivalência de Taxas"), getattr(self, "rate_equiv_result", None))
+        add_section(tr("App", "Taxa Real / Aparente"), getattr(self, "rate_real_result", None))
+        add_section(tr("App", "Amortização"), getattr(self, "amort_result", None))
+        add_section(tr("App", "Análise de Investimentos"), getattr(self, "invest_result", None))
+        add_section(tr("App", "Depreciação"), getattr(self, "deprec_result", None))
 
         html_parts = [
             "<html><head><meta charset='utf-8'></head><body>",
-            "<h1>Todos os Cálculos</h1>",
+            f"<h1>{escape(tr('App','Todos os Cálculos'))}</h1>",
         ]
 
         for title, text in sections:
@@ -58,20 +77,20 @@ def create_menu_bar(self):
         tab_name = self.tabs.tabText(idx)
 
         mapping = {
-            "Juros Simples e Compostos": (getattr(self, "interest_result", None), "juros.pdf"),
-            "Anuidades": (getattr(self, "annuity_result", None), "anuidades.pdf"),
-            "Gradientes": (getattr(self, "grad_result", None), "gradiente.pdf"),
-            "Amortização": (None, None),
-            "Análise de Investimentos": (getattr(self, "invest_result", None), "investimento.pdf"),
-            "Depreciação": (getattr(self, "deprec_result", None), "depreciacao.pdf"),
-            "Conversão de Taxas": (None, None),
+            tr("App", "Juros Simples e Compostos"): (getattr(self, "interest_result", None), "juros.pdf"),
+            tr("App", "Anuidades"): (getattr(self, "annuity_result", None), "anuidades.pdf"),
+            tr("App", "Gradientes"): (getattr(self, "grad_result", None), "gradiente.pdf"),
+            tr("App", "Amortização"): (None, None),
+            tr("App", "Análise de Investimentos"): (getattr(self, "invest_result", None), "investimento.pdf"),
+            tr("App", "Depreciação"): (getattr(self, "deprec_result", None), "depreciacao.pdf"),
+            tr("App", "Conversão de Taxas"): (None, None),
         }
 
-        if tab_name == "Amortização":
+        if tab_name == tr("App", "Amortização"):
             self.export_amortization_pdf("amortizacao.pdf")
             return
 
-        if tab_name == "Conversão de Taxas":
+        if tab_name == tr("App", "Conversão de Taxas"):
             real_widget = getattr(self, "rate_real_result", None)
             equiv_widget = getattr(self, "rate_equiv_result", None)
             if real_widget and real_widget.toPlainText().strip():

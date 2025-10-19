@@ -1,5 +1,5 @@
 from PySide6.QtWidgets import (QWidget, QScrollArea, QVBoxLayout, QHBoxLayout, QCheckBox, QTextEdit, QSizePolicy)
-from PySide6.QtCore import Qt
+from PySide6.QtCore import Qt, QCoreApplication
 
 
 class HistoryContainer(QWidget):
@@ -36,7 +36,7 @@ class HistoryContainer(QWidget):
         entry_layout.setSpacing(6)
 
         chk = QCheckBox(entry_w)
-        chk.setToolTip("Marque para editar/excluir esta entrada")
+        chk.setToolTip(QCoreApplication.translate("App", "Marque para editar/excluir esta entrada"))
         entry_layout.addWidget(chk, 0, Qt.AlignTop)
 
         te = QTextEdit(entry_w)

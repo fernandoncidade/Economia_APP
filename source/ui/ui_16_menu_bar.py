@@ -1,33 +1,71 @@
 from PySide6.QtWidgets import QMenuBar, QTextEdit
-from PySide6.QtGui import QAction
+from PySide6.QtGui import QAction, QActionGroup
 from PySide6.QtCore import QCoreApplication
 from html import escape
 from .ui_15_export_pdf import amort_table_to_html
+from .ui_19_exibir_sobre import exibir_sobre
 
 def create_menu_bar(self):
     tr = QCoreApplication.translate
     menubar = QMenuBar(self)
-    file_menu = menubar.addMenu(tr("App", "Arquivos"))
 
+    file_menu = menubar.addMenu(tr("App", "Arquivos"))
     export_current_action = QAction(tr("App", "Exportar Atual"), self)
     export_all_action = QAction(tr("App", "Exportar Todos"), self)
-
     file_menu.addAction(export_current_action)
     file_menu.addAction(export_all_action)
 
-    # Menu de configuração / idiomas
     config_menu = menubar.addMenu(tr("App", "Configuração"))
     idiomas_menu = config_menu.addMenu(tr("App", "Idiomas"))
 
     action_pt = QAction(tr("App", "Português (Brasil)"), self)
     action_en = QAction(tr("App", "English (United States)"), self)
+    action_pt.setCheckable(True)
+    action_en.setCheckable(True)
+    ag = QActionGroup(self)
+    ag.setExclusive(True)
+    ag.addAction(action_pt)
+    ag.addAction(action_en)
     idiomas_menu.addAction(action_pt)
     idiomas_menu.addAction(action_en)
+
+    def _get_gerenciador():
+        return getattr(self, "gerenciador", None) or getattr(self, "gerenciador_traducao", None)
+
+    def _update_language_checks(codigo):
+        try:
+            action_pt.setChecked(codigo == "pt_BR")
+            action_en.setChecked(codigo == "en_US")
+
+        except Exception:
+            action_pt.setChecked(False)
+            action_en.setChecked(False)
+
+    gm = _get_gerenciador()
+    try:
+        if gm and hasattr(gm, "obter_idioma_atual"):
+            current = gm.obter_idioma_atual()
+            _update_language_checks(current)
+
+            try:
+                gm.idioma_alterado.connect(_update_language_checks)
+
+            except Exception:
+                pass
+
+    except Exception:
+        _update_language_checks(None)
+
+    options_menu = menubar.addMenu(tr("App", "Opções"))
+    about_action = QAction(tr("App", "Sobre"), self)
+    about_action.triggered.connect(lambda: exibir_sobre(self))
+    options_menu.addAction(about_action)
 
     def set_language(code):
         gm = getattr(self, "gerenciador", None)
         if gm:
             gm.definir_idioma(code)
+            _update_language_checks(code)
 
     action_pt.triggered.connect(lambda: set_language("pt_BR"))
     action_en.triggered.connect(lambda: set_language("en_US"))
@@ -55,7 +93,7 @@ def create_menu_bar(self):
         html_parts = [
             "<html><head><meta charset='utf-8'></head><body>",
             f"<h1>{escape(tr('App','Todos os Cálculos'))}</h1>",
-        ]
+            ]
 
         for title, text in sections:
             html_parts.append(f"<h2>{escape(title)}</h2><pre>{escape(text)}</pre>")
@@ -84,7 +122,7 @@ def create_menu_bar(self):
             tr("App", "Análise de Investimentos"): (getattr(self, "invest_result", None), "investimento.pdf"),
             tr("App", "Depreciação"): (getattr(self, "deprec_result", None), "depreciacao.pdf"),
             tr("App", "Conversão de Taxas"): (None, None),
-        }
+            }
 
         if tab_name == tr("App", "Amortização"):
             self.export_amortization_pdf("amortizacao.pdf")

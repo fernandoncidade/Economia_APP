@@ -111,5 +111,28 @@
     <message><source>Calculadora de Economia de Engenharia - TT007</source><translation>Engineering Economics Calculator - TT007</translation></message>
 
     <message><source>O campo não pode estar vazio.</source><translation>Field cannot be empty.</translation></message>
+
+    <message><source>Opções</source><translation>Options</translation></message>
+    <message><source>Sobre</source><translation>About</translation></message>
+    <message><source>version</source><translation>Version</translation></message>
+    <message><source>authors</source><translation>Authors</translation></message>
+    <message><source>description</source><translation>Description</translation></message>
+    <message><source>description_text</source><translation>Economia APP is a support tool for studying Engineering Economics (course TT007) that automates common financial calculations — simple and compound interest, annuities, gradients, rate equivalence, amortization (SAC, Price, SAM), investment analysis (VPL / VAUE) and depreciation — and presents detailed steps and history of results.</translation></message>
+    <message><source>show_history</source><translation>Show History</translation></message>
+    <message><source>hide_history</source><translation>Hide History</translation></message>
+    <message><source>show_details</source><translation>Show Details</translation></message>
+    <message><source>hide_details</source><translation>Hide Details</translation></message>
+    <message><source>show_licenses</source><translation>Show Licenses</translation></message>
+    <message><source>hide_licenses</source><translation>Hide Licenses</translation></message>
+    <message><source>OK</source><translation>OK</translation></message>
+    <message><source>site_oficial</source><translation>Official Site</translation></message>
+    <message><source>show_notices</source><translation>Show Notices</translation></message>
+    <message><source>hide_notices</source><translation>Hide Notices</translation></message>
+    <message><source>show_privacy_policy</source><translation>Show Privacy Policy</translation></message>
+    <message><source>hide_privacy_policy</source><translation>Hide Privacy Policy</translation></message>
+    <message><source>information_not_available</source><translation>Information Not Available</translation></message>
+    <message><source>show_release_notes</source><translation>Show Release Notes</translation></message>
+    <message><source>hide_release_notes</source><translation>Hide Release Notes</translation></message>
+
   </context>
 </TS>

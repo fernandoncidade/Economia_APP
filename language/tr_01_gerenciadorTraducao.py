@@ -17,7 +17,7 @@ class GerenciadorTraducao(QObject):
             self.tradutor = None
             self.idioma_atual = "pt_BR"
             self.app = QCoreApplication.instance()
-            self.idioma_padrao = "pt_BR"
+            self.idioma_padrao = "en_US"
 
             self.idiomas_disponiveis = {
                 "pt_BR": "Português (Brasil)",
@@ -92,14 +92,11 @@ class GerenciadorTraducao(QObject):
 
             self._remover_tradutor_instalado()
 
-            if self.idioma_atual == self.idioma_padrao:
-                return True
-
-            self.tradutor = QTranslator()
             arquivo_traducao = f"economia_{self.idioma_atual}.qm"
             caminho_traducao = os.path.join(self.dir_traducoes, arquivo_traducao)
 
             if os.path.exists(caminho_traducao):
+                self.tradutor = QTranslator()
                 if self.tradutor.load(caminho_traducao):
                     app.installTranslator(self.tradutor)
                     app.setProperty("_translator_gerenciador_traducao", self.tradutor)
@@ -107,17 +104,19 @@ class GerenciadorTraducao(QObject):
 
                 else:
                     logger.error(f"Erro ao carregar arquivo de tradução: {caminho_traducao}")
+                    return False
 
-            else:
-                logger.warning(f"Arquivo de tradução não encontrado: {caminho_traducao}")
-                logger.warning(f"Arquivos disponíveis em {self.dir_traducoes}:")
+            if self.idioma_atual == self.idioma_padrao:
+                return True
 
-                try:
-                    for arquivo in os.listdir(self.dir_traducoes):
-                        logger.warning(f"  - {arquivo}")
+            logger.warning(f"Arquivo de tradução não encontrado: {caminho_traducao}")
+            logger.warning(f"Arquivos disponíveis em {self.dir_traducoes}:")
+            try:
+                for arquivo in os.listdir(self.dir_traducoes):
+                    logger.warning(f"  - {arquivo}")
 
-                except Exception as e:
-                    logger.error(f"Erro ao listar diretório: {e}", exc_info=True)
+            except Exception as e:
+                logger.error(f"Erro ao listar diretório: {e}", exc_info=True)
 
             return False
 

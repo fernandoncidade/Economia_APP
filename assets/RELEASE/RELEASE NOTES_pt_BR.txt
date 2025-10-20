@@ -1,0 +1,70 @@
+NOTAS DE LANÇAMENTO — Economia APP
+Versão: 0.0.1.0
+Data: 19 de outubro de 2025
+Autor: Fernando Nillsson Cidade
+
+Resumo do lançamento
+- Versão inicial alfa/experimental do Economia APP, ferramenta de apoio ao estudo de Economia de Engenharia (TT007). Automatiza cálculos de juros, anuidades, gradientes, equivalência de taxas, amortização (SAC, Price, SAM), análise de investimentos (VPL/VAUE) e depreciação. Inclui histórico, exportação de tabelas em PDF e suporte a traduções pt_BR / en_US.
+
+Principais funcionalidades incluídas
+- Módulos de cálculo: juros simples/compostos, anuidades, gradientes, amortização (SAC/Price/SAM), investimentos (VPL/VAUE) e depreciação.
+- Geração de tabelas de amortização com visualização e opção de exportar para PDF.
+- Histórico editável dos cálculos.
+- Interface em abas por tópicos (implementada em PySide6).
+- Suporte básico à internacionalização (arquivos .ts incluídos em language/translations).
+
+Arquivos e recursos incluídos neste pacote
+- Código: pasta source/
+- Utilitários: pasta utils/ (logging, caminhos e helpers)
+- Assets: assets/ (ABOUT, EULA, NOTICES, COPYRIGHT, CLC, RELEASE)
+- Traduções: language/translations/*.ts (pt_BR, en_US)
+- Documentação mínima: assets/ABOUT/*.txt, assets/EULA/*.txt, assets/NOTICES/*.txt, assets/COPYRIGHT/*.txt, assets/CLC/*.txt
+
+Instalação (Windows — desenvolvimento)
+1. Instale Python 3.10+.
+2. No terminal (PowerShell ou cmd):
+   - python -m venv venv
+   - venv\Scripts\activate
+   - pip install PySide6
+3. Executar em desenvolvimento:
+   - python main.py
+
+Empacotamento para distribuição (dicas)
+- Recomenda-se PyInstaller para gerar executável Windows. Verificar inclusão dos diretórios assets/ e language/translations/ no spec:
+  - adicionE assets/ e language/translations/ em datas do .spec
+- Certifique-se de incluir arquivos de licença (assets/EULA, assets/NOTICES, assets/COPYRIGHT, assets/CLC).
+- Se incluir binários PySide6 no bundle, documente procedimentos de conformidade LGPL conforme NOTICE_pt_BR.txt.
+
+Compilação de traduções
+- Gerar .qm a partir de .ts com pyside6-lrelease (ou lrelease):
+  - pyside6-lrelease language/translations/economia_pt_BR.ts -qm language/translations/economia_pt_BR.qm
+- Coloque os .qm gerados em language/translations/ antes de empacotar.
+
+Local de armazenamento de dados
+- Configurações, histórico e arquivos gerados são salvos em:
+  %LOCALAPPDATA%\Economia_APP
+
+Notas técnicas e dependências
+- Dependência principal: PySide6 (LGPL v3 conforme versão).
+- Verifique requirements.txt (se presente) para dependências adicionais.
+- Logging: utils/LogManager.py (arquivos de log em %LOCALAPPDATA%\Economia_APP).
+- Testes e validação: versão inicial — testes manuais; recomenda-se adicionar testes automatizados para cálculos em próximos lançamentos.
+
+Problemas conhecidos (versão inicial)
+- Recursos parcialmente implementados em UI (alguns arquivos da pasta source/ui contêm stubs a completar).
+- Traduções requerem compilação (.qm) antes do empacotamento.
+- Validação de entradas numéricas aceita vírgula/ponto; revisar tratamento para casos limites (ex.: campos vazios, zeros, valores negativos onde inválidos).
+
+Roadmap / próximos passos
+- Completar e testar todos os módulos UI e serviços (arquivos com stubs em source/ui e source/services).
+- Adicionar testes unitários para cálculos financeiros.
+- Melhorar exportação PDF e layout das tabelas.
+- Automatizar processo de build e geração de instalador Windows.
+- Implementar telemetria opt-in para diagnóstico (apenas com consentimento explícito).
+
+Suporte e contato
+- Autor: Fernando Nillsson Cidade
+- Bugs, issues e contribuições: abrir issue / pull request no repositório do projeto (ver README).
+
+Notas de conformidade legal
+- Consulte assets/EULA/EULA_pt_BR - Economia.txt, assets/NOTICES/NOTICE_pt_BR.txt, assets/COPYRIGHT/AVISO DE COPYRIGHT E MARCA REGISTRA_pt_BR.txt e assets/CLC/CLC_pt_BR - Economia.txt para termos de uso, licenciamento comercial e atribuições de terceiros.

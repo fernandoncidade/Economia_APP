@@ -15,6 +15,9 @@ from .ui_14_get_table_data import get_table_data
 from .ui_15_export_pdf import export_to_pdf
 from .ui_15_export_pdf import export_amortization_pdf
 from .ui_16_menu_bar import create_menu_bar
+from .ui_17_history_container import HistoryContainer
+from .ui_18_SobreDialog import SobreDialog
+from .ui_19_exibir_sobre import exibir_sobre
 
 __all__ = [
     "create_layout",
@@ -34,4 +37,7 @@ __all__ = [
     "export_to_pdf",
     "export_amortization_pdf",
     "create_menu_bar",
+    "HistoryContainer",
+    "SobreDialog",
+    "exibir_sobre",
 ]

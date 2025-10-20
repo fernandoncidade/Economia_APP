@@ -111,5 +111,28 @@
     <message><source>Calculadora de Economia de Engenharia - TT007</source><translation>Calculadora de Economia de Engenharia - TT007</translation></message>
 
     <message><source>O campo não pode estar vazio.</source><translation>O campo não pode estar vazio.</translation></message>
+
+    <message><source>Opções</source><translation>Opções</translation></message>
+    <message><source>Sobre</source><translation>Sobre</translation></message>
+    <message><source>version</source><translation>Versão</translation></message>
+    <message><source>authors</source><translation>Autores</translation></message>
+    <message><source>description</source><translation>Descrição</translation></message>
+    <message><source>description_text</source><translation>Economia APP é uma ferramenta de apoio ao estudo de Economia de Engenharia (disciplina TT007) que automatiza cálculos financeiros frequentes — juros simples e compostos, anuidades, gradientes, equivalência de taxas, amortização (SAC, Price, SAM), análise de investimentos (VPL / VAUE) e depreciação — e apresenta passos detalhados e histórico dos resultados.</translation></message>
+    <message><source>show_history</source><translation>Exibir Histórico</translation></message>
+    <message><source>hide_history</source><translation>Ocultar Histórico</translation></message>
+    <message><source>show_details</source><translation>Exibir Detalhes</translation></message>
+    <message><source>hide_details</source><translation>Ocultar Detalhes</translation></message>
+    <message><source>show_licenses</source><translation>Exibir Licenças</translation></message>
+    <message><source>hide_licenses</source><translation>Ocultar Licenças</translation></message>
+    <message><source>OK</source><translation>OK</translation></message>
+    <message><source>site_oficial</source><translation>Site Oficial</translation></message>
+    <message><source>show_notices</source><translation>Exibir Avisos</translation></message>
+    <message><source>hide_notices</source><translation>Ocultar Avisos</translation></message>
+    <message><source>show_privacy_policy</source><translation>Exibir Política de Privacidade</translation></message>
+    <message><source>hide_privacy_policy</source><translation>Ocultar Política de Privacidade</translation></message>
+    <message><source>information_not_available</source><translation>Informação Não Disponível</translation></message>
+    <message><source>show_release_notes</source><translation>Exibir Notas de Lançamento</translation></message>
+    <message><source>hide_release_notes</source><translation>Ocultar Notas de Lançamento</translation></message>
+
   </context>
 </TS>

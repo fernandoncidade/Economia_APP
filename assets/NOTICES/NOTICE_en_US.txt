@@ -1,4 +1,4 @@
-Version 0.0.1.0, October 19, 2025
+Version 0.0.2.0, October 21, 2025
 
 Third-Party Software Licenses and Attributions Notice — Economia APP
 

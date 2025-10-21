@@ -8,7 +8,10 @@ python -m nuitka
 --include-package=PySide6.QtCore 
 --include-package=PySide6.QtGui 
 --include-package=PySide6.QtWidgets 
---output-dir="D:\MISCELANEAS\Nuitka\Economia_APP_main" 
+--include-data-dir="assets=assets" 
+--include-data-dir="language\translations=language\translations" 
+--windows-icon-from-ico=assets\icones\economia.ico 
+--output-dir="D:\MISCELANEAS\Nuitka\Economia_APP" 
 --output-filename="Economia_APP" 
 --windows-console-mode=disable 
 --show-progress 
@@ -16,7 +19,7 @@ python -m nuitka
 --assume-yes-for-downloads 
 main.py
 
-python -m nuitka --standalone --follow-imports --enable-plugin=pyside6 --enable-plugin=pylint-warnings --enable-plugin=anti-bloat --msvc=latest --include-package=PySide6.QtCore --include-package=PySide6.QtGui --include-package=PySide6.QtWidgets --output-dir="D:\MISCELANEAS\Nuitka\Economia_APP_main" --output-filename="Economia_APP" --windows-console-mode=disable --show-progress --show-memory --assume-yes-for-downloads main.py
+python -m nuitka --standalone --follow-imports --enable-plugin=pyside6 --enable-plugin=pylint-warnings --enable-plugin=anti-bloat --msvc=latest --include-package=PySide6.QtCore --include-package=PySide6.QtGui --include-package=PySide6.QtWidgets --include-data-dir="assets=assets" --include-data-dir="language\translations=language\translations" --windows-icon-from-ico=assets\icones\economia.ico --output-dir="D:\MISCELANEAS\Nuitka\Economia_APP" --output-filename="Economia_APP" --windows-console-mode=disable --show-progress --show-memory --assume-yes-for-downloads main.py
 
 
 
@@ -31,7 +34,10 @@ python -m nuitka
 --include-package=PySide6.QtCore 
 --include-package=PySide6.QtGui 
 --include-package=PySide6.QtWidgets 
---output-dir="D:\MISCELANEAS\Nuitka\Economia_APP_main" 
+--include-data-dir="assets=assets" 
+--include-data-dir="language\translations=language\translations" 
+--windows-icon-from-ico=assets\icones\economia.ico 
+--output-dir="D:\MISCELANEAS\Nuitka\Economia_APP" 
 --output-filename="Economia_APP" 
 --windows-console-mode=disable 
 --show-progress 
@@ -39,7 +45,7 @@ python -m nuitka
 --assume-yes-for-downloads 
 main.py
 
-python -m nuitka --standalone --onefile --follow-imports --enable-plugin=pyside6 --enable-plugin=pylint-warnings --enable-plugin=anti-bloat --msvc=latest --include-package=PySide6.QtCore --include-package=PySide6.QtGui --include-package=PySide6.QtWidgets --output-dir="D:\MISCELANEAS\Nuitka\Economia_APP_main" --output-filename="Economia_APP" --windows-console-mode=disable --show-progress --show-memory --assume-yes-for-downloads main.py
+python -m nuitka --standalone --onefile --follow-imports --enable-plugin=pyside6 --enable-plugin=pylint-warnings --enable-plugin=anti-bloat --msvc=latest --include-package=PySide6.QtCore --include-package=PySide6.QtGui --include-package=PySide6.QtWidgets --include-data-dir="assets=assets" --include-data-dir="language\translations=language\translations" --windows-icon-from-ico=assets\icones\economia.ico --output-dir="D:\MISCELANEAS\Nuitka\Economia_APP" --output-filename="Economia_APP" --windows-console-mode=disable --show-progress --show-memory --assume-yes-for-downloads main.py
 
 
 

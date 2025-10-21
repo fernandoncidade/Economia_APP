@@ -1,6 +1,6 @@
 from PySide6.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLineEdit, QPushButton, QSizePolicy
-from PySide6.QtGui import QDoubleValidator
-from PySide6.QtCore import Qt, QCoreApplication
+from PySide6.QtGui import QDoubleValidator, QFontDatabase
+from PySide6.QtCore import QCoreApplication
 from .ui_17_history_container import HistoryContainer
 
 def create_investment_tab(self):
@@ -20,6 +20,8 @@ def create_investment_tab(self):
 
     self.invest_result = HistoryContainer(self)
     self.invest_result.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+    fixed_font = QFontDatabase.systemFont(QFontDatabase.FixedFont)
+    self.invest_result.setFont(fixed_font)
 
     calc_button = QPushButton(tr("App", "Calcular VPL e VAUE"))
     calc_button.clicked.connect(self.calculate_investment)

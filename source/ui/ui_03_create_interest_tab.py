@@ -1,5 +1,5 @@
 from PySide6.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLineEdit, QPushButton, QComboBox, QSizePolicy
-from PySide6.QtGui import QDoubleValidator
+from PySide6.QtGui import QDoubleValidator, QFontDatabase
 from PySide6.QtCore import QCoreApplication
 from .ui_17_history_container import HistoryContainer
 
@@ -26,6 +26,8 @@ def create_interest_tab(self):
 
     self.interest_result = HistoryContainer(self)
     self.interest_result.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+    fixed_font = QFontDatabase.systemFont(QFontDatabase.FixedFont)
+    self.interest_result.setFont(fixed_font)
 
     calc_button = QPushButton(tr("App", "Calcular"))
     calc_button.clicked.connect(self.calculate_interest)

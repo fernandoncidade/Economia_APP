@@ -1,6 +1,6 @@
 History and Rationale for Development
 
-Economia APP was born from the practical need of a Civil Engineering student at UFPR to consolidate, speed up, and validate calculations from Engineering Economics (TT007) classes. Faced with repetitive, time-consuming exercises prone to manual calculation errors, an assistant was developed that automates the most common procedures — from simple and compound interest to amortization (SAC, Price, SAM), annuities, gradients, rate conversions, investment analysis (VPL/VAUE) and depreciation.
+The Economia APP was born out of the practical need of a Civil Engineering student to consolidate, accelerate, and validate the calculations from Engineering Economics classes (TT007). Faced with repetitive, time-consuming exercises prone to manual calculation errors, an assistant was developed to automate the most common procedures — ranging from simple and compound interest to amortization (SAC, Price, SAM), annuities, gradients, rate conversions, investment analysis (NPV/EUAW), and depreciation.
 
 Motivation
 - Make studying more efficient: reduce the time spent recalculating examples to check answers.

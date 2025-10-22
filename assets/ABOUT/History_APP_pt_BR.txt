@@ -1,6 +1,6 @@
 História e Justificativa do Desenvolvimento
 
-O Economia APP nasceu da necessidade prática de um estudante de Engenharia Civil da UFPR em consolidar, acelerar e validar os cálculos das aulas de Economia de Engenharia (TT007). Frente a exercícios repetitivos, demorados e propensos a erros de cálculo manual, foi desenvolvido um assistente que automatiza os procedimentos mais comuns — desde juros simples e compostos até amortização (SAC, Price, SAM), anuidades, gradientes, conversões de taxas, análise de investimentos (VPL/VAUE) e depreciação.
+O Economia APP nasceu da necessidade prática de um estudante de Engenharia Civil em consolidar, acelerar e validar os cálculos das aulas de Economia de Engenharia (TT007). Frente a exercícios repetitivos, demorados e propensos a erros de cálculo manual, foi desenvolvido um assistente que automatiza os procedimentos mais comuns — desde juros simples e compostos até amortização (SAC, Price, SAM), anuidades, gradientes, conversões de taxas, análise de investimentos (VPL/VAUE) e depreciação.
 
 Motivação
 - Tornar o estudo mais eficiente: reduzir o tempo gasto em recalcular exemplos para conferir respostas.

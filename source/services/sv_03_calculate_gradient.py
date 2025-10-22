@@ -1,4 +1,7 @@
 from PySide6.QtCore import QCoreApplication
+from utils.LogManager import LogManager
+
+logger = LogManager.get_logger()
 
 def calculate_gradient(self):
     try:
@@ -195,5 +198,10 @@ def calculate_gradient(self):
             self.grad_result.append(result_text)
 
     except Exception as e:
+        logger.error(f"Erro ao calcular gradiente: {e}", exc_info=True)
         tr = QCoreApplication.translate
-        self.grad_result.append(f"{tr('App', 'Erro')}: {e}")
+        try:
+            self.grad_result.append(f"{tr('App', 'Erro')}: {e}")
+
+        except Exception:
+            pass

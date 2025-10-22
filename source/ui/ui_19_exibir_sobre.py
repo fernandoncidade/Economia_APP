@@ -9,6 +9,9 @@ from source.ui.ui_20_opcoes_sobre import (SITE_LICENSES,
                                           RELEASE_NOTES_pt_BR, RELEASE_NOTES_en_US
                                           )
 from PySide6.QtWidgets import QMessageBox
+from utils.LogManager import LogManager
+
+logger = LogManager.get_logger()
 
 def get_text(text, context="App"):
     try:
@@ -55,7 +58,7 @@ def exibir_sobre(app):
         textos_sobre = { "pt_BR": ABOUT_TEXT_PT_BR, "en_US": ABOUT_TEXT_EN_US }
         textos_licenca = { "pt_BR": LICENSE_TEXT_PT_BR, "en_US": LICENSE_TEXT_EN_US }
         textos_aviso = { "pt_BR": NOTICE_TEXT_PT_BR, "en_US": NOTICE_TEXT_EN_US }
-        textos_privacidade = { "pt_BR": Privacy_Policy_pt_BR, "en_US": Privacy_Policy_EN_US } if False else { "pt_BR": Privacy_Policy_pt_BR, "en_US": Privacy_Policy_en_US }
+        textos_privacidade = { "pt_BR": Privacy_Policy_pt_BR, "en_US": Privacy_Policy_en_US }
         history_texts = { "pt_BR": History_APP_pt_BR, "en_US": History_APP_en_US }
         release_notes_texts = { "pt_BR": RELEASE_NOTES_pt_BR, "en_US": RELEASE_NOTES_en_US }
 
@@ -68,7 +71,7 @@ def exibir_sobre(app):
 
         cabecalho_fixo = (
             "<h3>ECONOMIA APP</h3>"
-            f"<p><b>{get_text('version') or 'Version'}:</b> 0.0.2.0</p>"
+            f"<p><b>{get_text('version') or 'Version'}:</b> 0.0.3.0</p>"
             f"<p><b>{get_text('authors') or 'Authors'}:</b> Fernando Nillsson Cidade</p>"
             f"<p><b>{get_text('description') or 'Description'}:</b> {get_text('description_text') or ''}</p>"
         )
@@ -104,4 +107,5 @@ def exibir_sobre(app):
         dialog.show()
 
     except Exception as e:
+        logger.error(f"Erro ao exibir diálogo Sobre: {e}", exc_info=True)
         QMessageBox.critical(app, get_text("Erro") or "Erro", f"{get_text('Erro') or 'Erro'}: {e}")

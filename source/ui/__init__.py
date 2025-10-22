@@ -18,6 +18,7 @@ from .ui_16_menu_bar import create_menu_bar
 from .ui_17_history_container import HistoryContainer
 from .ui_18_SobreDialog import SobreDialog
 from .ui_19_exibir_sobre import exibir_sobre
+from .ui_21_font_config_dialog import FontConfigDialog
 
 __all__ = [
     "create_layout",
@@ -40,4 +41,5 @@ __all__ = [
     "HistoryContainer",
     "SobreDialog",
     "exibir_sobre",
+    "FontConfigDialog",
 ]

@@ -13,6 +13,7 @@
     <message><source>English (United States)</source><translation>English (United States)</translation></message>
     <message><source>Opções</source><translation>Options</translation></message>
     <message><source>Sobre</source><translation>About</translation></message>
+    <message><source>Configurar Fontes</source><translation>Configure Fonts</translation></message>
 
     <!-- Abas Principais -->
     <message><source>Juros (Simples/Compostos)</source><translation>Interest (Simple/Compound)</translation></message>
@@ -26,6 +27,7 @@
     <message><source>Todos os Cálculos</source><translation>All Calculations</translation></message>
     <message><source>Tabela de Amortização</source><translation>Amortization Table</translation></message>
     <message><source>Cálculos</source><translation>Calculations</translation></message>
+    <message><source>Conversão de Taxas</source><translation>Rate Conversion</translation></message>
 
     <!-- Exportação -->
     <message><source>Salvar como PDF</source><translation>Save as PDF</translation></message>
@@ -59,7 +61,6 @@
     <message><source>Gradiente (G ou g %):</source><translation>Gradient (G or g %):</translation></message>
 
     <!-- Conversão de Taxas -->
-    <message><source>Conversão de Taxas</source><translation>Rate Conversion</translation></message>
     <message><source>&lt;b&gt;Equivalência de Taxas Efetivas&lt;/b&gt;</source><translation>&lt;b&gt;Effective Rate Equivalence&lt;/b&gt;</translation></message>
     <message><source>Taxa Atual (%):</source><translation>Current Rate (%):</translation></message>
     <message><source>Período da Taxa Atual (em unidades de tempo):</source><translation>Current Rate Period (in time units):</translation></message>
@@ -114,6 +115,19 @@
     <message><source>Salvar Edição</source><translation>Save Edit</translation></message>
     <message><source>Excluir Seleção</source><translation>Delete Selection</translation></message>
     <message><source>Marque para editar/excluir esta entrada</source><translation>Check to edit/delete this entry</translation></message>
+    <message><source>OK</source><translation>OK</translation></message>
+    <message><source>Cancelar</source><translation>Cancel</translation></message>
+    <message><source>Padrão</source><translation>Default</translation></message>
+
+    <!-- Dialog de Fontes -->
+    <message><source>Configuração de Fontes</source><translation>Font Configuration</translation></message>
+    <message><source>Configurações de Fonte</source><translation>Font Settings</translation></message>
+    <message><source>Família da Fonte:</source><translation>Font Family:</translation></message>
+    <message><source>Tamanho:</source><translation>Size:</translation></message>
+    <message><source>Negrito</source><translation>Bold</translation></message>
+    <message><source>Itálico</source><translation>Italic</translation></message>
+    <message><source>Sublinhado</source><translation>Underline</translation></message>
+    <message><source>Prévia</source><translation>Preview</translation></message>
 
     <!-- Títulos e Cabeçalhos -->
     <message><source>Calculadora de Economia de Engenharia - TT007</source><translation>Engineering Economics Calculator - TT007</translation></message>
@@ -122,7 +136,6 @@
     <message><source>description</source><translation>Description</translation></message>
     <message><source>description_text</source><translation>Economia APP is a support tool for studying Engineering Economics (course TT007) that automates common financial calculations — simple and compound interest, annuities, gradients, rate equivalence, amortization (SAC, Price, SAM), investment analysis (NPV / EUAW) and depreciation — and presents detailed steps and history of results.</translation></message>
     <message><source>site_oficial</source><translation>Official Site</translation></message>
-    <message><source>OK</source><translation>OK</translation></message>
 
     <!-- Controles de Exibição -->
     <message><source>show_history</source><translation>Show History</translation></message>

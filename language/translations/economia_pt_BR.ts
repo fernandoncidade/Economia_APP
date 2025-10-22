@@ -13,6 +13,7 @@
     <message><source>English (United States)</source><translation>English (United States)</translation></message>
     <message><source>Opções</source><translation>Opções</translation></message>
     <message><source>Sobre</source><translation>Sobre</translation></message>
+    <message><source>Configurar Fontes</source><translation>Configurar Fontes</translation></message>
 
     <!-- Abas Principais -->
     <message><source>Juros (Simples/Compostos)</source><translation>Juros (Simples/Compostos)</translation></message>
@@ -26,6 +27,7 @@
     <message><source>Todos os Cálculos</source><translation>Todos os Cálculos</translation></message>
     <message><source>Tabela de Amortização</source><translation>Tabela de Amortização</translation></message>
     <message><source>Cálculos</source><translation>Cálculos</translation></message>
+    <message><source>Conversão de Taxas</source><translation>Conversão de Taxas</translation></message>
 
     <!-- Exportação -->
     <message><source>Salvar como PDF</source><translation>Salvar como PDF</translation></message>
@@ -59,7 +61,6 @@
     <message><source>Gradiente (G ou g %):</source><translation>Gradiente (G ou g %):</translation></message>
 
     <!-- Conversão de Taxas -->
-    <message><source>Conversão de Taxas</source><translation>Conversão de Taxas</translation></message>
     <message><source>&lt;b&gt;Equivalência de Taxas Efetivas&lt;/b&gt;</source><translation>&lt;b&gt;Equivalência de Taxas Efetivas&lt;/b&gt;</translation></message>
     <message><source>Taxa Atual (%):</source><translation>Taxa Atual (%):</translation></message>
     <message><source>Período da Taxa Atual (em unidades de tempo):</source><translation>Período da Taxa Atual (em unidades de tempo):</translation></message>
@@ -114,6 +115,19 @@
     <message><source>Salvar Edição</source><translation>Salvar Edição</translation></message>
     <message><source>Excluir Seleção</source><translation>Excluir Seleção</translation></message>
     <message><source>Marque para editar/excluir esta entrada</source><translation>Marque para editar/excluir esta entrada</translation></message>
+    <message><source>OK</source><translation>OK</translation></message>
+    <message><source>Cancelar</source><translation>Cancelar</translation></message>
+    <message><source>Padrão</source><translation>Padrão</translation></message>
+
+    <!-- Dialog de Fontes -->
+    <message><source>Configuração de Fontes</source><translation>Configuração de Fontes</translation></message>
+    <message><source>Configurações de Fonte</source><translation>Configurações de Fonte</translation></message>
+    <message><source>Família da Fonte:</source><translation>Família da Fonte:</translation></message>
+    <message><source>Tamanho:</source><translation>Tamanho:</translation></message>
+    <message><source>Negrito</source><translation>Negrito</translation></message>
+    <message><source>Itálico</source><translation>Itálico</translation></message>
+    <message><source>Sublinhado</source><translation>Sublinhado</translation></message>
+    <message><source>Prévia</source><translation>Prévia</translation></message>
 
     <!-- Títulos e Cabeçalhos -->
     <message><source>Calculadora de Economia de Engenharia - TT007</source><translation>Calculadora de Economia de Engenharia - TT007</translation></message>
@@ -122,7 +136,6 @@
     <message><source>description</source><translation>Descrição</translation></message>
     <message><source>description_text</source><translation>Economia APP é uma ferramenta de apoio ao estudo de Economia de Engenharia (disciplina TT007) que automatiza cálculos financeiros frequentes — juros simples e compostos, anuidades, gradientes, equivalência de taxas, amortização (SAC, Price, SAM), análise de investimentos (VPL / VAUE) e depreciação — e apresenta passos detalhados e histórico dos resultados.</translation></message>
     <message><source>site_oficial</source><translation>Site Oficial</translation></message>
-    <message><source>OK</source><translation>OK</translation></message>
 
     <!-- Controles de Exibição -->
     <message><source>show_history</source><translation>Exibir Histórico</translation></message>

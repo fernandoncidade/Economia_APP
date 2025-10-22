@@ -1,6 +1,6 @@
 Privacy Policy — Economia APP
-Last updated: October 21, 2025
-Version: 0.0.2.0
+Last updated: October 22, 2025
+Version: 0.0.3.0
 
 Summary
 This Policy describes how Economia APP ("the Application") handles, stores and protects user data. The Application is designed to operate locally and, by default, does not send telemetry or user data to external servers.

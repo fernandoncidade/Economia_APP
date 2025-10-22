@@ -1,7 +1,10 @@
 from PySide6.QtWidgets import QMainWindow, QTabWidget
 from language.tr_01_gerenciadorTraducao import GerenciadorTraducao
 from utils.IconUtils import get_icon_path
+from utils.LogManager import LogManager
 from PySide6.QtCore import QCoreApplication
+
+logger = LogManager.get_logger()
 
 from .ui import (
     create_layout,
@@ -41,22 +44,26 @@ from .services import (
 class FinancialCalculatorApp(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.tr = lambda s: QCoreApplication.translate("App", s)
-        self.setGeometry(100, 100, 900, 600)
+        try:
+            self.tr = lambda s: QCoreApplication.translate("App", s)
+            self.setGeometry(100, 100, 900, 600)
 
-        icon_path = get_icon_path("economia.ico")
-        if icon_path:
-            from PySide6.QtGui import QIcon
-            self.setWindowIcon(QIcon(icon_path))
+            icon_path = get_icon_path("economia.ico")
+            if icon_path:
+                from PySide6.QtGui import QIcon
+                self.setWindowIcon(QIcon(icon_path))
 
-        self.tabs = QTabWidget()
-        self.setCentralWidget(self.tabs)
+            self.tabs = QTabWidget()
+            self.setCentralWidget(self.tabs)
 
-        self.gerenciador = GerenciadorTraducao()
-        self.gerenciador.idioma_alterado.connect(self.on_language_changed)
-        self.gerenciador.aplicar_traducao()
-        self.setWindowTitle(self.tr("Calculadora de Economia de Engenharia - TT007"))
-        self.rebuild_ui()
+            self.gerenciador = GerenciadorTraducao()
+            self.gerenciador.idioma_alterado.connect(self.on_language_changed)
+            self.gerenciador.aplicar_traducao()
+            self.setWindowTitle(self.tr("Calculadora de Economia de Engenharia - TT007"))
+            self.rebuild_ui()
+
+        except Exception as e:
+            logger.error(f"Erro ao inicializar FinancialCalculatorApp: {e}", exc_info=True)
 
     def on_language_changed(self, codigo_idioma):
         try:
@@ -64,19 +71,22 @@ class FinancialCalculatorApp(QMainWindow):
             self.rebuild_ui()
 
         except Exception as e:
-            print(f"Erro ao mudar idioma: {e}")
+            logger.error(f"Erro ao mudar idioma: {e}", exc_info=True)
 
     def rebuild_ui(self):
-        self.tabs.clear()
+        try:
+            self.tabs.clear()
+            self.create_interest_tab()
+            self.create_annuity_tab()
+            self.create_gradient_tab()
+            self.create_rates_tab()
+            self.create_amortization_tab()
+            self.create_investment_tab()
+            self.create_depreciation_tab()
+            self.create_menu_bar()
 
-        self.create_interest_tab()
-        self.create_annuity_tab()
-        self.create_gradient_tab()
-        self.create_rates_tab()
-        self.create_amortization_tab()
-        self.create_investment_tab()
-        self.create_depreciation_tab()
-        self.create_menu_bar()
+        except Exception as e:
+            logger.error(f"Erro ao reconstruir UI: {e}", exc_info=True)
 
 FinancialCalculatorApp.create_layout = create_layout
 FinancialCalculatorApp.get_float_from_line_edit = get_float_from_line_edit

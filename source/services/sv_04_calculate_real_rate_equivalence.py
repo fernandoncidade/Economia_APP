@@ -1,4 +1,7 @@
 from PySide6.QtCore import QCoreApplication
+from utils.LogManager import LogManager
+
+logger = LogManager.get_logger()
 
 def calculate_rate_equivalence(self):
     try:
@@ -82,8 +85,13 @@ def calculate_rate_equivalence(self):
         self.rate_equiv_result.append("".join(steps))
 
     except Exception as e:
+        logger.error(f"Erro ao calcular equivalência de taxas: {e}", exc_info=True)
         tr = QCoreApplication.translate
-        self.rate_equiv_result.append(f"{tr('App', 'Erro')}: {e}")
+        try:
+            self.rate_equiv_result.append(f"{tr('App', 'Erro')}: {e}")
+
+        except Exception:
+            pass
 
 def calculate_real_rate(self):
     try:
@@ -198,5 +206,10 @@ def calculate_real_rate(self):
             self.rate_real_result.append("".join(steps))
 
     except Exception as e:
+        logger.error(f"Erro ao calcular taxa aparente/real: {e}", exc_info=True)
         tr = QCoreApplication.translate
-        self.rate_real_result.append(f"{tr('App', 'Erro')}: {e}")
+        try:
+            self.rate_real_result.append(f"{tr('App', 'Erro')}: {e}")
+
+        except Exception:
+            pass

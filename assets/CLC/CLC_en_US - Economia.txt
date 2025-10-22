@@ -5,7 +5,7 @@ This Commercial License Agreement ("Agreement") is entered into by:
 LICENSOR: Fernando Nillsson Cidade, hereinafter "LICENSOR".
 LICENSEE: the natural or legal person who acquires the commercial license for the software "Economia APP", hereinafter "LICENSEE".
 
-Date: October 21, 2025
+Date: October 22, 2025
 
 PREAMBLE
 This Agreement supplements the terms of the End User License Agreement (EULA) included in the package (assets/EULA/EULA_pt_BR - Economia.txt) and governs the commercial license modalities, support, updates and liabilities related to the Economia APP software — a financial calculator intended to support studies in Engineering Economics (TT007) with features for interest, annuities, gradients, amortization (SAC/Price/SAM), rate equivalence, investment analysis (VPL/VAUE), depreciation, history and export (PDF).

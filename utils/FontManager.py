@@ -1,14 +1,14 @@
 import json
-import os
 from pathlib import Path
 from PySide6.QtGui import QFont
 from utils.LogManager import LogManager
+from utils.CaminhoPersistenteUtils import obter_caminho_persistente
 
 logger = LogManager.get_logger()
 
 
 class FontManager:
-    CONFIG_FILE = Path.home() / ".economia_app" / "font_config.json"
+    CONFIG_FILE = Path(obter_caminho_persistente()) / "font_config.json"
 
     DEFAULT_CONFIG = {
         "family": "Courier New",

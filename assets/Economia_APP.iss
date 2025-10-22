@@ -1,7 +1,7 @@
 ; Script adaptado para compatibilidade com Nuitka
 
 #define MyAppName "ECONOMIA APP"
-#define MyAppVersion "0.0.2.0"
+#define MyAppVersion "0.0.3.0"
 #define MyAppPublisher "Fernando Nillsson Cidade"
 #define MyAppURL "https://github.com/fernandoncidade"
 #define MyAppExeName "Economia_APP.exe"
@@ -24,7 +24,7 @@ DisableProgramGroupPage=yes
 InfoBeforeFile={#NuitkaDistDir}\assets\ABOUT\ABOUT_en_US.txt
 LicenseFile={#NuitkaDistDir}\assets\PRIVACY_POLICY\Privacy_Policy_en_US.txt
 OutputDir=D:\MISCELANEAS\Nuitka\Economia_APP
-OutputBaseFilename=Economia_APP_v0.0.2.0
+OutputBaseFilename=Economia_APP_v0.0.3.0
 SetupIconFile={#NuitkaDistDir}\assets\icones\economia.ico
 SolidCompression=yes
 WizardStyle=modern

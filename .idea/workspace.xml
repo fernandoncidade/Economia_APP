@@ -4,7 +4,55 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0f13959f-517a-4ffe-8a35-fc8e1405bb44" name="Changes" comment="" />
+    <list default="true" id="0f13959f-517a-4ffe-8a35-fc8e1405bb44" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/LICENSE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/ABOUT/ABOUT_en_US.txt" beforeDir="false" afterPath="$PROJECT_DIR$/assets/ABOUT/ABOUT_en_US.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/ABOUT/ABOUT_pt_BR.txt" beforeDir="false" afterPath="$PROJECT_DIR$/assets/ABOUT/ABOUT_pt_BR.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/ABOUT/History_APP_en_US.txt" beforeDir="false" afterPath="$PROJECT_DIR$/assets/ABOUT/History_APP_en_US.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/ABOUT/History_APP_pt_BR.txt" beforeDir="false" afterPath="$PROJECT_DIR$/assets/ABOUT/History_APP_pt_BR.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/CLC/CLC_en_US - Economia.txt" beforeDir="false" afterPath="$PROJECT_DIR$/assets/CLC/CLC_en_US - Economia.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/CLC/CLC_pt_BR - Economia.txt" beforeDir="false" afterPath="$PROJECT_DIR$/assets/CLC/CLC_pt_BR - Economia.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/EULA/EULA_en_US - Economia.txt" beforeDir="false" afterPath="$PROJECT_DIR$/assets/EULA/EULA_en_US - Economia.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/EULA/EULA_pt_BR - Economia.txt" beforeDir="false" afterPath="$PROJECT_DIR$/assets/EULA/EULA_pt_BR - Economia.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/NOTICES/NOTICE_en_US.txt" beforeDir="false" afterPath="$PROJECT_DIR$/assets/NOTICES/NOTICE_en_US.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/NOTICES/NOTICE_pt_BR.txt" beforeDir="false" afterPath="$PROJECT_DIR$/assets/NOTICES/NOTICE_pt_BR.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/PRIVACY_POLICY/Privacy_Policy_en_US.txt" beforeDir="false" afterPath="$PROJECT_DIR$/assets/PRIVACY_POLICY/Privacy_Policy_en_US.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/PRIVACY_POLICY/Privacy_Policy_pt_BR.txt" beforeDir="false" afterPath="$PROJECT_DIR$/assets/PRIVACY_POLICY/Privacy_Policy_pt_BR.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/RELEASE/RELEASE NOTES_en_US.txt" beforeDir="false" afterPath="$PROJECT_DIR$/assets/RELEASE/RELEASE NOTES_en_US.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/RELEASE/RELEASE NOTES_pt_BR.txt" beforeDir="false" afterPath="$PROJECT_DIR$/assets/RELEASE/RELEASE NOTES_pt_BR.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/fca_01_FinancialCalculatorAPP.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/fca_01_FinancialCalculatorAPP.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/services/sv_01_calculate_interest.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/services/sv_01_calculate_interest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/services/sv_02_calculate_annuity.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/services/sv_02_calculate_annuity.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/services/sv_03_calculate_gradient.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/services/sv_03_calculate_gradient.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/services/sv_04_calculate_real_rate_equivalence.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/services/sv_04_calculate_real_rate_equivalence.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/services/sv_05_calculate_amortization.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/services/sv_05_calculate_amortization.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/services/sv_06_calculate_investment.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/services/sv_06_calculate_investment.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/services/sv_07_calculate_depreciation.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/services/sv_07_calculate_depreciation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/ui/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/ui/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/ui/ui_01_create_layout.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/ui/ui_01_create_layout.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/ui/ui_02_get_float_from_line_edit.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/ui/ui_02_get_float_from_line_edit.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/ui/ui_03_create_interest_tab.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/ui/ui_03_create_interest_tab.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/ui/ui_04_create_annuity_tab.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/ui/ui_04_create_annuity_tab.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/ui/ui_05_create_gradient_tab.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/ui/ui_05_create_gradient_tab.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/ui/ui_06_create_rates_tab.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/ui/ui_06_create_rates_tab.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/ui/ui_07_create_amortization_tab.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/ui/ui_07_create_amortization_tab.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/ui/ui_08_create_investment_tab.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/ui/ui_08_create_investment_tab.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/ui/ui_09_create_depreciation_tab.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/ui/ui_09_create_depreciation_tab.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/ui/ui_10_generate_sac_table.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/ui/ui_10_generate_sac_table.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/ui/ui_11_generate_price_table.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/ui/ui_11_generate_price_table.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/ui/ui_12_generate_sam_table.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/ui/ui_12_generate_sam_table.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/ui/ui_13_set_amort_table_row.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/ui/ui_13_set_amort_table_row.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/ui/ui_14_get_table_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/ui/ui_14_get_table_data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/ui/ui_15_export_pdf.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/ui/ui_15_export_pdf.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/ui/ui_16_menu_bar.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/ui/ui_16_menu_bar.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/ui/ui_17_history_container.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/ui/ui_17_history_container.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/ui/ui_18_SobreDialog.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/ui/ui_18_SobreDialog.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/ui/ui_19_exibir_sobre.py" beforeDir="false" afterPath="$PROJECT_DIR$/source/ui/ui_19_exibir_sobre.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/ui/ui_21_font_config_dialog.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/FontManager.py" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -63,7 +111,7 @@
       <workItem from="1760700373730" duration="1422000" />
       <workItem from="1761351102345" duration="496000" />
       <workItem from="1761351605267" duration="1126000" />
-      <workItem from="1761357468596" duration="163000" />
+      <workItem from="1761357468596" duration="771000" />
     </task>
     <servers />
   </component>

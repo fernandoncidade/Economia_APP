@@ -303,5 +303,11 @@
     <message><source>RESPOSTA: Depreciação no ano</source><translation>RESPOSTA: Depreciação no ano</translation></message>
     <message><source>RESPOSTA: Soma dos dígitos =</source><translation>RESPOSTA: Soma dos dígitos =</translation></message>
 
+    <!-- Trial / Licença -->
+    <message><source>trial_expired_title</source><translation>Versão de avaliação expirada</translation></message>
+    <message><source>trial_expired_message</source><translation>Seu período de avaliação terminou.</translation></message>
+    <message><source>trial_buy_message</source><translation>Por favor, adquira a versão completa para continuar usando o aplicativo.</translation></message>
+    <message><source>trial_uninstall_message</source><translation>Se não desejar comprar, desinstale o aplicativo.</translation></message>
+    <message><source>trial_paid_link</source><translation>Comprar Versão Completa</translation></message>
   </context>
 </TS>

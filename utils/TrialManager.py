@@ -12,7 +12,7 @@ logger = LogManager.get_logger()
 
 def get_text(text):
     try:
-        return QCoreApplication.translate("InterfaceGerenciadorAtividades", text)
+        return QCoreApplication.translate("App", text)
 
     except Exception:
         return text
@@ -20,8 +20,8 @@ def get_text(text):
 class TrialManager:
     CONFIG_FILE = "trial_info.json"
     DEFAULT_TRIAL = "days"  # Pode ser "minutes" ou "days"
-    DEFAULT_TRIAL_VALUE = 1    # Valor inteiro para minutos ou dias
-    PAID_VERSION_URL = "ms-windows-store://pdp/?productid="
+    DEFAULT_TRIAL_VALUE = 7    # Valor inteiro para minutos ou dias
+    PAID_VERSION_URL = "ms-windows-store://pdp/?productid=9PLR0KD6KSJJ"
     LIBERAR_USO_DEFINITIVO = False  # Altere para True para liberar uso definitivo
     REG_PATH = r"SOFTWARE\Economia_APP"
     REG_KEY = "FirstRunTimestamp"
@@ -236,7 +236,7 @@ class TrialManager:
 
             if cls.is_trial_expired():
                 msg = QMessageBox(parent)
-                icon_file = get_icon_path("ReviewsManager.ico")
+                icon_file = get_icon_path("economia.ico")
                 msg.setWindowIcon(QIcon(icon_file))
                 msg.setIcon(QMessageBox.Critical)
                 msg.setWindowTitle(get_text("trial_expired_title"))

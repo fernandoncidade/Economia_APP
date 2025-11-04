@@ -1,5 +1,6 @@
 from PySide6.QtCore import QCoreApplication
 from utils.LogManager import LogManager
+from utils.TextFormat import to_superscript, format_currency, format_fraction, to_unicode_subscripts
 
 logger = LogManager.get_logger()
 
@@ -9,42 +10,103 @@ def calculate_interest(self):
         i = self.get_float_from_line_edit(self.interest_i, is_percentage=True)
         n = self.get_float_from_line_edit(self.interest_n)
 
-        # Corrigido: usar índice ao invés de comparação de texto
-        is_compound = self.interest_regime.currentIndex() == 0  # 0 = Juros Compostos, 1 = Juros Simples
-        calc_f = self.interest_calc_type.currentIndex() == 0   # 0 = Calcular Montante (F), 1 = Calcular Principal (P)
+        calc_type_index = self.interest_calc_type.currentIndex()
+        is_compound = self.interest_regime.currentIndex() == 0
 
         result_text = ""
 
-        # Função auxiliar para converter número em sobrescrito
-        def to_superscript(num):
-            superscript_map = {
-                '0': '⁰', '1': '¹', '2': '²', '3': '³', '4': '⁴',
-                '5': '⁵', '6': '⁶', '7': '⁷', '8': '⁸', '9': '⁹',
-                '.': '·', '-': '⁻'
-            }
-            return ''.join(superscript_map.get(c, c) for c in str(num))
+        # NOVA FUNCIONALIDADE: Comparar JS vs JC
+        if calc_type_index == 2:  # Comparar JS vs JC
+            p = self.get_float_from_line_edit(self.interest_p)
+            n_base = int(n)  # Período base para cálculo de JC
 
-        # Normalização da formatação numérica/monetária
-        def format_currency(value):
-            s = f"{value:,.2f}"         # ex: "15,000.00"
-            s = s.replace(",", "T")     # "15T000.00"
-            s = s.replace(".", ",")     # "15T000,00"
-            s = s.replace("T", ".")     # "15.000,00"
-            return s
+            steps = []
+            steps.append("═" * 70 + "\n")
+            steps.append(to_unicode_subscripts(tr("App", "COMPARAÇÃO: JUROS SIMPLES vs JUROS COMPOSTOS")) + "\n")
+            steps.append("═" * 70 + "\n\n")
 
-        # Função auxiliar para formatar frações com numerador centralizado sobre o traço
-        def format_fraction(numer_str, denom_str, prefix=""):
-            # prefix é aplicado somente na linha do traço (ex.: "  P = ")
-            numer = str(numer_str)
-            denom = str(denom_str)
-            width = max(len(numer), len(denom), 3)
-            pad = " " * len(prefix)
-            numer_line = pad + numer.center(width)
-            divider_line = prefix + "─" * width
-            denom_line = pad + denom.center(width)
-            return numer_line, divider_line, denom_line
+            steps.append(tr("App", "Objetivo:") + "\n")
+            steps.append(to_unicode_subscripts(tr("App", "Encontrar quantos meses (n_s) são necessários para que o montante a juros simples (F_s) supere o montante a juros compostos (F_c) calculado para {n} meses.").format(n=n_base)) + "\n\n")
 
-        if calc_f:
+            steps.append(tr("App", "Dados do problema:") + "\n")
+            steps.append(f"  P ({tr('App', 'Principal')})           = R$ {format_currency(p)}\n")
+            steps.append(f"  i ({tr('App', 'Taxa')})                = {format_currency(i*100)}% {tr('App', 'ao período')}\n")
+            steps.append(to_unicode_subscripts(f"  n_c ({tr('App', 'Período base JC')})   = {n_base} {tr('App', 'meses')}") + "\n\n")
+
+            # Passo 1: Calcular F_c para n_base meses
+            f_c = p * (1 + i) ** n_base
+            steps.append("─" * 70 + "\n")
+            steps.append(to_unicode_subscripts(tr("App", "PASSO 1: Calcular montante a juros compostos para {n} meses").format(n=n_base)) + "\n")
+            steps.append("─" * 70 + "\n\n")
+
+            steps.append(tr("App", "Fórmula:") + "\n")
+            steps.append(to_unicode_subscripts("  F_c = P × (1 + i)ⁿᶜ") + "\n\n")
+
+            n_super = to_superscript(n_base)
+            steps.append(tr("App", "Substituindo os valores:") + "\n")
+            steps.append(to_unicode_subscripts(f"  F_c = {format_currency(p)} × (1 + {format_currency(i)}){n_super}") + "\n")
+
+            fator_jc = (1 + i) ** n_base
+            steps.append(to_unicode_subscripts(f"  F_c = {format_currency(p)} × {format_currency(fator_jc)}") + "\n")
+            steps.append(to_unicode_subscripts(f"  F_c = R$ {format_currency(f_c)}") + "\n\n")
+
+            # Passo 2: Estabelecer inequação e resolver
+            steps.append("─" * 70 + "\n")
+            steps.append(to_unicode_subscripts(tr("App", "PASSO 2: Estabelecer a inequação e resolver para n_s")) + "\n")
+            steps.append("─" * 70 + "\n\n")
+
+            steps.append(to_unicode_subscripts(tr("App", "Queremos encontrar n_s tal que:")) + "\n")
+            steps.append(to_unicode_subscripts("  F_s > F_c") + "\n\n")
+
+            steps.append(tr("App", "Fórmula de juros simples:") + "\n")
+            steps.append(to_unicode_subscripts("  F_s = P × (1 + n_s × i)") + "\n\n")
+
+            steps.append(tr("App", "Inequação:") + "\n")
+            steps.append(to_unicode_subscripts(f"  P × (1 + n_s × i) > {format_currency(f_c)}") + "\n")
+            steps.append(to_unicode_subscripts(f"  {format_currency(p)} × (1 + n_s × {format_currency(i)}) > {format_currency(f_c)}") + "\n\n")
+
+            steps.append(tr("App", "Dividindo ambos os lados por P:") + "\n")
+            razao = f_c / p
+            steps.append(to_unicode_subscripts(f"  1 + n_s × {format_currency(i)} > {format_currency(f_c)} / {format_currency(p)}") + "\n")
+            steps.append(to_unicode_subscripts(f"  1 + n_s × {format_currency(i)} > {format_currency(razao)}") + "\n\n")
+
+            steps.append(to_unicode_subscripts(tr("App", "Isolando n_s:")) + "\n")
+            diferenca = razao - 1
+            steps.append(to_unicode_subscripts(f"  n_s × {format_currency(i)} > {format_currency(razao)} - 1") + "\n")
+            steps.append(to_unicode_subscripts(f"  n_s × {format_currency(i)} > {format_currency(diferenca)}") + "\n")
+
+            n_s_real = diferenca / i
+            steps.append(to_unicode_subscripts(f"  n_s > {format_currency(diferenca)} / {format_currency(i)}") + "\n")
+            steps.append(to_unicode_subscripts(f"  n_s > {format_currency(n_s_real)}") + "\n\n")
+
+            # Resposta final
+            n_s_inteiro = int(n_s_real) + 1
+            steps.append("─" * 70 + "\n")
+            steps.append(tr("App", "RESULTADO") + "\n")
+            steps.append("─" * 70 + "\n\n")
+
+            steps.append(tr("App", "Como o número de meses deve ser inteiro, o menor valor que satisfaz a condição é {n}.").format(n=n_s_inteiro) + "\n\n")
+
+            # Verificação
+            f_s_verificacao = p * (1 + n_s_inteiro * i)
+            steps.append(tr("App", "Verificação:") + "\n")
+            steps.append(to_unicode_subscripts(f"  F_s({n_s_inteiro}) = {format_currency(p)} × (1 + {n_s_inteiro} × {format_currency(i)})") + "\n")
+            steps.append(to_unicode_subscripts(f"  F_s({n_s_inteiro}) = {format_currency(p)} × {format_currency(1 + n_s_inteiro * i)}") + "\n")
+            steps.append(to_unicode_subscripts(f"  F_s({n_s_inteiro}) = R$ {format_currency(f_s_verificacao)}") + "\n\n")
+
+            steps.append(to_unicode_subscripts(f"  F_c({n_base}) = R$ {format_currency(f_c)}") + "\n")
+            steps.append(to_unicode_subscripts(f"  F_s({n_s_inteiro}) = R$ {format_currency(f_s_verificacao)}") + "\n\n")
+
+            if f_s_verificacao > f_c:
+                steps.append(to_unicode_subscripts(f"  ✓ F_s({n_s_inteiro}) > F_c({n_base})") + "\n\n")
+
+            steps.append("═" * 70 + "\n")
+            steps.append(tr("App", "RESPOSTA: São necessários {n} meses consecutivos.").format(n=n_s_inteiro) + "\n")
+            steps.append("═" * 70 + "\n")
+
+            result_text = "".join(steps)
+
+        elif calc_type_index == 0:  # Calcular Montante (F)
             p = self.get_float_from_line_edit(self.interest_p)
             if is_compound:
                 f = p * (1 + i) ** n

@@ -1,7 +1,7 @@
-from PySide6.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QLineEdit, QPushButton, QComboBox, QSizePolicy
+from PySide6.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QLineEdit, QPushButton, QComboBox, QSizePolicy, QSplitter
 from PySide6.QtGui import QDoubleValidator, QFontDatabase
-from PySide6.QtCore import Qt, QCoreApplication
-from .ui_17_history_container import HistoryContainer
+from PySide6.QtCore import Qt, QCoreApplication, QTimer
+from .ui_20_history_container import HistoryContainer
 from utils.LogManager import LogManager
 
 logger = LogManager.get_logger()
@@ -23,16 +23,6 @@ def create_rates_tab(self):
 
         calc_equiv_button = QPushButton(tr("App", "Calcular Taxa Equivalente"))
         calc_equiv_button.clicked.connect(self.calculate_rate_equivalence)
-
-        self.rate_equiv_label = QLabel(tr("App", "<b>Resultado — Equivalência de Taxas</b>"))
-        self.rate_equiv_label.setAlignment(Qt.AlignLeft)
-        self.rate_equiv_label.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Fixed)
-        right_layout.addWidget(self.rate_equiv_label)
-
-        self.rate_equiv_result = HistoryContainer(self)
-        self.rate_equiv_result.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        fixed_font = QFontDatabase.systemFont(QFontDatabase.FixedFont)
-        self.rate_equiv_result.setFont(fixed_font)
 
         layout.addRow(tr("App", "Taxa Atual (%):"), self.rate_equiv_i)
         layout.addRow(tr("App", "Período da Taxa Atual (em unidades de tempo):"), self.rate_equiv_current_n)
@@ -80,30 +70,9 @@ def create_rates_tab(self):
         btn_edit_equiv.clicked.connect(toggle_edit_equiv)
         layout.addRow(btn_widget)
 
-        def clear_inputs():
-            self.rate_equiv_i.clear()
-            self.rate_equiv_current_n.setText()
-            self.rate_equiv_target_n.setText()
-            self.rate_real_calc_type.setCurrentIndex(0)
-            self.rate_real_r.clear()
-            self.rate_real_i.clear()
-            self.rate_real_inflation.clear()
-
-        def clear_output():
-            self.rate_equiv_result.clear()
-            self.rate_real_result.clear()
-
-        def clear_all():
-            clear_inputs()
-            clear_output()
-
-        btn_clear_inputs.clicked.connect(clear_inputs)
-        btn_clear_output.clicked.connect(clear_output)
-        btn_clear_all.clicked.connect(clear_all)
-
-        right_layout.addWidget(self.rate_equiv_result)
-
-        layout.addRow(QLabel(tr("App", "<b>Taxa Real e Aparente (Inflação)</b>")))
+        # Seção Taxa Real
+        rate_real_title = tr("App", "Taxa Real e Aparente (Inflação)")
+        layout.addRow(QLabel(f"<b>{rate_real_title}</b>"))
         self.rate_real_calc_type = QComboBox()
         self.rate_real_calc_type.addItems([tr("App", "Calcular Taxa Aparente (i)"), tr("App", "Calcular Taxa Real (r)")])
         self.rate_real_r = QLineEdit()
@@ -116,15 +85,6 @@ def create_rates_tab(self):
 
         calc_real_button = QPushButton(tr("App", "Calcular"))
         calc_real_button.clicked.connect(self.calculate_real_rate)
-
-        self.rate_real_label = QLabel(tr("App", "<b>Resultado — Taxa Real / Aparente</b>"))
-        self.rate_real_label.setAlignment(Qt.AlignLeft)
-        self.rate_real_label.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Fixed)
-        right_layout.addWidget(self.rate_real_label)
-
-        self.rate_real_result = HistoryContainer(self)
-        self.rate_real_result.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        self.rate_real_result.setFont(fixed_font)
 
         layout.addRow(self.rate_real_calc_type)
         layout.addRow(tr("App", "Taxa Real (r %):"), self.rate_real_r)
@@ -173,7 +133,107 @@ def create_rates_tab(self):
         btn_edit_real.clicked.connect(toggle_edit_real)
 
         layout.addRow(btn_widget_real)
-        right_layout.addWidget(self.rate_real_result)
+
+        # Controle de disposição
+        self.rate_layout_mode = QComboBox()
+        self.rate_layout_mode.addItems([
+            tr("App", "Empilhadas (acima e abaixo)"),
+            tr("App", "Lado a lado")
+        ])
+        layout.addRow(tr("App", "Disposição da visualização:"), self.rate_layout_mode)
+
+        # Criar containers de resultado com rótulos
+        fixed_font = QFontDatabase.systemFont(QFontDatabase.FixedFont)
+        
+        # Container para Equivalência de Taxas
+        self.rate_equiv_container = QWidget()
+        equiv_layout = QVBoxLayout(self.rate_equiv_container)
+        equiv_layout.setContentsMargins(0, 0, 0, 0)
+        equiv_layout.setSpacing(2)
+        
+        self.rate_equiv_label = QLabel(tr("App", "<b>Resultado — Equivalência de Taxas</b>"))
+        self.rate_equiv_label.setAlignment(Qt.AlignCenter)
+        equiv_layout.addWidget(self.rate_equiv_label)
+        
+        self.rate_equiv_result = HistoryContainer(self)
+        self.rate_equiv_result.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        self.rate_equiv_result.setFont(fixed_font)
+        self.rate_equiv_result.setMinimumSize(0, 0)
+        equiv_layout.addWidget(self.rate_equiv_result)
+
+        # Container para Taxa Real/Aparente
+        self.rate_real_container = QWidget()
+        real_layout = QVBoxLayout(self.rate_real_container)
+        real_layout.setContentsMargins(0, 0, 0, 0)
+        real_layout.setSpacing(2)
+        
+        self.rate_real_label = QLabel(tr("App", "<b>Resultado — Taxa Real / Aparente</b>"))
+        self.rate_real_label.setAlignment(Qt.AlignCenter)
+        real_layout.addWidget(self.rate_real_label)
+        
+        self.rate_real_result = HistoryContainer(self)
+        self.rate_real_result.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        self.rate_real_result.setFont(fixed_font)
+        self.rate_real_result.setMinimumSize(0, 0)
+        real_layout.addWidget(self.rate_real_result)
+
+        # Criar splitter para os resultados
+        self.rate_splitter = QSplitter(Qt.Vertical, self)
+        self.rate_splitter.setChildrenCollapsible(False)
+        self.rate_splitter.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        self.rate_splitter.addWidget(self.rate_equiv_container)
+        self.rate_splitter.addWidget(self.rate_real_container)
+        self.rate_splitter.setStretchFactor(0, 1)
+        self.rate_splitter.setStretchFactor(1, 1)
+
+        # Funções de limpeza
+        def clear_inputs():
+            self.rate_equiv_i.clear()
+            self.rate_equiv_current_n.clear()
+            self.rate_equiv_target_n.clear()
+            self.rate_real_calc_type.setCurrentIndex(0)
+            self.rate_real_r.clear()
+            self.rate_real_i.clear()
+            self.rate_real_inflation.clear()
+
+        def clear_output():
+            self.rate_equiv_result.clear()
+            self.rate_real_result.clear()
+
+        def clear_all():
+            clear_inputs()
+            clear_output()
+
+        btn_clear_inputs.clicked.connect(clear_inputs)
+        btn_clear_output.clicked.connect(clear_output)
+        btn_clear_all.clicked.connect(clear_all)
+
+        btn_clear_inputs_r.clicked.connect(clear_inputs)
+        btn_clear_output_r.clicked.connect(clear_output)
+        btn_clear_all_r.clicked.connect(clear_all)
+
+        # Função para alternar orientação
+        def set_rate_orientation(index: int):
+            orientation = Qt.Vertical if index == 0 else Qt.Horizontal
+            self.rate_splitter.setOrientation(orientation)
+
+            def adjust_sizes():
+                total_size = self.rate_splitter.size()
+                if orientation == Qt.Horizontal:
+                    width = max(total_size.width(), 2)
+                    half = width // 2
+                    self.rate_splitter.setSizes([half, width - half])
+                else:
+                    height = max(total_size.height(), 2)
+                    half = height // 2
+                    self.rate_splitter.setSizes([half, height - half])
+
+            QTimer.singleShot(0, adjust_sizes)
+
+        self.rate_layout_mode.currentIndexChanged.connect(set_rate_orientation)
+        set_rate_orientation(self.rate_layout_mode.currentIndex())
+
+        right_layout.addWidget(self.rate_splitter)
 
     except Exception as e:
         logger.error(f"Erro ao criar aba de conversão de taxas: {e}", exc_info=True)

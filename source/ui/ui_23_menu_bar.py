@@ -2,8 +2,8 @@ from PySide6.QtWidgets import QMenuBar, QTextEdit
 from PySide6.QtGui import QAction, QActionGroup
 from PySide6.QtCore import QCoreApplication
 from html import escape
-from .ui_15_export_pdf import amort_table_to_html
-from .ui_19_exibir_sobre import exibir_sobre
+from .ui_22_export_pdf import amort_table_to_html
+from .ui_25_exibir_sobre import exibir_sobre
 from utils.LogManager import LogManager
 
 logger = LogManager.get_logger()
@@ -67,15 +67,7 @@ def create_menu_bar(self):
             try:
                 from .ui_21_font_config_dialog import FontConfigDialog
                 dialog = FontConfigDialog(self)
-                if dialog.exec():
-                    # Atualizar todas as abas
-                    for attr_name in ['interest_result', 'annuity_result', 'grad_result', 
-                                     'rate_equiv_result', 'rate_real_result', 'invest_result', 
-                                     'deprec_result', 'eff_rate_result']:
-                        result_widget = getattr(self, attr_name, None)
-
-                        if hasattr(result_widget, 'refresh_all_fonts'):
-                            result_widget.refresh_all_fonts()
+                dialog.exec()
 
             except Exception as e:
                 logger.error(f"Erro ao abrir configuração de fontes: {e}", exc_info=True)

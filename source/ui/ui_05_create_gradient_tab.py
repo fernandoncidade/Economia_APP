@@ -1,8 +1,10 @@
 from PySide6.QtWidgets import QLineEdit, QPushButton, QComboBox, QSizePolicy, QHBoxLayout, QVBoxLayout, QWidget
 from PySide6.QtGui import QDoubleValidator, QFontDatabase
 from PySide6.QtCore import QCoreApplication
-from .ui_17_history_container import HistoryContainer
+from .ui_20_history_container import HistoryContainer
 from utils.LogManager import LogManager
+from PySide6.QtWidgets import QLabel
+from utils.TextFormat import to_html_subscripts, to_unicode_subscripts
 
 logger = LogManager.get_logger()
 
@@ -14,14 +16,19 @@ def create_gradient_tab(self):
 
         # Modo de cálculo
         self.grad_calc_mode = QComboBox()
-        self.grad_calc_mode.addItems([
+        calc_items = [
             tr("App", "Calcular Valor Presente (P)"),
             tr("App", "Calcular k-ésimo Termo (X_k)"),
-            tr("App", "Renda Perpétua")
-        ])
+            tr("App", "Renda Perpétua"),
+            tr("App", "Calcular Termo G_k do Gradiente Aritmético"),
+        ]
+        for it in calc_items:
+            self.grad_calc_mode.addItem(to_unicode_subscripts(it))
 
         self.grad_type = QComboBox()
-        self.grad_type.addItems([tr("App", "Gradiente Aritmético (G)"), tr("App", "Gradiente Geométrico (g)")])
+        type_items = [tr("App", "Gradiente Aritmético (G)"), tr("App", "Gradiente Geométrico (g)")]
+        for it in type_items:
+            self.grad_type.addItem(to_unicode_subscripts(it))
 
         self.grad_p = QLineEdit()
         self.grad_a = QLineEdit()
@@ -87,14 +94,14 @@ def create_gradient_tab(self):
 
         btn_edit.clicked.connect(toggle_edit_grad)
 
-        layout.addRow(tr("App", "Modo de Cálculo:"), self.grad_calc_mode)
-        layout.addRow(tr("App", "Tipo de Gradiente:"), self.grad_type)
-        layout.addRow(tr("App", "Valor Presente (P):"), self.grad_p)
-        layout.addRow(tr("App", "Renda Periódica (A):"), self.grad_a)
-        layout.addRow(tr("App", "Gradiente (G ou g %):"), self.grad_g)
-        layout.addRow(tr("App", "Taxa de Juros (i % ao período):"), self.grad_i)
-        layout.addRow(tr("App", "Número de Períodos (n):"), self.grad_n)
-        layout.addRow(tr("App", "Termo desejado (k):"), self.grad_k)
+        layout.addRow(QLabel(to_html_subscripts(tr("App", "Modo de Cálculo:"))), self.grad_calc_mode)
+        layout.addRow(QLabel(to_html_subscripts(tr("App", "Tipo de Gradiente:"))), self.grad_type)
+        layout.addRow(QLabel(to_html_subscripts(tr("App", "Valor Presente (P):"))), self.grad_p)
+        layout.addRow(QLabel(to_html_subscripts(tr("App", "Renda Periódica (A):"))), self.grad_a)
+        layout.addRow(QLabel(to_html_subscripts(tr("App", "Gradiente (G ou g %):"))), self.grad_g)
+        layout.addRow(QLabel(to_html_subscripts(tr("App", "Taxa de Juros (i % ao período):"))), self.grad_i)
+        layout.addRow(QLabel(to_html_subscripts(tr("App", "Número de Períodos (n):"))), self.grad_n)
+        layout.addRow(QLabel(to_html_subscripts(tr("App", "Termo desejado (k):"))), self.grad_k)
         layout.addRow(calc_button)
         layout.addRow(btn_widget)
         right_layout.addWidget(self.grad_result)
@@ -120,6 +127,16 @@ def create_gradient_tab(self):
                 self.grad_n.setEnabled(True)
                 self.grad_k.setEnabled(True)
                 self.grad_type.setEnabled(True)
+
+            # Calcular Termo G_k do Gradiente Aritmético
+            elif calc_mode == 3:
+                self.grad_p.setEnabled(True)
+                self.grad_a.setEnabled(False)
+                self.grad_g.setEnabled(False)
+                self.grad_i.setEnabled(True)
+                self.grad_n.setEnabled(True)
+                self.grad_k.setEnabled(True)
+                self.grad_type.setEnabled(False)
 
             # Calcular P
             else:

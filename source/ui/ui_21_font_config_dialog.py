@@ -180,10 +180,32 @@ class FontConfigDialog(QDialog):
         try:
             config = self.get_config()
             FontManager.save_config(config)
+            parent = self.parent()
+            if parent:
+                self._refresh_all_result_widgets(parent)
+
             self.accept()
 
         except Exception as e:
             logger.error(f"Erro ao aplicar configuração: {e}", exc_info=True)
+
+    def _refresh_all_result_widgets(self, parent):
+        try:
+            result_widgets = [
+                'interest_result', 'annuity_result', 'grad_result', 
+                'rate_equiv_result', 'rate_real_result', 'amort_result',
+                'invest_result', 'deprec_result', 'eff_rate_result',
+                'min_return_result', 'fisher_result'
+            ]
+            
+            for attr_name in result_widgets:
+                widget = getattr(parent, attr_name, None)
+                if widget and hasattr(widget, 'refresh_all_fonts'):
+                    widget.refresh_all_fonts()
+                    logger.info(f"Fontes atualizadas em: {attr_name}")
+
+        except Exception as e:
+            logger.error(f"Erro ao atualizar widgets de resultado: {e}", exc_info=True)
 
     def reset_to_default(self):
         try:

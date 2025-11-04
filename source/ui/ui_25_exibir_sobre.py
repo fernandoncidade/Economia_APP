@@ -1,6 +1,6 @@
 from PySide6.QtCore import QCoreApplication
-from source.ui.ui_18_SobreDialog import SobreDialog
-from source.ui.ui_20_opcoes_sobre import (SITE_LICENSES, 
+from source.ui.ui_24_SobreDialog import SobreDialog
+from source.ui.ui_26_opcoes_sobre import (SITE_LICENSES, 
                                           LICENSE_TEXT_PT_BR, LICENSE_TEXT_EN_US, 
                                           NOTICE_TEXT_PT_BR, NOTICE_TEXT_EN_US, 
                                           ABOUT_TEXT_PT_BR, ABOUT_TEXT_EN_US, 
@@ -71,7 +71,7 @@ def exibir_sobre(app):
 
         cabecalho_fixo = (
             "<h3>ECONOMIA APP</h3>"
-            f"<p><b>{get_text('version') or 'Version'}:</b> 0.0.4.0</p>"
+            f"<p><b>{get_text('version') or 'Version'}:</b> 0.0.5.0</p>"
             f"<p><b>{get_text('authors') or 'Authors'}:</b> Fernando Nillsson Cidade</p>"
             f"<p><b>{get_text('description') or 'Description'}:</b> {get_text('description_text') or ''}</p>"
         )

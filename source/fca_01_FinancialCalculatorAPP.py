@@ -46,6 +46,7 @@ from .services import (
     calculate_effective_rate,
     calculate_minimum_return,
     calculate_fisher,
+    calculate_value_at_k,
 )
 
 
@@ -134,6 +135,7 @@ FinancialCalculatorApp.calculate_depreciation = calculate_depreciation
 FinancialCalculatorApp.calculate_effective_rate = calculate_effective_rate
 FinancialCalculatorApp.calculate_minimum_return = calculate_minimum_return
 FinancialCalculatorApp.calculate_fisher = calculate_fisher
+FinancialCalculatorApp.calculate_value_at_k = calculate_value_at_k
 
 FinancialCalculatorApp.export_to_pdf = export_to_pdf
 FinancialCalculatorApp.export_amortization_pdf = export_amortization_pdf

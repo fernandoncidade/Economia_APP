@@ -2,6 +2,7 @@ from PySide6.QtWidgets import (QWidget, QScrollArea, QVBoxLayout, QHBoxLayout, Q
 from PySide6.QtCore import Qt, QCoreApplication, QEvent
 from utils.LogManager import LogManager
 from utils.FontManager import FontManager
+from utils.TextFormat import to_html_subscripts
 
 logger = LogManager.get_logger()
 
@@ -103,7 +104,19 @@ class HistoryContainer(QWidget):
     def _convert_to_html(self, text: str) -> str:
         try:
             from html import escape
-            escaped_text = escape(text)
+
+            text_with_subs = to_html_subscripts(text)
+
+            PLACEHOLDER_OPEN = "___SUBSOPEN___"
+            PLACEHOLDER_CLOSE = "___SUBSCLOSE___"
+
+            text_protected = text_with_subs.replace("<sub>", PLACEHOLDER_OPEN)
+            text_protected = text_protected.replace("</sub>", PLACEHOLDER_CLOSE)
+
+            escaped_text = escape(text_protected)
+            escaped_text = escaped_text.replace(PLACEHOLDER_OPEN, "<sub>")
+            escaped_text = escaped_text.replace(PLACEHOLDER_CLOSE, "</sub>")
+
             html_style = FontManager.get_html_style()
             html_content = f"{html_style}<body><pre>{escaped_text}</pre></body>"
             return html_content
@@ -117,6 +130,7 @@ class HistoryContainer(QWidget):
             if self._editing_index is not None and 0 <= self._editing_index < len(self._entries):
                 _, chk, te = self._entries[self._editing_index]
                 te.setPlainText(text)
+                te.setProperty("raw_text", text)
                 te.setReadOnly(False)
                 te.setFocus()
                 return
@@ -147,6 +161,7 @@ class HistoryContainer(QWidget):
 
             html_content = self._convert_to_html(text)
             te.setHtml(html_content)
+            te.setProperty("raw_text", text)
 
             te.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
             entry_layout.setStretch(0, 0)
@@ -170,9 +185,12 @@ class HistoryContainer(QWidget):
     def refresh_all_fonts(self):
         try:
             for entry_w, chk, te in self._entries:
-                current_text = te.toPlainText()
-                if current_text:
-                    html_content = self._convert_to_html(current_text)
+                raw_text = te.property("raw_text")
+                if not raw_text:
+                    raw_text = te.toPlainText()
+
+                if raw_text:
+                    html_content = self._convert_to_html(raw_text)
                     te.setHtml(html_content)
 
             logger.info("Fontes de todas as entradas atualizadas")
@@ -233,6 +251,8 @@ class HistoryContainer(QWidget):
 
             idx = selected[0]
             _, chk, te = self._entries[idx]
+            raw_text = te.property("raw_text") or te.toPlainText()
+            te.setPlainText(raw_text)
             self._editing_index = idx
             te.setReadOnly(False)
             te.setFocus()
@@ -249,6 +269,7 @@ class HistoryContainer(QWidget):
 
             _, chk, te = self._entries[self._editing_index]
             current_text = te.toPlainText()
+            te.setProperty("raw_text", current_text)
 
             html_content = self._convert_to_html(current_text)
             te.setHtml(html_content)

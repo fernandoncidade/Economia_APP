@@ -1,5 +1,6 @@
 from PySide6.QtCore import QCoreApplication
 from utils.LogManager import LogManager
+from utils.TextFormat import to_unicode_subscripts, to_superscript, format_currency, format_fraction, to_subscript
 
 logger = LogManager.get_logger()
 
@@ -10,37 +11,15 @@ def calculate_rate_equivalence(self):
         n1 = self.get_float_from_line_edit(self.rate_equiv_current_n)
         n2 = self.get_float_from_line_edit(self.rate_equiv_target_n)
 
-        # Normalização da formatação numérica/monetária
-        def format_currency(value):
-            s = f"{value:,.2f}"         # ex: "15,000.00"
-            s = s.replace(",", "T")     # "15T000.00"
-            s = s.replace(".", ",")     # "15T000,00"
-            s = s.replace("T", ".")     # "15.000,00"
-            return s
-
-        # Função auxiliar para converter número em sobrescrito
-        def to_superscript(num):
-            superscript_map = {
-                '0': '⁰', '1': '¹', '2': '²', '3': '³', '4': '⁴',
-                '5': '⁵', '6': '⁶', '7': '⁷', '8': '⁸', '9': '⁹',
-                '.': '·', '-': '⁻', '/': '⸍'
-            }
-            return ''.join(superscript_map.get(c, c) for c in str(num))
-
-        # Função auxiliar para formatar frações com numerador centralizado sobre o traço
-        def format_fraction(numer_str, denom_str, prefix=""):
-            numer = str(numer_str)
-            denom = str(denom_str)
-            width = max(len(numer), len(denom), 3)
-            pad = " " * len(prefix)
-            numer_line = pad + numer.center(width)
-            divider_line = prefix + "─" * width
-            denom_line = pad + denom.center(width)
-            return numer_line, divider_line, denom_line
-
         # (1+i_eq) = (1+i)^(n2/n1)
         exponent = n2 / n1
         i_eq = (1 + i) ** exponent - 1
+
+        # Representações com subíndices/superscritos para exibição
+        txt1 = to_subscript("1")
+        txt2 = to_subscript("2")
+        n1_txt = to_unicode_subscripts("n_1")
+        n2_txt = to_unicode_subscripts("n_2")
 
         steps = []
         steps.append("═" * 60 + "\n")
@@ -48,30 +27,35 @@ def calculate_rate_equivalence(self):
         steps.append("═" * 60 + "\n\n")
 
         steps.append(tr("App", "Fórmula:") + "\n")
-        n1l, n2l, n3l = format_fraction("n₂", "n₁", prefix="  (1 + i_eq) = (1 + i)^")
-        steps.append(n1l + "\n")
-        steps.append(n2l + "\n")
-        steps.append(n3l + "\n\n")
+        # Criar expoente com fração vertical
+        exp_super = to_superscript(f"({n2_txt}/{n1_txt})")
+        steps.append(f"  (1 + i_eq) = (1 + i){exp_super}\n\n")
 
         steps.append(tr("App", "Dados do problema:") + "\n")
-        steps.append(f"  i ({tr('App', 'Taxa conhecida')})     = {format_currency(i*100)}% {tr('App', 'ao período')} (n₁)\n")
-        steps.append(f"  n₁ ({tr('App', 'Período atual')})     = {format_currency(n1)}\n")
-        steps.append(f"  n₂ ({tr('App', 'Período desejado')})  = {format_currency(n2)}\n\n")
+        steps.append(f"  i ({tr('App', 'Taxa conhecida')}) = {format_currency(i*100)}% {tr('App', 'ao período')} (n_1)\n")
+        steps.append(f"  n_1 ({tr('App', 'Período atual')}) = {format_currency(n1, 0)}\n")
+        steps.append(f"  n_2 ({tr('App', 'Período desejado')}) = {format_currency(n2, 0)}\n\n")
+
+        # steps.append(tr("App", "Dados do problema:") + "\n")
+        # steps.append(f"  i ({tr('App', 'Taxa conhecida')}) = {format_currency(i*100)}% {tr('App', 'ao período')} (n{txt1})\n")
+        # steps.append(f"  n{txt1} ({tr('App', 'Período atual')}) = {format_currency(n1, 0)}\n")
+        # steps.append(f"  n{txt2} ({tr('App', 'Período desejado')}) = {format_currency(n2, 0)}\n\n")
 
         steps.append(tr("App", "Desenvolvimento:") + "\n")
-        n1e, n2e, n3e = format_fraction(format_currency(n2), format_currency(n1), prefix=f"  {tr('App', 'Expoente')}: ")
+        n1e, n2e, n3e = format_fraction(format_currency(n2, 0), format_currency(n1, 0), prefix=f"  {tr('App', 'Expoente')}: ")
         steps.append(n1e + "\n")
         steps.append(n2e + "\n")
         steps.append(n3e + "\n")
         steps.append(f"  {tr('App', 'Expoente')} = {format_currency(exponent)}\n\n")
 
-        exp_super = to_superscript(format_currency(exponent))
-        steps.append(f"  (1 + i_eq) = (1 + {format_currency(i)}){exp_super}\n\n")
+        exp_value_super = to_superscript(format_currency(exponent))
+        steps.append(f"  (1 + i_eq) = (1 + {format_currency(i)}){exp_value_super}\n\n")
 
         pow_val = (1 + i) ** exponent
         steps.append(tr("App", "Cálculo do fator:") + "\n")
-        steps.append(f"  (1 + i)^(n₂/n₁) = (1 + {format_currency(i)})^{format_currency(exponent)}\n")
-        steps.append(f"  (1 + i)^(n₂/n₁) = {format_currency(pow_val)}\n\n")
+        exp_frac_values = to_superscript(f"({format_currency(n2, 0)}/{format_currency(n1, 0)})")
+        steps.append(f"  (1 + i){exp_frac_values} = (1 + {format_currency(i)}){exp_value_super}\n")
+        steps.append(f"  (1 + i){exp_frac_values} = {format_currency(pow_val)}\n\n")
 
         steps.append(tr("App", "Cálculo final:") + "\n")
         steps.append(f"  i_eq = {format_currency(pow_val)} - 1\n")
@@ -79,8 +63,12 @@ def calculate_rate_equivalence(self):
         steps.append(f"  i_eq = {format_currency(i_eq*100)}%\n\n")
 
         steps.append("─" * 60 + "\n")
-        steps.append(tr("App", "RESPOSTA: A taxa equivalente é") + f" {format_currency(i_eq*100)}% {tr('App', 'ao período')} (n₂)\n")
+        steps.append(tr("App", "RESPOSTA: A taxa equivalente é") + f" {format_currency(i_eq*100)}% {tr('App', 'ao período')} (n_2)\n")
         steps.append("─" * 60 + "\n")
+
+        # steps.append("─" * 60 + "\n")
+        # steps.append(tr("App", "RESPOSTA: A taxa equivalente é") + f" {format_currency(i_eq*100)}% {tr('App', 'ao período')} (n{txt2})\n")
+        # steps.append("─" * 60 + "\n")
 
         self.rate_equiv_result.append("".join(steps))
 
@@ -89,44 +77,14 @@ def calculate_rate_equivalence(self):
         tr = QCoreApplication.translate
         try:
             self.rate_equiv_result.append(f"{tr('App', 'Erro')}: {e}")
-
         except Exception:
             pass
 
 def calculate_real_rate(self):
     try:
         tr = QCoreApplication.translate
-        
-        # Corrigido: usar índice ao invés de comparação de texto
+
         calc_apparent = self.rate_real_calc_type.currentIndex() == 0  # 0 = Calcular Taxa Aparente (i), 1 = Calcular Taxa Real (r)
-
-        # Normalização da formatação numérica/monetária
-        def format_currency(value):
-            s = f"{value:,.2f}"         # ex: "15,000.00"
-            s = s.replace(",", "T")     # "15T000.00"
-            s = s.replace(".", ",")     # "15T000,00"
-            s = s.replace("T", ".")     # "15.000,00"
-            return s
-
-        # Função auxiliar para converter número em sobrescrito
-        def to_superscript(num):
-            superscript_map = {
-                '0': '⁰', '1': '¹', '2': '²', '3': '³', '4': '⁴',
-                '5': '⁵', '6': '⁶', '7': '⁷', '8': '⁸', '9': '⁹',
-                '.': '·', '-': '⁻'
-            }
-            return ''.join(superscript_map.get(c, c) for c in str(num))
-
-        # Função auxiliar para formatar frações com numerador centralizado sobre o traço
-        def format_fraction(numer_str, denom_str, prefix=""):
-            numer = str(numer_str)
-            denom = str(denom_str)
-            width = max(len(numer), len(denom), 3)
-            pad = " " * len(prefix)
-            numer_line = pad + numer.center(width)
-            divider_line = prefix + "─" * width
-            denom_line = pad + denom.center(width)
-            return numer_line, divider_line, denom_line
 
         if calc_apparent:
             r = self.get_float_from_line_edit(self.rate_real_r, is_percentage=True)

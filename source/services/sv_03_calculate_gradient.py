@@ -1,5 +1,6 @@
 from PySide6.QtCore import QCoreApplication
 from utils.LogManager import LogManager
+from utils.TextFormat import to_superscript, to_subscript, to_superscript_parens, format_currency, format_fraction
 
 logger = LogManager.get_logger()
 
@@ -8,54 +9,101 @@ def calculate_gradient(self):
         tr = QCoreApplication.translate
 
         # Corrigido: usar índice ao invés de comparação de texto
-        calc_mode_index = self.grad_calc_mode.currentIndex()  # 0 = Calcular P, 1 = Calcular X_k, 2 = Renda Perpétua
+        calc_mode_index = self.grad_calc_mode.currentIndex()  # 0 = Calcular P, 1 = Calcular X_k, 2 = Renda Perpétua, 3 = Calcular G_k
         is_arithmetic = self.grad_type.currentIndex() == 0  # 0 = Gradiente Aritmético, 1 = Gradiente Geométrico
 
         result_text = ""
 
-        # Normalização da formatação numérica/monetária
-        def format_currency(value, decimals=2):
-            s = f"{value:,.{decimals}f}"         # ex: "15,000.00"
-            s = s.replace(",", "T")             # "15T000.00"
-            s = s.replace(".", ",")             # "15T000,00"
-            s = s.replace("T", ".")             # "15.000,00"
-            return s
+        # Calcular G_k do Gradiente Aritmético a partir de P
+        if calc_mode_index == 3:
+            p = self.get_float_from_line_edit(self.grad_p)
+            i = self.get_float_from_line_edit(self.grad_i, is_percentage=True)
+            n = self.get_float_from_line_edit(self.grad_n)
+            k = int(self.get_float_from_line_edit(self.grad_k))
 
-        # Função auxiliar para converter número em sobrescrito
-        def to_superscript(num):
-            superscript_map = {
-                '0': '⁰', '1': '¹', '2': '²', '3': '³', '4': '⁴',
-                '5': '⁵', '6': '⁶', '7': '⁷', '8': '⁸', '9': '⁹',
-                '.': '·', '-': '⁻'
-            }
-            return ''.join(superscript_map.get(c, c) for c in str(num))
+            steps = []
+            steps.append("═" * 60 + "\n")
+            steps.append(tr("App", "GRADIENTE ARITMÉTICO - CÁLCULO DO TERMO G_k") + "\n")
+            steps.append("═" * 60 + "\n\n")
 
-        # Função auxiliar para converter número em subscrito
-        def to_subscript(num):
-            subscript_map = {
-                '0': '₀', '1': '₁', '2': '₂', '3': '₃', '4': '₄',
-                '5': '₅', '6': '₆', '7': '₇', '8': '₈', '9': '₉',
-                '-': '₋', '+': '₊', '=': '₌', '(': '₍', ')': '₎'
-            }
-            return ''.join(subscript_map.get(c, c) for c in str(num))
+            steps.append(tr("App", "Dados do problema:") + "\n")
+            steps.append(f"  P ({tr('App', 'Valor Presente')}) = R$ {format_currency(p,2)}\n")
+            steps.append(f"  i ({tr('App', 'Taxa')})           = {format_currency(i*100, 2)}% {tr('App', 'ao período')}\n")
+            steps.append(f"  n ({tr('App', 'Períodos')})       = {format_currency(n, 0)}\n")
+            steps.append(f"  k ({tr('App', 'Termo desejado')}) = {format_currency(k, 0)}\n\n")
 
-        # Função auxiliar para formatar frações com numerador centralizado sobre o traço
-        def format_fraction(numer_str, denom_str, prefix=""):
-            numer = str(numer_str)
-            denom = str(denom_str)
-            width = max(len(numer), len(denom), 3)
-            pad = " " * len(prefix)
-            numer_line = pad + numer.center(width)
-            divider_line = prefix + "─" * width
-            denom_line = pad + denom.center(width)
-            return numer_line, divider_line, denom_line
+            # Passo 1: Calcular G (o incremento do gradiente)
+            steps.append("─" * 60 + "\n")
+            steps.append(f"1. {tr('App', 'CÁLCULO DO INCREMENTO G')}\n")
+            steps.append("─" * 60 + "\n\n")
+
+            steps.append(tr("App", "Fórmula para encontrar G a partir de P:") + "\n")
+            steps.append(f"  G = P × (1+i)ⁿ / [((1+i)ⁿ-1)/i² - n/i]\n\n")
+
+            pow_val = (1 + i) ** n
+            n_super = to_superscript(int(n))
+
+            steps.append(tr("App", "Cálculo de (1+i)ⁿ:") + "\n")
+            steps.append(f"  (1+i)ⁿ = (1 + {format_currency(i,6)}){n_super}\n")
+            steps.append(f"  (1+i)ⁿ = {format_currency(pow_val,6)}\n\n")
+
+            numerator_fraction = (pow_val - 1) / (i ** 2)
+            denominator_fraction = n / i
+
+            steps.append(tr("App", "Cálculo do denominador:") + "\n")
+            steps.append(f"  ((1+i)ⁿ-1)/i² = ({format_currency(pow_val,6)} - 1) / {format_currency(i**2,6)}\n")
+            steps.append(f"                = {format_currency(pow_val - 1,6)} / {format_currency(i**2,6)}\n")
+            steps.append(f"                = {format_currency(numerator_fraction,6)}\n\n")
+
+            steps.append(f"  n/i = {format_currency(n,0)} / {format_currency(i,6)}\n")
+            steps.append(f"      = {format_currency(denominator_fraction,6)}\n\n")
+
+            denominator = numerator_fraction - denominator_fraction
+            steps.append(f"  Denominador total = {format_currency(numerator_fraction,6)} - {format_currency(denominator_fraction,6)}\n")
+            steps.append(f"                    = {format_currency(denominator,6)}\n\n")
+
+            g = p * pow_val / denominator
+
+            steps.append(tr("App", "Cálculo de G:") + "\n")
+            steps.append(f"  G = {format_currency(p,2)} × {format_currency(pow_val,6)} / {format_currency(denominator,6)}\n")
+            steps.append(f"  G = {format_currency(p * pow_val,2)} / {format_currency(denominator,6)}\n")
+            steps.append(f"  G = R$ {format_currency(g,2)}\n\n")
+
+            # Passo 2: Calcular G_k
+            steps.append("─" * 60 + "\n")
+            steps.append(f"2. {tr('App', 'CÁLCULO DO TERMO')} G{to_subscript(k)}\n")
+            steps.append("─" * 60 + "\n\n")
+
+            steps.append(tr("App", "Fórmula:") + "\n")
+            steps.append(f"  G{to_subscript('k')} = (k - 1) × G\n\n")
+
+            steps.append(tr("App", "Observação: A série em gradiente aritmético padrão é:") + "\n")
+            steps.append(f"  Período 1: 0\n")
+            steps.append(f"  Período 2: G\n")
+            steps.append(f"  Período 3: 2G\n")
+            steps.append(f"  Período k: (k-1)G\n\n")
+
+            g_k = (k - 1) * g
+
+            steps.append(tr("App", "Cálculo:") + "\n")
+            steps.append(f"  G{to_subscript(k)} = ({format_currency(k, 0)} - 1) × {format_currency(g,2)}\n")
+            steps.append(f"  G{to_subscript(k)} = {format_currency(k - 1, 0)} × {format_currency(g,2)}\n")
+            steps.append(f"  G{to_subscript(k)} = R$ {format_currency(g_k,2)}\n\n")
+
+            steps.append("═" * 60 + "\n")
+            steps.append(tr("App", "RESPOSTA:") + "\n")
+            steps.append(f"  G (incremento) = R$ {format_currency(g,2)}\n")
+            steps.append(f"  G{to_subscript(k)} = R$ {format_currency(g_k,2)}\n")
+            steps.append("═" * 60 + "\n")
+
+            result_text = "".join(steps)
 
         # Renda Perpétua (Série Perpétua)
-        if calc_mode_index == 2:
+        elif calc_mode_index == 2:
             # Ler apenas os campos necessários para Renda Perpétua
             a = self.get_float_from_line_edit(self.grad_a)
             i = self.get_float_from_line_edit(self.grad_i, is_percentage=True)
-            
+
             p = a / i
 
             steps = []
@@ -182,9 +230,9 @@ def calculate_gradient(self):
             steps.append("─" * 60 + "\n\n")
 
             steps.append(tr("App", "Fórmula:") + "\n")
-            steps.append(f"  X{to_subscript('k')} = X{to_subscript(1)} × (1 + g){to_superscript('(k-1)')}\n\n")
+            steps.append(f"  X{to_subscript('k')} = X{to_subscript(1)} × (1 + g){to_superscript_parens('k-1')}\n\n")
 
-            k_minus_1_super = to_superscript(k - 1)
+            k_minus_1_super = to_superscript_parens(k - 1)
             pow_g = (1 + g) ** (k - 1)
 
             steps.append(tr("App", "Cálculo:") + "\n")

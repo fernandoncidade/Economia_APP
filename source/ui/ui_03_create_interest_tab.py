@@ -1,7 +1,7 @@
 from PySide6.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLineEdit, QPushButton, QComboBox, QSizePolicy
 from PySide6.QtGui import QDoubleValidator, QFontDatabase
 from PySide6.QtCore import QCoreApplication
-from .ui_17_history_container import HistoryContainer
+from .ui_20_history_container import HistoryContainer
 from utils.LogManager import LogManager
 
 logger = LogManager.get_logger()
@@ -13,7 +13,11 @@ def create_interest_tab(self):
         self.tabs.addTab(widget, tr("App", "Juros Simples e Compostos"))
 
         self.interest_calc_type = QComboBox()
-        self.interest_calc_type.addItems([tr("App", "Calcular Montante (F)"), tr("App", "Calcular Principal (P)")])
+        self.interest_calc_type.addItems([
+            tr("App", "Calcular Montante (F)"), 
+            tr("App", "Calcular Principal (P)"),
+            tr("App", "Comparar JS vs JC")
+        ])
 
         self.interest_regime = QComboBox()
         self.interest_regime.addItems([tr("App", "Juros Compostos"), tr("App", "Juros Simples")])
@@ -113,15 +117,26 @@ def create_interest_tab(self):
         right_layout.addWidget(self.interest_result)
 
         def toggle_fields():
-            if self.interest_calc_type.currentText() == tr("App", "Calcular Montante (F)"):
+            current_index = self.interest_calc_type.currentIndex()
+
+            if current_index == 0:  # Calcular Montante (F)
                 self.interest_p.setEnabled(True)
                 self.interest_f.setEnabled(False)
                 self.interest_f.clear()
+                self.interest_n.setEnabled(True)
 
-            else:
+            elif current_index == 1:  # Calcular Principal (P)
                 self.interest_p.setEnabled(False)
                 self.interest_f.setEnabled(True)
                 self.interest_p.clear()
+                self.interest_n.setEnabled(True)
+
+            else:  # Comparar JS vs JC
+                self.interest_p.setEnabled(True)
+                self.interest_f.setEnabled(False)
+                self.interest_f.clear()
+                self.interest_n.setEnabled(True)
+                # Para comparação, n será o período base de JC
 
         self.interest_calc_type.currentIndexChanged.connect(toggle_fields)
         toggle_fields()

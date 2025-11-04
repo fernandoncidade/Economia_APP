@@ -8,6 +8,7 @@ from .sv_07_calculate_depreciation import calculate_depreciation
 from .sv_08_calculate_effective_rate import calculate_effective_rate
 from .sv_09_calculate_minimum_return import calculate_minimum_return
 from .sv_10_calculate_fisher import calculate_fisher
+from .sv_11_calculate_value_at_k import calculate_value_at_k
 
 __all__ = [
     "calculate_interest",
@@ -21,4 +22,5 @@ __all__ = [
     "calculate_effective_rate",
     "calculate_minimum_return",
     "calculate_fisher",
+    "calculate_value_at_k",
 ]

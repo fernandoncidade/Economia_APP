@@ -1,7 +1,7 @@
-from PySide6.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLineEdit, QPushButton, QComboBox, QTableWidget, QTableWidgetItem, QHeaderView, QSizePolicy, QCheckBox
-from PySide6.QtGui import QDoubleValidator, QFontDatabase
-from PySide6.QtCore import QCoreApplication
-from .ui_17_history_container import HistoryContainer
+from PySide6.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLineEdit, QPushButton, QComboBox, QTableWidget, QTableWidgetItem, QHeaderView, QSizePolicy, QCheckBox, QSplitter
+from PySide6.QtGui import QDoubleValidator, QFontDatabase, QIntValidator
+from PySide6.QtCore import QCoreApplication, Qt, QTimer
+from .ui_20_history_container import HistoryContainer
 from utils.LogManager import LogManager
 
 logger = LogManager.get_logger()
@@ -25,7 +25,11 @@ def create_amortization_tab(self):
         self.amort_i = QLineEdit()
         self.amort_n = QLineEdit()
 
-        # Campos específicos para Sistema Hamburguês
+        self.amort_e = QLineEdit()
+        self.amort_e.setPlaceholderText(tr("App", "Entrada (E)"))
+        self.amort_k = QLineEdit()
+        self.amort_k.setPlaceholderText(tr("App", "Período desejado (k)"))
+
         self.amort_carencia = QLineEdit()
         self.amort_carencia.setPlaceholderText(tr("App", "Períodos de carência"))
 
@@ -36,9 +40,20 @@ def create_amortization_tab(self):
         self.amort_i.setValidator(QDoubleValidator())
         self.amort_n.setValidator(QDoubleValidator())
         self.amort_carencia.setValidator(QDoubleValidator())
+        self.amort_e.setValidator(QDoubleValidator())
+        self.amort_k.setValidator(QIntValidator(1, 10**9))
 
         calc_button = QPushButton(tr("App", "Gerar Tabela de Amortização"))
         calc_button.clicked.connect(self.calculate_amortization)
+
+        calc_k_button = QPushButton(tr("App", "Calcular valor no período k"))
+        calc_k_button.clicked.connect(self.calculate_value_at_k)
+
+        self.amort_layout_mode = QComboBox()
+        self.amort_layout_mode.addItems([
+            tr("App", "Empilhadas (acima e abaixo)"),
+            tr("App", "Lado a lado")
+        ])
 
         self.amort_table = QTableWidget()
         self.amort_table.setColumnCount(5)
@@ -46,19 +61,33 @@ def create_amortization_tab(self):
         self.amort_table.setHorizontalHeaderLabels(headers)
         self.amort_table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
         self.amort_table.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        self.amort_table.setMinimumSize(0, 0)
 
         self.amort_result = HistoryContainer(self)
         self.amort_result.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         fixed_font = QFontDatabase.systemFont(QFontDatabase.FixedFont)
         self.amort_result.setFont(fixed_font)
+        self.amort_result.setMinimumSize(0, 0)
+
+        self.amort_splitter = QSplitter(Qt.Vertical, self)
+        self.amort_splitter.setChildrenCollapsible(False)
+        self.amort_splitter.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        self.amort_splitter.addWidget(self.amort_result)
+        self.amort_splitter.addWidget(self.amort_table)
+        self.amort_splitter.setStretchFactor(0, 1)
+        self.amort_splitter.setStretchFactor(1, 1)
 
         layout.addRow(tr("App", "Sistema de Amortização:"), self.amort_system)
         layout.addRow(tr("App", "Valor do Financiamento (P):"), self.amort_p)
+        layout.addRow(tr("App", "Entrada (E):"), self.amort_e)
         layout.addRow(tr("App", "Taxa de Juros (i % ao período):"), self.amort_i)
         layout.addRow(tr("App", "Prazo (n períodos):"), self.amort_n)
         layout.addRow(tr("App", "Carência (períodos):"), self.amort_carencia)
         layout.addRow(self.amort_juros_capitalizados)
+        layout.addRow(tr("App", "Período desejado (k):"), self.amort_k)
         layout.addRow(calc_button)
+        layout.addRow(calc_k_button)
+        layout.addRow(tr("App", "Disposição da visualização:"), self.amort_layout_mode)
 
         btn_widget = QWidget()
         btn_vlayout = QVBoxLayout(btn_widget)
@@ -107,6 +136,8 @@ def create_amortization_tab(self):
             self.amort_i.clear()
             self.amort_n.clear()
             self.amort_carencia.clear()
+            self.amort_e.clear()
+            self.amort_k.clear()
             self.amort_system.setCurrentIndex(0)
             self.amort_juros_capitalizados.setChecked(False)
 
@@ -126,18 +157,36 @@ def create_amortization_tab(self):
         btn_clear_output.clicked.connect(clear_output)
         btn_clear_all.clicked.connect(clear_all)
 
-        # Toggle visibility dos campos de carência
         def toggle_carencia_fields():
             system_index = self.amort_system.currentIndex()
-            is_hamburgues = (system_index == 4)  # Sistema Hamburguês
-            self.amort_carencia.setVisible(is_hamburgues)
-            self.amort_juros_capitalizados.setVisible(is_hamburgues)
+            is_price_or_sac_or_hamb = system_index in (0, 1, 4)
+            self.amort_carencia.setVisible(is_price_or_sac_or_hamb)
+            self.amort_juros_capitalizados.setVisible(is_price_or_sac_or_hamb)
 
         self.amort_system.currentIndexChanged.connect(toggle_carencia_fields)
         toggle_carencia_fields()
 
-        right_layout.addWidget(self.amort_result)
-        right_layout.addWidget(self.amort_table)
+        def set_amort_orientation(index: int):
+            orientation = Qt.Vertical if index == 0 else Qt.Horizontal
+            self.amort_splitter.setOrientation(orientation)
+
+            def adjust_sizes():
+                total_size = self.amort_splitter.size()
+                if orientation == Qt.Horizontal:
+                    width = max(total_size.width(), 2)
+                    half = width // 2
+                    self.amort_splitter.setSizes([half, width - half])
+                else:
+                    height = max(total_size.height(), 2)
+                    half = height // 2
+                    self.amort_splitter.setSizes([half, height - half])
+
+            QTimer.singleShot(0, adjust_sizes)
+
+        self.amort_layout_mode.currentIndexChanged.connect(set_amort_orientation)
+        set_amort_orientation(self.amort_layout_mode.currentIndex())
+
+        right_layout.addWidget(self.amort_splitter)
 
     except Exception as e:
         logger.error(f"Erro ao criar aba de amortização: {e}", exc_info=True)

@@ -1,5 +1,5 @@
 LICENÇA DE USO DE USUÁRIO FINAL - ECONOMIA APP
-Versão 0.0.4.0, 31 de Janeiro de 2026
+Versão 0.0.5.0, 28 de Fevereiro de 2026
 
 Copyright (c) 2025 Fernando Nillsson Cidade. Todos os direitos reservados.
 

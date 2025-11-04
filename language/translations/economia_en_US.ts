@@ -44,6 +44,33 @@
     <message><source>Valor do Montante (F):</source><translation>Amount Value (F):</translation></message>
     <message><source>Taxa de Juros (i % ao período):</source><translation>Interest Rate (i % per period):</translation></message>
     <message><source>Número de Períodos (n):</source><translation>Number of Periods (n):</translation></message>
+    <message><source>Comparar JS vs JC</source><translation>Compare SI vs CI</translation></message>
+    <message><source>COMPARAÇÃO: JUROS SIMPLES vs JUROS COMPOSTOS</source><translation>COMPARISON: SIMPLE INTEREST vs COMPOUND INTEREST</translation></message>
+    <message><source>Objetivo:</source><translation>Objective:</translation></message>
+    <message><source>Encontrar quantos meses (n_s) são necessários para que o montante a juros simples (F_s) supere o montante a juros compostos (F_c) calculado para {n} meses.</source><translation>Find how many months (n_s) are required for the amount from simple interest (F_s) to exceed the amount from compound interest (F_c) calculated for {n} months.</translation></message>
+    <message><source>Período base JC</source><translation>Compound base period</translation></message>
+    <message><source>PASSO 1: Calcular montante a juros compostos para {n} meses</source><translation>STEP 1: Calculate the compound interest amount for {n} months</translation></message>
+    <message><source>Substituindo os valores:</source><translation>Substituting the values:</translation></message>
+    <message><source>PASSO 2: Estabelecer a inequação e resolver para n_s</source><translation>STEP 2: Set up the inequality and solve for n_s</translation></message>
+    <message><source>Queremos encontrar n_s tal que:</source><translation>We want to find n_s such that:</translation></message>
+    <message><source>Fórmula de juros simples:</source><translation>Simple interest formula:</translation></message>
+    <message><source>Inequação:</source><translation>Inequality:</translation></message>
+    <message><source>Dividindo ambos os lados por P:</source><translation>Dividing both sides by P:</translation></message>
+    <message><source>Isolando n_s:</source><translation>Isolating n_s:</translation></message>
+    <message><source>RESULTADO</source><translation>RESULT</translation></message>
+    <message><source>Como o número de meses deve ser inteiro, o menor valor que satisfaz a condição é {n}.</source><translation>Since the number of months must be an integer, the smallest value that satisfies the condition is {n}.</translation></message>
+    <message><source>Verificação:</source><translation>Verification:</translation></message>
+    <message><source>RESPOSTA: São necessários {n} meses consecutivos.</source><translation>ANSWER: The required number of months is {n} consecutive months.</translation></message>
+    <message><source>meses (n_s) para que o montante a juros simples</source><translation>months (n_s) for the amount from simple interest</translation></message>
+    <message><source>supere o montante a juros compostos.</source><translation>to exceed the amount from compound interest.</translation></message>
+    <message><source>meses</source><translation>months</translation></message>
+    <message><source>meses.</source><translation>months.</translation></message>
+    <message><source>meses consecutivos.</source><translation>consecutive months.</translation></message>
+
+    <!-- Mensagens de Aviso -->
+    <message><source>Atenção</source><translation>Warning</translation></message>
+    <message><source>Este cálculo pode levar a resultados imprecisos devido à natureza dos juros compostos.</source><translation>This calculation may lead to imprecise results due to the nature of compound interest.</translation></message>
+    <message><source>Considere revisar os parâmetros e a fórmula utilizada.</source><translation>Consider reviewing the parameters and the formula used.</translation></message>
 
     <!-- Anuidades -->
     <message><source>Calcular Prestação (A)</source><translation>Calculate Payment (A)</translation></message>
@@ -89,6 +116,11 @@
     <message><source>Prestação</source><translation>Installment</translation></message>
     <message><source>Juros</source><translation>Interest</translation></message>
     <message><source>Saldo Devedor</source><translation>Outstanding Balance</translation></message>
+    <message><source>Entrada (E):</source><translation>Input (E):</translation></message>
+    <message><source>Entrada (E)</source><translation>Input (E)</translation></message>
+    <message><source>Período desejado (k):</source><translation>Desired Period (k):</translation></message>
+    <message><source>Período desejado (k)</source><translation>Desired Period (k)</translation></message>
+    <message><source>Calcular valor no período k</source><translation>Calculate value in period k</translation></message>
 
     <!-- Análise de Investimentos -->
     <message><source>Calcular VPL e VAUE</source><translation>Calculate NPV and EUAW</translation></message>
@@ -218,6 +250,7 @@
     <message><source>GRADIENTE ARITMÉTICO - CÁLCULO DO VALOR PRESENTE (P)</source><translation>ARITHMETIC GRADIENT - PRESENT VALUE CALCULATION (P)</translation></message>
     <message><source>GRADIENTE GEOMÉTRICO - CÁLCULO DO VALOR PRESENTE (P)</source><translation>GEOMETRIC GRADIENT - PRESENT VALUE CALCULATION (P)</translation></message>
     <message><source>Cálculo dos fatores:</source><translation>Factor calculations:</translation></message>
+    <message><source>Calcular Termo G_k do Gradiente Aritmético</source><translation>Calculate Term G_k of the Arithmetic Gradient</translation></message>
     <message><source>Fator (P/A, i, n):</source><translation>Factor (P/A, i, n):</translation></message>
     <message><source>Fator (P/F, i, n):</source><translation>Factor (P/F, i, n):</translation></message>
     <message><source>Fórmula (caso especial i = g):</source><translation>Formula (special case i = g):</translation></message>
@@ -348,6 +381,17 @@
     <message><source>Inflação Mês 1 (%):</source><translation>Inflation Month 1 (%):</translation></message>
     <message><source>Inflação Mês 2 (%):</source><translation>Inflation Month 2 (%):</translation></message>
     <message><source>Inflação Mês 3 (%):</source><translation>Inflation Month 3 (%):</translation></message>
+    <message><source>Investimento Inicial (R$):</source><translation>Initial Investment ($):</translation></message>
+    <message><source>Juros Reais</source><translation>Real Interest</translation></message>
+    <message><source>Retorno por Período (R$):</source><translation>Return per Period ($):</translation></message>
+    <message><source>Taxa de Capitalização (%):</source><translation>Capitalization Rate (%):</translation></message>
+    <message><source>Capital (R$):</source><translation>Capital ($):</translation></message>
+    <message><source>TMA vs Rentabilidade</source><translation>MARR vs Profitability</translation></message>
+    <message><source>Taxa da Oportunidade (% ao mês):</source><translation>Opportunity Rate (% per month):</translation></message>
+    <message><source>TMA (% ao ano):</source><translation>MARR (% per year):</translation></message>
+    <message><source>Número de Períodos (meses):</source><translation>Number of Periods (months):</translation></message>
+    <message><source>Taxa Global (% ao ano):</source><translation>Global Rate (% per year):</translation></message>
+    <message><source>Inflação (% ao ano):</source><translation>Inflation (% per year):</translation></message>
 
     <!-- Análise de Investimentos -->
     <message><source>Tipo de Análise:</source><translation>Analysis Type:</translation></message>
@@ -538,5 +582,92 @@
     <message><source>Taxa Nominal (ou Aparente)</source><translation>Nominal Rate (or Apparent)</translation></message>
     <message><source>A TMA Nominal para esse ano é de</source><translation>The Nominal MARR for this year is</translation></message>
     <message><source>A TMA Real para esse ano é de</source><translation>The Real MARR for this year is</translation></message>
+
+    <!-- Prepaid / German System (new keys added) -->
+    <message><source>CÁLCULO DE TAXA EFETIVA EM COBRANÇA ANTECIPADA</source><translation>EFFECTIVE RATE CALCULATION FOR PREPAID CHARGES</translation></message>
+    <message><source>(SISTEMA ALEMÃO)</source><translation>(GERMAN SYSTEM)</translation></message>
+    <message><source>Valor Nominal do Empréstimo</source><translation>Loan Nominal Value</translation></message>
+    <message><source>Taxa de Cobrança Antecipada</source><translation>Prepaid Interest Rate</translation></message>
+    <message><source>Período</source><translation>Period</translation></message>
+    <message><source>CÁLCULO DOS JUROS ANTECIPADOS</source><translation>PREPAID INTEREST CALCULATION</translation></message>
+    <message><source>CÁLCULO DO VALOR RECEBIDO (PRINCIPAL LÍQUIDO)</source><translation>CALCULATION OF AMOUNT RECEIVED (NET PRINCIPAL)</translation></message>
+    <message><source>Valor Recebido</source><translation>Amount Received</translation></message>
+    <message><source>MÉTODO 1: LÓGICA FINANCEIRA</source><translation>METHOD 1: FINANCIAL LOGIC</translation></message>
+    <message><source>Interpretação:</source><translation>Interpretation:</translation></message>
+    <message><source>O tomador recebeu</source><translation>The borrower received</translation></message>
+    <message><source>Ao final de 1 ano, pagou</source><translation>At the end of 1 year, paid</translation></message>
+    <message><source>1 ano</source><translation>1 year</translation></message>
+    <message><source>Juros efetivamente pagos</source><translation>Interest effectively paid</translation></message>
+    <message><source>CÁLCULO DA TAXA EFETIVA PELO MÉTODO 1</source><translation>EFFECTIVE RATE CALCULATION BY METHOD 1</translation></message>
+    <message><source>A taxa efetiva é calculada pela relação:</source><translation>The effective rate is calculated by the relation:</translation></message>
+    <message><source>MÉTODO 2: USO DA FÓRMULA DE CONVERSÃO</source><translation>METHOD 2: USING THE CONVERSION FORMULA</translation></message>
+    <message><source>Fórmula para converter taxa antecipada em taxa efetiva:</source><translation>Formula to convert prepaid rate to effective rate:</translation></message>
+    <message><source>Onde:</source><translation>Where:</translation></message>
+    <message><source>APLICAÇÃO DA FÓRMULA</source><translation>APPLICATION OF THE FORMULA</translation></message>
+    <message><source>VERIFICAÇÃO DOS RESULTADOS</source><translation>RESULTS VERIFICATION</translation></message>
+    <message><source>Método 1 (Lógica Financeira)</source><translation>Method 1 (Financial Logic)</translation></message>
+    <message><source>Método 2 (Fórmula de Conversão)</source><translation>Method 2 (Conversion Formula)</translation></message>
+    <message><source>Os resultados são idênticos (diferença &lt; 0,0001%)</source><translation>Results are identical (difference &lt; 0.0001%)</translation></message>
+    <message><source>Diferença entre métodos</source><translation>Difference between methods</translation></message>
+    <message><source>RESUMO:</source><translation>SUMMARY:</translation></message>
+    <message><source>Juros Pagos Antecipadamente</source><translation>Interest Paid in Advance</translation></message>
+    <message><source>Taxa Efetiva Anual (i)</source><translation>Annual Effective Rate (i)</translation></message>
+    <message><source>RESPOSTA FINAL:</source><translation>FINAL ANSWER:</translation></message>
+    <message><source>A taxa efetiva anual que produz os mesmos juros é de</source><translation>The annual effective rate that yields the same interest is</translation></message>
+    <message><source>Taxa Efetiva em Cobrança Antecipada</source><translation>Effective Rate for Prepaid Charges</translation></message>
+    <message><source>Valor Nominal do Empréstimo (F)</source><translation>Loan Nominal Value (F)</translation></message>
+    <message><source>Valor Recebido (P)</source><translation>Amount Received (P)</translation></message>
+    <message><source>Taxa de cobrança antecipada</source><translation>Prepaid Interest Rate</translation></message>
+    <message><source>Valor Nominal do Empréstimo (R$):</source><translation>Loan Nominal Value (R$):</translation></message>
+    <message><source>Taxa de Cobrança Antecipada (%):</source><translation>Prepaid Interest Rate (%):</translation></message>
+
+    <!-- Mensagens específicas para cálculo pontual em k (adicionadas a partir de sv_11_calculate_value_at_k.py) -->
+    <message><source>Erro: É necessário informar o período k desejado.</source><translation>Error: The desired period k must be provided.</translation></message>
+    <message><source>Erro: Prazo (n) deve ser maior que zero.</source><translation>Error: Term (n) must be greater than zero.</translation></message>
+    <message><source>Erro: O período k deve estar entre 1 e n.</source><translation>Error: The period k must be between 1 and n.</translation></message>
+    <message><source>Erro: O período de carência deve ser menor que n e não negativo.</source><translation>Error: The grace period must be less than n and non‑negative.</translation></message>
+    <message><source>Atenção: Entrada (E) igual ou maior que o principal resulta em financiamento zero ou negativo.</source><translation>Warning: Down payment (E) equal to or greater than the principal results in zero or negative financing.</translation></message>
+
+    <message><source>Sistema não suportado para este cálculo pontual</source><translation>System not supported for this point‑in‑time calculation</translation></message>
+    <message><source>CÁLCULO NO PERÍODO k</source><translation>CALCULATION IN PERIOD k</translation></message>
+    <message><source>Dados:</source><translation>Data:</translation></message>
+    <message><source>ao período</source><translation>per period</translation></message>
+    <message><source>Capitalizar juros na carência?</source><translation>Capitalize interest during grace period?</translation></message>
+
+    <message><source>Durante a carência com capitalização: não há amortização.</source><translation>During grace period with capitalization: no amortization.</translation></message>
+    <message><source>Durante a carência com juros pagos: não há amortização.</source><translation>During grace period with interest paid: no amortization.</translation></message>
+
+    <message><source>Durante a carência com capitalização: não há pagamento (PMT_k = 0).</source><translation>During grace period with capitalization: no payment (PMT_k = 0).</translation></message>
+    <message><source>Durante a carência com juros pagos: prestação igual aos juros.</source><translation>During grace period with interest paid: payment equals interest.</translation></message>
+
+    <message><source>Saldo após carência (juros capitalizados):</source><translation>Balance after grace period (interest capitalized):</translation></message>
+    <message><source>Saldo após carência (juros pagos):</source><translation>Balance after grace period (interest paid):</translation></message>
+    <message><source>Sem carência, iniciando amortização imediatamente:</source><translation>No grace period, amortization starts immediately:</translation></message>
+
+    <message><source>Taxa zero: prestação e amortização constantes na fase de amortização.</source><translation>Zero rate: payment and amortization constant during amortization phase.</translation></message>
+    <message><source>Fator (A/P) na fase de amortização:</source><translation>Factor (A/P) in the amortization phase:</translation></message>
+    <message><source>Prestação constante:</source><translation>Constant payment:</translation></message>
+    <message><source>Amortização inicial e na k-ésima:</source><translation>Initial amortization and at the k‑th:</translation></message>
+
+    <message><source>Amortização constante na fase de amortização (SAC):</source><translation>Constant amortization in the amortization phase (SAC):</translation></message>
+    <message><source>Juros no período k:</source><translation>Interest in period k:</translation></message>
+    <message><source>Prestação na k-ésima:</source><translation>Payment at the k‑th:</translation></message>
+
+    <message><source>Resultado</source><translation>Result</translation></message>
+    <message><source>Sistema selecionado não suporta cálculo pontual de k.</source><translation>Selected system does not support point‑in‑time calculation for k.</translation></message>
+    <message><source>P (Principal) = R$</source><translation>Principal (P) = $</translation></message>
+    <message><source>E (Entrada) = R$</source><translation>Down Payment (E) = $</translation></message>
+    <message><source>P - E</source><translation>P - E</translation></message>
+    <message><source>E (Entrada) = R$ 0,00 (sem entrada)</source><translation>Down Payment (E) = $0.00 (no down payment)</translation></message>
+    <message><source>i (taxa) =</source><translation>i (rate) =</translation></message>
+    <message><source>n (períodos) =</source><translation>n (periods) =</translation></message>
+    <message><source>carência (c) =</source><translation>grace period (c) =</translation></message>
+    <message><source>carência (c) = 0 (sem carência)</source><translation>grace period (c) = 0 (no grace period)</translation></message>
+    <message><source>Capitalizar juros na carência?</source><translation>Capitalize interest during grace period?</translation></message>
+    <message><source>k (período) =</source><translation>k (period) =</translation></message>
+    <message><source>Substituindo os valores:</source><translation>Substituting the values:</translation></message>
+    <message><source>Disposição da visualização:</source><translation>View layout:</translation></message>
+    <message><source>Lado a lado</source><translation>Side by side</translation></message>
+    <message><source>Empilhadas (acima e abaixo)</source><translation>Stacked (above and below)</translation></message>
   </context>
 </TS>

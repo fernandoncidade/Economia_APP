@@ -1,3 +1,72 @@
+NOTAS DE LANÇAMENTO — Economia APP
+Versão: 0.0.5.0
+Data: 28 de fevereiro de 2026
+Autor: Fernando Nillsson Cidade
+
+---
+
+Resumo do lançamento  
+Release de manutenção e melhorias funcionais com foco em robustez, correções de UI e refinamento dos serviços financeiros. Destaque para: comparações de juros, novos modos e casos especiais em gradientes e TIR, correções em abas de conversão de taxas, e aprimoramentos nas gerações de tabelas de amortização (Americano e Hamburguês).
+
+Principais mudanças
+
+- Aba Juros (source/ui/ui_03_create_interest_tab.py + services/sv_01_calculate_interest.py)
+  - Inclusão do modo "Comparar JS vs JC" com apresentação passo a passo e verificação do resultado.
+  - Cálculos e texto formatado (expoentes, subscritos e moedas) via utils/TextFormat.
+  - Uso consistente de QDoubleValidator nos campos da aba e aplicação de fonte monospace no HistoryContainer para melhor alinhamento.
+  - Melhoria no fluxo de edição/commit de histórico (botão Editar → Salvar Edição).
+
+- Gradientes (source/ui/ui_05_create_gradient_tab.py + services/sv_03_calculate_gradient.py)
+  - Suporte ampliado a modos: Calcular P, Calcular X_k (geométrico), Renda Perpétua e cálculo de G_k (gradiente aritmético).
+  - Separação e tratamento específico para gradiente aritmético e geométrico (incluindo caso especial i == g).
+  - Saídas didáticas: formatação de frações, sobrescrito/subscrito, passos de cálculo e verificação.
+  - Correção de lógica de seleção: uso de currentIndex() em ComboBox para compatibilidade com i18n.
+  - Validações com QDoubleValidator e fonte fixa no HistoryContainer.
+
+- Conversão de Taxas / Taxa Efetiva / TIR (source/ui/ui_06_create_rates_tab.py, source/ui/ui_22_create_effective_rate_tab.py + services/sv_08_calculate_effective_rate.py)
+  - Nova aba unificada de Taxa Efetiva / TIR / Taxa Global com modos múltiplos (efetiva, TIR, global, antecipada, TIRm, TMA vs rentabilidade, juros reais).
+  - Implementação de TIR por Newton-Raphson com função auxiliar e caso especial documentado para 2 períodos.
+  - Cálculo de taxa efetiva a partir de taxa nominal com passos e conversões por período.
+  - Cálculo da Taxa Global levando em conta inflação acumulada.
+  - Sistema de Cobrança Antecipada (sistema alemão) com duas formas de verificação e comparação entre métodos.
+  - Correções de bugs na aba de conversão de taxas (ex.: chamadas incorretas a setText() sem argumento foram revisadas e fluxos de limpeza ajustados).
+
+- Amortização (source/ui/ui_23_generate_american_table.py, source/ui/ui_24_generate_hamburgues_table.py)
+  - Implementado gerador de tabela para Sistema Americano (juros durante os períodos intermediários; amortização total no último período).
+  - Implementado gerador para Sistema Hamburguês com suporte a carência e opção de capitalizar juros durante a carência.
+  - As funções populam a tabela via set_amort_table_row e retornam dados consolidados para exportação.
+
+- Fisher / TMA real/nominal (source/ui/ui_26_create_fisher_tab.py)
+  - UI com alternância entre cálculo de TMA nominal a partir da real e vice-versa.
+  - Cálculos e apresentação em passos, com validação de campos e botão de cálculo contextual (texto muda conforme modo).
+
+- Retorno Mínimo (TMA) (source/ui/ui_25_create_minimum_return_tab.py)
+  - Aba dedicada ao cálculo de retorno mínimo baseado em TMA anual e períodos por ano.
+  - Saídas formatadas e integradas ao HistoryContainer.
+
+- Melhorias gerais e correções
+  - Aplicação consistente de QDoubleValidator em campos numéricos para reduzir erros de entrada.
+  - Uso de fonte monospace (QFontDatabase.FixedFont) no HistoryContainer para melhor alinhamento de passos e tabelas.
+  - Subscritos/sobrescritos e formatação numérica centralizados em utils/TextFormat.py (format_currency, format_fraction, to_subscript, to_superscript).
+  - Padronização das mensagens de erro e logging via utils/LogManager.
+  - Correções em lógica de visibilidade/limpeza de campos (clear inputs/outputs) para evitar comportamentos inesperados.
+  - Pequenos ajustes de UX: labels dinâmicos, botões de exportação vinculados ao histórico correto e foco pós-edição.
+
+Como usar as novas funções (resumo)
+1. Aba Juros: escolha "Comparar JS vs JC" para visualizar passo a passo e verificação; use "Calcular" para gerar entrada no histórico.
+2. Gradientes: selecione o modo desejado (P, X_k, Renda Perpétua, G_k) e preencha os campos visíveis; calcule para obter passos detalhados.
+3. Taxas/TIR: escolha o modo na aba unificada (Taxa Efetiva, TIR, Taxa Global, etc.) e preencha os campos; TIR geral usa Newton-Raphson, caso n=2 tratado separadamente.
+4. Amortização: gere tabelas Americano ou Hamburguês (preencher carência e marcar capitalização se aplicável); exporte via menu ou botão Exportar.
+
+Observações técnicas / pendências
+- Recomenda-se revisar e adicionar testes unitários para funções financeiras críticas (TIR, fórmulas de gradiente, geradores de tabela) — há TODOs pendentes.
+- Revisar mensagens e traduções (.ts) se necessário; uso de indices em QComboBox minimiza problemas com textos traduzidos.
+- Continuar uniformizando exportação para PDF (integração com FontManager.get_html_style já aplicada em outras áreas do projeto).
+
+
+______________________________
+
+
 NOTAS DE LANÇAMENTO — Economia APP  
 Versão: 0.0.4.0  
 Data: 31 de janeiro de 2026  

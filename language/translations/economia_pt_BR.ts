@@ -44,6 +44,33 @@
     <message><source>Valor do Montante (F):</source><translation>Valor do Montante (F):</translation></message>
     <message><source>Taxa de Juros (i % ao período):</source><translation>Taxa de Juros (i % ao período):</translation></message>
     <message><source>Número de Períodos (n):</source><translation>Número de Períodos (n):</translation></message>
+    <message><source>Comparar JS vs JC</source><translation>Comparar JS vs JC</translation></message>
+    <message><source>COMPARAÇÃO: JUROS SIMPLES vs JUROS COMPOSTOS</source><translation>COMPARAÇÃO: JUROS SIMPLES vs JUROS COMPOSTOS</translation></message>
+    <message><source>Objetivo:</source><translation>Objetivo:</translation></message>
+    <message><source>Encontrar quantos meses (n_s) são necessários para que o montante a juros simples (F_s) supere o montante a juros compostos (F_c) calculado para {n} meses.</source><translation>Encontrar quantos meses (n_s) são necessários para que o montante a juros simples (F_s) supere o montante a juros compostos (F_c) calculado para {n} meses.</translation></message>
+    <message><source>Período base JC</source><translation>Período base JC</translation></message>
+    <message><source>PASSO 1: Calcular montante a juros compostos para {n} meses</source><translation>PASSO 1: Calcular montante a juros compostos para {n} meses</translation></message>
+    <message><source>Substituindo os valores:</source><translation>Substituindo os valores:</translation></message>
+    <message><source>PASSO 2: Estabelecer a inequação e resolver para n_s</source><translation>PASSO 2: Estabelecer a inequação e resolver para n_s</translation></message>
+    <message><source>Queremos encontrar n_s tal que:</source><translation>Queremos encontrar n_s tal que:</translation></message>
+    <message><source>Fórmula de juros simples:</source><translation>Fórmula de juros simples:</translation></message>
+    <message><source>Inequação:</source><translation>Inequação:</translation></message>
+    <message><source>Dividindo ambos os lados por P:</source><translation>Dividindo ambos os lados por P:</translation></message>
+    <message><source>Isolando n_s:</source><translation>Isolando n_s:</translation></message>
+    <message><source>RESULTADO</source><translation>RESULTADO</translation></message>
+    <message><source>Como o número de meses deve ser inteiro, o menor valor que satisfaz a condição é {n}.</source><translation>Como o número de meses deve ser inteiro, o menor valor que satisfaz a condição é {n}.</translation></message>
+    <message><source>Verificação:</source><translation>Verificação:</translation></message>
+    <message><source>RESPOSTA: São necessários {n} meses consecutivos.</source><translation>RESPOSTA: São necessários {n} meses consecutivos.</translation></message>
+    <message><source>meses (n_s) para que o montante a juros simples</source><translation>meses (n_s) para que o montante a juros simples</translation></message>
+    <message><source>supere o montante a juros compostos.</source><translation>supere o montante a juros compostos.</translation></message>
+    <message><source>meses</source><translation>meses</translation></message>
+    <message><source>meses.</source><translation>meses.</translation></message>
+    <message><source>meses consecutivos.</source><translation>meses consecutivos.</translation></message>
+
+    <!-- Mensagens de Aviso -->
+    <message><source>Atenção</source><translation>Atenção</translation></message>
+    <message><source>Este cálculo pode levar a resultados imprecisos devido à natureza dos juros compostos.</source><translation>Este cálculo pode levar a resultados imprecisos devido à natureza dos juros compostos.</translation></message>
+    <message><source>Considere revisar os parâmetros e a fórmula utilizada.</source><translation>Considere revisar os parâmetros e a fórmula utilizada.</translation></message>
 
     <!-- Anuidades -->
     <message><source>Calcular Prestação (A)</source><translation>Calcular Prestação (A)</translation></message>
@@ -89,6 +116,11 @@
     <message><source>Prestação</source><translation>Prestação</translation></message>
     <message><source>Juros</source><translation>Juros</translation></message>
     <message><source>Saldo Devedor</source><translation>Saldo Devedor</translation></message>
+    <message><source>Entrada (E):</source><translation>Entrada (E):</translation></message>
+    <message><source>Entrada (E)</source><translation>Entrada (E)</translation></message>
+    <message><source>Período desejado (k):</source><translation>Período desejado (k):</translation></message>
+    <message><source>Período desejado (k)</source><translation>Período desejado (k)</translation></message>
+    <message><source>Calcular valor no período k</source><translation>Calcular valor no período k</translation></message>
 
     <!-- Análise de Investimentos -->
     <message><source>Calcular VPL e VAUE</source><translation>Calcular VPL e VAUE</translation></message>
@@ -218,6 +250,7 @@
     <message><source>GRADIENTE ARITMÉTICO - CÁLCULO DO VALOR PRESENTE (P)</source><translation>GRADIENTE ARITMÉTICO - CÁLCULO DO VALOR PRESENTE (P)</translation></message>
     <message><source>GRADIENTE GEOMÉTRICO - CÁLCULO DO VALOR PRESENTE (P)</source><translation>GRADIENTE GEOMÉTRICO - CÁLCULO DO VALOR PRESENTE (P)</translation></message>
     <message><source>Cálculo dos fatores:</source><translation>Cálculo dos fatores:</translation></message>
+    <message><source>Calcular Termo G_k do Gradiente Aritmético</source><translation>Calcular Termo G_k do Gradiente Aritmético</translation></message>
     <message><source>Fator (P/A, i, n):</source><translation>Fator (P/A, i, n):</translation></message>
     <message><source>Fator (P/F, i, n):</source><translation>Fator (P/F, i, n):</translation></message>
     <message><source>Fórmula (caso especial i = g):</source><translation>Fórmula (caso especial i = g):</translation></message>
@@ -348,6 +381,17 @@
     <message><source>Inflação Mês 1 (%):</source><translation>Inflação Mês 1 (%):</translation></message>
     <message><source>Inflação Mês 2 (%):</source><translation>Inflação Mês 2 (%):</translation></message>
     <message><source>Inflação Mês 3 (%):</source><translation>Inflação Mês 3 (%):</translation></message>
+    <message><source>Investimento Inicial (R$):</source><translation>Investimento Inicial (R$):</translation></message>
+    <message><source>Juros Reais</source><translation>Juros Reais</translation></message>
+    <message><source>Retorno por Período (R$):</source><translation>Retorno por Período (R$):</translation></message>
+    <message><source>Taxa de Capitalização (%):</source><translation>Taxa de Capitalização (%):</translation></message>
+    <message><source>Capital (R$):</source><translation>Capital (R$):</translation></message>
+    <message><source>TMA vs Rentabilidade</source><translation>TMA vs Rentabilidade</translation></message>
+    <message><source>Taxa da Oportunidade (% ao mês):</source><translation>Taxa da Oportunidade (% ao mês):</translation></message>
+    <message><source>TMA (% ao ano):</source><translation>TMA (% ao ano):</translation></message>
+    <message><source>Número de Períodos (meses):</source><translation>Número de Períodos (meses):</translation></message>
+    <message><source>Taxa Global (% ao ano):</source><translation>Taxa Global (% ao ano):</translation></message>
+    <message><source>Inflação (% ao ano):</source><translation>Inflação (% ao ano):</translation></message>
 
     <!-- Análise de Investimentos -->
     <message><source>Tipo de Análise:</source><translation>Tipo de Análise:</translation></message>
@@ -538,5 +582,92 @@
     <message><source>Taxa Nominal (ou Aparente)</source><translation>Taxa Nominal (ou Aparente)</translation></message>
     <message><source>A TMA Nominal para esse ano é de</source><translation>A TMA Nominal para esse ano é de</translation></message>
     <message><source>A TMA Real para esse ano é de</source><translation>A TMA Real para esse ano é de</translation></message>
+
+    <!-- Cobrança Antecipada / Sistema Alemão (novas chaves adicionadas) -->
+    <message><source>CÁLCULO DE TAXA EFETIVA EM COBRANÇA ANTECIPADA</source><translation>CÁLCULO DE TAXA EFETIVA EM COBRANÇA ANTECIPADA</translation></message>
+    <message><source>(SISTEMA ALEMÃO)</source><translation>(SISTEMA ALEMÃO)</translation></message>
+    <message><source>Valor Nominal do Empréstimo</source><translation>Valor Nominal do Empréstimo</translation></message>
+    <message><source>Taxa de Cobrança Antecipada</source><translation>Taxa de Cobrança Antecipada</translation></message>
+    <message><source>Período</source><translation>Período</translation></message>
+    <message><source>CÁLCULO DOS JUROS ANTECIPADOS</source><translation>CÁLCULO DOS JUROS ANTECIPADOS</translation></message>
+    <message><source>CÁLCULO DO VALOR RECEBIDO (PRINCIPAL LÍQUIDO)</source><translation>CÁLCULO DO VALOR RECEBIDO (PRINCIPAL LÍQUIDO)</translation></message>
+    <message><source>Valor Recebido</source><translation>Valor Recebido</translation></message>
+    <message><source>MÉTODO 1: LÓGICA FINANCEIRA</source><translation>MÉTODO 1: LÓGICA FINANCEIRA</translation></message>
+    <message><source>Interpretação:</source><translation>Interpretação:</translation></message>
+    <message><source>O tomador recebeu</source><translation>O tomador recebeu</translation></message>
+    <message><source>Ao final de 1 ano, pagou</source><translation>Ao final de 1 ano, pagou</translation></message>
+    <message><source>1 ano</source><translation>1 ano</translation></message>
+    <message><source>Juros efetivamente pagos</source><translation>Juros efetivamente pagos</translation></message>
+    <message><source>CÁLCULO DA TAXA EFETIVA PELO MÉTODO 1</source><translation>CÁLCULO DA TAXA EFETIVA PELO MÉTODO 1</translation></message>
+    <message><source>A taxa efetiva é calculada pela relação:</source><translation>A taxa efetiva é calculada pela relação:</translation></message>
+    <message><source>MÉTODO 2: USO DA FÓRMULA DE CONVERSÃO</source><translation>MÉTODO 2: USO DA FÓRMULA DE CONVERSÃO</translation></message>
+    <message><source>Fórmula para converter taxa antecipada em taxa efetiva:</source><translation>Fórmula para converter taxa antecipada em taxa efetiva:</translation></message>
+    <message><source>Onde:</source><translation>Onde:</translation></message>
+    <message><source>APLICAÇÃO DA FÓRMULA</source><translation>APLICAÇÃO DA FÓRMULA</translation></message>
+    <message><source>VERIFICAÇÃO DOS RESULTADOS</source><translation>VERIFICAÇÃO DOS RESULTADOS</translation></message>
+    <message><source>Método 1 (Lógica Financeira)</source><translation>Método 1 (Lógica Financeira)</translation></message>
+    <message><source>Método 2 (Fórmula de Conversão)</source><translation>Método 2 (Fórmula de Conversão)</translation></message>
+    <message><source>Os resultados são idênticos (diferença &lt; 0,0001%)</source><translation>Os resultados são idênticos (diferença &lt; 0,0001%)</translation></message>
+    <message><source>Diferença entre métodos</source><translation>Diferença entre métodos</translation></message>
+    <message><source>RESUMO:</source><translation>RESUMO:</translation></message>
+    <message><source>Juros Pagos Antecipadamente</source><translation>Juros Pagos Antecipadamente</translation></message>
+    <message><source>Taxa Efetiva Anual (i)</source><translation>Taxa Efetiva Anual (i)</translation></message>
+    <message><source>RESPOSTA FINAL:</source><translation>RESPOSTA FINAL:</translation></message>
+    <message><source>A taxa efetiva anual que produz os mesmos juros é de</source><translation>A taxa efetiva anual que produz os mesmos juros é de</translation></message>
+    <message><source>Taxa Efetiva em Cobrança Antecipada</source><translation>Taxa Efetiva em Cobrança Antecipada</translation></message>
+    <message><source>Valor Nominal do Empréstimo (F)</source><translation>Valor Nominal do Empréstimo (F)</translation></message>
+    <message><source>Valor Recebido (P)</source><translation>Valor Recebido (P)</translation></message>
+    <message><source>Taxa de cobrança antecipada</source><translation>Taxa de cobrança antecipada</translation></message>
+    <message><source>Valor Nominal do Empréstimo (R$):</source><translation>Valor Nominal do Empréstimo (R$):</translation></message>
+    <message><source>Taxa de Cobrança Antecipada (%):</source><translation>Taxa de Cobrança Antecipada (%):</translation></message>
+
+    <!-- Mensagens específicas para cálculo pontual em k (adicionadas a partir de sv_11_calculate_value_at_k.py) -->
+    <message><source>Erro: É necessário informar o período k desejado.</source><translation>Erro: É necessário informar o período k desejado.</translation></message>
+    <message><source>Erro: Prazo (n) deve ser maior que zero.</source><translation>Erro: Prazo (n) deve ser maior que zero.</translation></message>
+    <message><source>Erro: O período k deve estar entre 1 e n.</source><translation>Erro: O período k deve estar entre 1 e n.</translation></message>
+    <message><source>Erro: O período de carência deve ser menor que n e não negativo.</source><translation>Erro: O período de carência deve ser menor que n e não negativo.</translation></message>
+    <message><source>Atenção: Entrada (E) igual ou maior que o principal resulta em financiamento zero ou negativo.</source><translation>Atenção: Entrada (E) igual ou maior que o principal resulta em financiamento zero ou negativo.</translation></message>
+
+    <message><source>Sistema não suportado para este cálculo pontual</source><translation>Sistema não suportado para este cálculo pontual</translation></message>
+    <message><source>CÁLCULO NO PERÍODO k</source><translation>CÁLCULO NO PERÍODO k</translation></message>
+    <message><source>Dados:</source><translation>Dados:</translation></message>
+    <message><source>ao período</source><translation>ao período</translation></message>
+    <message><source>Capitalizar juros na carência?</source><translation>Capitalizar juros na carência?</translation></message>
+
+    <message><source>Durante a carência com capitalização: não há amortização.</source><translation>Durante a carência com capitalização: não há amortização.</translation></message>
+    <message><source>Durante a carência com juros pagos: não há amortização.</source><translation>Durante a carência com juros pagos: não há amortização.</translation></message>
+
+    <message><source>Durante a carência com capitalização: não há pagamento (PMT_k = 0).</source><translation>Durante a carência com capitalização: não há pagamento (PMT_k = 0).</translation></message>
+    <message><source>Durante a carência com juros pagos: prestação igual aos juros.</source><translation>Durante a carência com juros pagos: prestação igual aos juros.</translation></message>
+
+    <message><source>Saldo após carência (juros capitalizados):</source><translation>Saldo após carência (juros capitalizados):</translation></message>
+    <message><source>Saldo após carência (juros pagos):</source><translation>Saldo após carência (juros pagos):</translation></message>
+    <message><source>Sem carência, iniciando amortização imediatamente:</source><translation>Sem carência, iniciando amortização imediatamente:</translation></message>
+
+    <message><source>Taxa zero: prestação e amortização constantes na fase de amortização.</source><translation>Taxa zero: prestação e amortização constantes na fase de amortização.</translation></message>
+    <message><source>Fator (A/P) na fase de amortização:</source><translation>Fator (A/P) na fase de amortização:</translation></message>
+    <message><source>Prestação constante:</source><translation>Prestação constante:</translation></message>
+    <message><source>Amortização inicial e na k-ésima:</source><translation>Amortização inicial e na k-ésima:</translation></message>
+
+    <message><source>Amortização constante na fase de amortização (SAC):</source><translation>Amortização constante na fase de amortização (SAC):</translation></message>
+    <message><source>Juros no período k:</source><translation>Juros no período k:</translation></message>
+    <message><source>Prestação na k-ésima:</source><translation>Prestação na k-ésima:</translation></message>
+
+    <message><source>Resultado</source><translation>Resultado</translation></message>
+    <message><source>Sistema selecionado não suporta cálculo pontual de k.</source><translation>Sistema selecionado não suporta cálculo pontual de k.</translation></message>
+    <message><source>P (Principal) = R$</source><translation>P (Principal) = R$</translation></message>
+    <message><source>E (Entrada) = R$</source><translation>E (Entrada) = R$</translation></message>
+    <message><source>P - E</source><translation>P - E</translation></message>
+    <message><source>E (Entrada) = R$ 0,00 (sem entrada)</source><translation>E (Entrada) = R$ 0,00 (sem entrada)</translation></message>
+    <message><source>i (taxa) =</source><translation>i (taxa) =</translation></message>
+    <message><source>n (períodos) =</source><translation>n (períodos) =</translation></message>
+    <message><source>carência (c) =</source><translation>carência (c) =</translation></message>
+    <message><source>carência (c) = 0 (sem carência)</source><translation>carência (c) = 0 (sem carência)</translation></message>
+    <message><source>Capitalizar juros na carência?</source><translation>Capitalizar juros na carência?</translation></message>
+    <message><source>k (período) =</source><translation>k (período) =</translation></message>
+    <message><source>Substituindo os valores:</source><translation>Substituindo os valores:</translation></message>
+    <message><source>Disposição da visualização:</source><translation>Disposição da visualização:</translation></message>
+    <message><source>Lado a lado</source><translation>Lado a lado</translation></message>
+    <message><source>Empilhadas (acima e abaixo)</source><translation>Empilhadas (acima e abaixo)</translation></message>
   </context>
 </TS>

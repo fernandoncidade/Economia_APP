@@ -1,5 +1,5 @@
 from PySide6.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QLineEdit, QPushButton, QComboBox, QSizePolicy
-from PySide6.QtGui import QDoubleValidator
+from PySide6.QtGui import QDoubleValidator, QFontDatabase
 from PySide6.QtCore import Qt, QCoreApplication
 from .ui_17_history_container import HistoryContainer
 
@@ -27,6 +27,8 @@ def create_rates_tab(self):
 
     self.rate_equiv_result = HistoryContainer(self)
     self.rate_equiv_result.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+    fixed_font = QFontDatabase.systemFont(QFontDatabase.FixedFont)
+    self.rate_equiv_result.setFont(fixed_font)
 
     layout.addRow(tr("App", "Taxa Atual (%):"), self.rate_equiv_i)
     layout.addRow(tr("App", "Período da Taxa Atual (em unidades de tempo):"), self.rate_equiv_current_n)
@@ -118,6 +120,7 @@ def create_rates_tab(self):
 
     self.rate_real_result = HistoryContainer(self)
     self.rate_real_result.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+    self.rate_real_result.setFont(fixed_font)
 
     layout.addRow(self.rate_real_calc_type)
     layout.addRow(tr("App", "Taxa Real (r %):"), self.rate_real_r)

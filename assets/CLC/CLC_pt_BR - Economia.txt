@@ -5,7 +5,7 @@ Este Contrato de Licenciamento Comercial ("Contrato") é celebrado entre:
 LICENCIADOR: Fernando Nillsson Cidade, doravante "LICENCIADOR".
 LICENCIADO: a pessoa física ou jurídica que adquire a licença comercial do software "Economia APP", doravante "LICENCIADO".
 
-Data: 19 de Outubro de 2025
+Data: 21 de Outubro de 2025
 
 PREÂMBULO
 O presente Contrato complementa os termos da Licença de Uso de Usuário Final (EULA) inclusa no pacote (assets/EULA/EULA_pt_BR - Economia.txt) e regula as modalidades comerciais de licença, suporte, atualizações e responsabilidades relativas ao software Economia APP — uma calculadora financeira destinada a apoiar estudos de Economia de Engenharia (TT007) com funcionalidades de juros, anuidades, gradientes, amortização (SAC/Price/SAM), equivalência de taxas, análise de investimentos (VPL/VAUE), depreciação, histórico e exportação (PDF).

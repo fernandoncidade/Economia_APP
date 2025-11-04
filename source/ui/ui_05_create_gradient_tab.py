@@ -1,6 +1,6 @@
 from PySide6.QtWidgets import QLineEdit, QPushButton, QComboBox, QSizePolicy, QHBoxLayout, QVBoxLayout, QWidget
-from PySide6.QtGui import QDoubleValidator
-from PySide6.QtCore import Qt, QCoreApplication
+from PySide6.QtGui import QDoubleValidator, QFontDatabase
+from PySide6.QtCore import QCoreApplication
 from .ui_17_history_container import HistoryContainer
 
 def create_gradient_tab(self):
@@ -23,6 +23,8 @@ def create_gradient_tab(self):
 
     self.grad_result = HistoryContainer(self)
     self.grad_result.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+    fixed_font = QFontDatabase.systemFont(QFontDatabase.FixedFont)
+    self.grad_result.setFont(fixed_font)
 
     calc_button = QPushButton(tr("App", "Calcular Valor Presente (P)"))
     calc_button.clicked.connect(self.calculate_gradient)

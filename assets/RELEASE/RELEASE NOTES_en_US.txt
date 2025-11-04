@@ -1,3 +1,154 @@
+Release Notes — Financial Calculator App
+Date: October 21, 2025
+Version: 0.0.2.0
+
+---
+
+## FOR DEVELOPERS AND PROGRAMMERS
+
+Scope and Architecture
+
+* Full modularization of the application:
+
+  * Interface split into independent modules (ui_01 to ui_19), each responsible for a tab, helper, or visual component.
+  * Services organized in separate modules (sv_01 to sv_07), each dedicated to a type of financial calculation.
+  * Core structure centralized in the FinancialCalculatorApp class, which dynamically imports and binds UI functions and services (controlled monkey-patching).
+
+Modules and Features
+
+User Interface (UI)
+
+* Main tabs created dynamically:
+
+  * Interest (simple and compound)
+  * Annuities (ordinary and due)
+  * Gradients (arithmetic and geometric)
+  * Rate conversion and equivalence
+  * Amortization (SAC, Price, SAM)
+  * Investments (NPV, PVB, VAUE)
+  * Depreciation (straight-line and sum-of-the-years-digits)
+
+* Highlighted modules:
+
+  * ui_03 to ui_09: creation of calculation tabs.
+  * ui_10 to ui_14: generation and reading of amortization tables.
+  * ui_15_export_pdf.py: exporting results and tables to PDF.
+  * ui_16_menu_bar.py: menu bar with language, export and "About" dialog options.
+  * ui_17_history_container.py: result history with support for multiple entries, editing and exporting.
+  * ui_18_SobreDialog.py and ui_19_exibir_sobre.py: multilingual "About" dialog with tabs for history, licenses, privacy and release notes.
+
+Logic and Services
+
+* Standalone financial services:
+
+  * sv_01_calculate_interest.py: simple and compound interest.
+  * sv_02_calculate_annuity.py: calculation of payment or present value.
+  * sv_03_calculate_gradient.py: arithmetic and geometric gradients.
+  * sv_04_calculate_real_rate_equivalence.py: equivalence and real/apparent rate.
+  * sv_05_calculate_amortization.py: full amortization calculations (SAC, PRICE, SAM).
+  * sv_06_calculate_investment.py: feasibility analysis (NPV, PVB, VAUE).
+  * sv_07_calculate_depreciation.py: straight-line and sum-of-the-years-digits depreciation methods.
+
+* Each service:
+
+  * Extracts data directly from widgets (QLineEdit, QComboBox).
+  * Performs robust numerical calculations.
+  * Produces step-by-step explanatory output and sends it to the HistoryContainer.
+
+Internationalization and Translation
+
+* New module: language/tr_01_gerenciadorTraducao.py
+
+  * Language persistence (language.json) and dynamic reload via idioma_alterado signal.
+  * Full support for pt_BR and en_US.
+  * Compile .ts files to .qm via pyside6-lrelease.
+* New multilingual assets: ABOUT, EULA, NOTICE, PRIVACY, RELEASE, COPYRIGHT, CLC.
+
+Export and Printing
+
+* Functions: export_to_pdf and export_amortization_pdf
+
+  * Safe conversion of text/tables to HTML with monospace CSS.
+  * PDF printing via QPrinter and QTextDocument.
+
+Validation and UX
+
+* QDoubleValidator applied to all numeric fields.
+* Currency formatting in Brazilian style (1.234,56).
+* Placeholders, resets and visual feedback when recalculating or clearing fields.
+* History with single-edit control and resize synchronization.
+
+Suggested Tests and Validation
+
+* Languages: test switching and persistence in language.json.
+* Export: validate PDF for current calculation and all calculations.
+* AboutDialog: verify tab loading and external links.
+* HistoryContainer: test editing, deletion and multiple exports.
+* Logs: verify generation at %LOCALAPPDATA%\Economia_APP.
+
+Technical Notes
+
+* ui_04_create_annuity_tab.py: fix validator variable names (annuity_*).
+* Comparisons of currentText() should consider using QCoreApplication.translate.
+* HistoryContainer: ensure commit_edit/cancel_edit on close.
+* Consider replacing manual currency formatting with locale or Babel.
+
+Compatibility
+
+* Requirements: PySide6
+* Packaging: include assets/ and language/translations/ with compiled .qm files.
+* Environment: Windows 10/11 (tested) and compatible with Linux via PyInstaller.
+
+---
+
+## FOR END USERS (FRIENDLY VERSION)
+
+Main Highlights
+
+* Redesigned interface: separate tabs for each type of financial calculation.
+* Languages: now available in Portuguese (Brazil) and English (United States).
+
+  * Change the language in the Settings → Languages menu.
+  * The choice is saved automatically for next time.
+* Export to PDF: save results and amortization tables with one click.
+* Calculation history: view, edit and export all previous results.
+* New menu: quick access to export, change language and open the "About" dialog.
+* Improved "About" window: shows version, authors, licenses and privacy policy.
+* Greater stability: errors are handled automatically and logged.
+
+How to Use
+
+1. Choose a tab (e.g., Interest, Annuities, Amortization, etc.).
+2. Fill in the requested values.
+3. Click Calculate.
+4. The result appears in the right panel with step-by-step explanations.
+5. Use the buttons:
+
+   * Clear: clears fields or results.
+   * Edit: allows modifying a saved result.
+   * Delete: removes selected entries.
+   * Export PDF: generates a PDF file with the calculation.
+6. The Amortization tab also displays a complete table.
+
+Other Important Functions
+
+* Change language:
+  Go to Settings → Languages → Português / English.
+* Export calculations:
+  Go to Files → Export Current or Files → Export All.
+* View app information:
+  Go to Options → About.
+
+Privacy and Security
+
+* No data is sent over the internet.
+* History and configuration files are saved only on the user's computer at:
+  %LOCALAPPDATA%\Economia_APP
+
+
+______________________________
+
+
 RELEASE NOTES — Economia APP
 Version: 0.0.1.0
 Date: October 19, 2025

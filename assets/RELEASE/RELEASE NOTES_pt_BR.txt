@@ -1,3 +1,154 @@
+Nota de Lançamento — Financial Calculator App
+Data: 21 de outubro de 2025
+Versão: 0.0.2.0
+
+---
+
+## PARA DESENVOLVEDORES E PROGRAMADORES
+
+Escopo e Arquitetura
+
+* Modularização completa da aplicação:
+
+  * Interface dividida em módulos independentes (ui_01 a ui_19), cada um responsável por uma aba, helper ou componente visual.
+  * Serviços organizados em módulos separados (sv_01 a sv_07), cada um dedicado a um tipo de cálculo financeiro.
+  * Estrutura principal centralizada na classe FinancialCalculatorApp, que importa e vincula dinamicamente as funções de interface e serviços (monkey-patch controlado).
+
+Módulos e Funcionalidades
+
+Interface do Usuário (UI)
+
+* Abas principais criadas dinamicamente:
+
+  * Juros (simples e compostos)
+  * Anuidades (postecipadas e antecipadas)
+  * Gradientes (aritmético e geométrico)
+  * Conversão e equivalência de taxas
+  * Amortização (SAC, Price, SAM)
+  * Investimentos (VPL, VPB, VAUE)
+  * Depreciação (linear e soma dos dígitos)
+
+* Módulos destacados:
+
+  * ui_03 a ui_09: criação das abas de cálculo.
+  * ui_10 a ui_14: geração e leitura de tabelas de amortização.
+  * ui_15_export_pdf.py: exportação de resultados e tabelas para PDF.
+  * ui_16_menu_bar.py: barra de menus com opções de idioma, exportação e diálogo "Sobre".
+  * ui_17_history_container.py: histórico de resultados com suporte a múltiplas entradas, edição e exportação.
+  * ui_18_SobreDialog.py e ui_19_exibir_sobre.py: diálogo "Sobre" multilíngue com abas de histórico, licenças, privacidade e notas de versão.
+
+Lógica e Serviços
+
+* Serviços financeiros autônomos:
+
+  * sv_01_calculate_interest.py: juros simples e compostos.
+  * sv_02_calculate_annuity.py: cálculo de prestação ou valor presente.
+  * sv_03_calculate_gradient.py: gradientes aritmético e geométrico.
+  * sv_04_calculate_real_rate_equivalence.py: equivalência e taxa real/aparente.
+  * sv_05_calculate_amortization.py: cálculo completo de amortizações (SAC, PRICE, SAM).
+  * sv_06_calculate_investment.py: análise de viabilidade (VPL, VPB, VAUE).
+  * sv_07_calculate_depreciation.py: métodos de depreciação linear e soma dos dígitos.
+
+* Cada serviço:
+
+  * Extrai dados diretamente dos widgets (QLineEdit, QComboBox).
+  * Realiza cálculos numéricos robustos.
+  * Gera explicações passo a passo e envia a saída ao HistoryContainer.
+
+Internacionalização e Tradução
+
+* Novo módulo: language/tr_01_gerenciadorTraducao.py
+
+  * Persistência de idioma (language.json) e recarga dinâmica via sinal idioma_alterado.
+  * Suporte completo a pt_BR e en_US.
+  * Compilação de arquivos .ts para .qm via pyside6-lrelease.
+* Novos assets multilíngues: ABOUT, EULA, NOTICE, PRIVACY, RELEASE, COPYRIGHT, CLC.
+
+Exportação e Impressão
+
+* Funções: export_to_pdf e export_amortization_pdf
+
+  * Conversão segura de texto/tabela em HTML com CSS monoespaçado.
+  * Impressão em PDF via QPrinter e QTextDocument.
+
+Validação e UX
+
+* Aplicação de QDoubleValidator em todos os campos numéricos.
+* Formatação monetária em formato brasileiro (1.234,56).
+* Placeholders, resets e feedback visual ao recalcular ou limpar campos.
+* Histórico com controle de edição única e sincronização de redimensionamento.
+
+Testes e Validação Sugeridos
+
+* Idiomas: testar troca e persistência em language.json.
+* Exportação: validar PDF de cálculo atual e de todos os cálculos.
+* SobreDialog: verificar carregamento de abas e links externos.
+* HistoryContainer: testar edição, exclusão e exportação múltipla.
+* Logs: verificar geração em %LOCALAPPDATA%\Economia_APP.
+
+Observações Técnicas
+
+* ui_04_create_annuity_tab.py: corrigir nomes de validadores (annuity_*).
+* Comparações de currentText() devem considerar uso de QCoreApplication.translate.
+* HistoryContainer: garantir commit_edit/cancel_edit no fechamento.
+* Considerar substituição de formatação manual de moeda por locale ou Babel.
+
+Compatibilidade
+
+* Requisitos: PySide6
+* Empacotamento: incluir assets/ e language/translations/ com arquivos .qm compilados.
+* Ambiente: Windows 10/11 (testado) e compatível com Linux via PyInstaller.
+
+---
+
+## PARA USUÁRIOS FINAIS (VERSÃO AMIGÁVEL)
+
+Novidades Principais
+
+* Interface renovada: abas separadas para cada tipo de cálculo financeiro.
+* Idiomas: agora disponível em Português (Brasil) e Inglês (Estados Unidos).
+
+  * Mude o idioma pelo menu Configuração → Idiomas.
+  * A escolha é salva automaticamente para a próxima vez.
+* Exportar em PDF: salve resultados e tabelas de amortização com um clique.
+* Histórico de cálculos: visualize, edite e exporte todos os resultados anteriores.
+* Novo menu: acesso rápido para exportar, trocar idioma e abrir o diálogo "Sobre".
+* Janela "Sobre" aprimorada: mostra versão, autores, licenças e política de privacidade.
+* Maior estabilidade: erros são tratados automaticamente e registrados em log.
+
+Como Usar
+
+1. Escolha uma aba (por exemplo: Juros, Anuidades, Amortização, etc.).
+2. Preencha os campos com os valores solicitados.
+3. Clique em Calcular.
+4. O resultado aparece no painel à direita, com explicações passo a passo.
+5. Use os botões:
+
+   * Limpar: apaga os campos ou resultados.
+   * Editar: permite alterar um resultado salvo.
+   * Excluir: remove entradas selecionadas.
+   * Exportar PDF: gera um arquivo PDF com o cálculo.
+6. Na aba de Amortização, é exibida também uma tabela completa.
+
+Outras Funções Importantes
+
+* Trocar idioma:
+  Acesse Configuração → Idiomas → Português / English.
+* Exportar cálculos:
+  Vá em Arquivos → Exportar Atual ou Arquivos → Exportar Todos.
+* Ver informações do app:
+  Vá em Opções → Sobre.
+
+Privacidade e Segurança
+
+* Nenhum dado é enviado pela internet.
+* Os arquivos de histórico e configuração são salvos somente no computador do usuário, em:
+  %LOCALAPPDATA%\Economia_APP
+
+
+______________________________
+
+
 NOTAS DE LANÇAMENTO — Economia APP
 Versão: 0.0.1.0
 Data: 19 de outubro de 2025

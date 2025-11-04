@@ -1,5 +1,6 @@
 from PySide6.QtWidgets import QMainWindow, QTabWidget
 from language.tr_01_gerenciadorTraducao import GerenciadorTraducao
+from utils.IconUtils import get_icon_path
 from PySide6.QtCore import QCoreApplication
 
 from .ui import (
@@ -42,6 +43,11 @@ class FinancialCalculatorApp(QMainWindow):
         super().__init__()
         self.tr = lambda s: QCoreApplication.translate("App", s)
         self.setGeometry(100, 100, 900, 600)
+
+        icon_path = get_icon_path("economia.ico")
+        if icon_path:
+            from PySide6.QtGui import QIcon
+            self.setWindowIcon(QIcon(icon_path))
 
         self.tabs = QTabWidget()
         self.setCentralWidget(self.tabs)

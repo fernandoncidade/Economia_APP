@@ -1,6 +1,6 @@
 from PySide6.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLineEdit, QPushButton, QComboBox, QSizePolicy
-from PySide6.QtGui import QDoubleValidator
-from PySide6.QtCore import Qt, QCoreApplication
+from PySide6.QtGui import QDoubleValidator, QFontDatabase
+from PySide6.QtCore import QCoreApplication
 from .ui_17_history_container import HistoryContainer
 
 def create_depreciation_tab(self):
@@ -23,6 +23,9 @@ def create_depreciation_tab(self):
 
     self.deprec_k.setPlaceholderText(tr("App", "Opcional: para cálculo específico do ano k"))
     self.deprec_result = HistoryContainer(self)
+    self.deprec_result.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+    fixed_font = QFontDatabase.systemFont(QFontDatabase.FixedFont)
+    self.deprec_result.setFont(fixed_font)
 
     calc_button = QPushButton(tr("App", "Calcular"))
     calc_button.clicked.connect(self.calculate_depreciation)

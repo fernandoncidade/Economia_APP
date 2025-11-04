@@ -1,5 +1,5 @@
 from PySide6.QtWidgets import (QWidget, QScrollArea, QVBoxLayout, QHBoxLayout, QCheckBox, QTextEdit, QSizePolicy)
-from PySide6.QtCore import Qt, QCoreApplication
+from PySide6.QtCore import Qt, QCoreApplication, QEvent
 
 
 class HistoryContainer(QWidget):
@@ -7,6 +7,7 @@ class HistoryContainer(QWidget):
         super().__init__(parent)
         self._entries = []
         self._editing_index = None
+        self._entry_height = None
 
         main_layout = QVBoxLayout(self)
         main_layout.setContentsMargins(0, 0, 0, 0)
@@ -18,9 +19,33 @@ class HistoryContainer(QWidget):
         self._inner = QWidget()
         self._inner_layout = QVBoxLayout(self._inner)
         self._inner_layout.setAlignment(Qt.AlignTop)
+        self._inner_layout.setSpacing(2)
+        self._inner_layout.setContentsMargins(4, 4, 4, 4)
         self._inner.setLayout(self._inner_layout)
 
         self._scroll.setWidget(self._inner)
+        self._scroll.viewport().installEventFilter(self)
+
+    def eventFilter(self, obj, event):
+        if obj is self._scroll.viewport() and event.type() == QEvent.Resize:
+            vh = obj.height()
+            if vh > 0:
+                self._entry_height = vh
+                self._sync_entry_sizes()
+
+        return super().eventFilter(obj, event)
+
+    def _sync_entry_sizes(self):
+        if not self._entries or not self._entry_height:
+            return
+
+        total_margin = 8
+        spacing_per_entry = 2
+        h = max(1, self._entry_height - total_margin - spacing_per_entry)
+        for entry_w, chk, te in self._entries:
+            entry_w.setFixedHeight(h)
+            te.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+            te.setMinimumHeight(max(1, h - 40))
 
     def append(self, text: str):
         if self._editing_index is not None and 0 <= self._editing_index < len(self._entries):
@@ -37,18 +62,37 @@ class HistoryContainer(QWidget):
 
         chk = QCheckBox(entry_w)
         chk.setToolTip(QCoreApplication.translate("App", "Marque para editar/excluir esta entrada"))
+        chk.setFixedSize(20, 20)
+        chk.setStyleSheet("""
+            QCheckBox {
+                spacing: 0px;
+                padding: 0px;
+                margin: 0px;
+            }
+            QCheckBox::indicator {
+                width: 18px;
+                height: 18px;
+            }
+        """)
         entry_layout.addWidget(chk, 0, Qt.AlignTop)
 
         te = QTextEdit(entry_w)
         te.setReadOnly(True)
         te.setPlainText(text)
-        te.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
+        te.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        entry_layout.setStretch(0, 0)
+        entry_layout.setStretch(1, 1)
         entry_layout.addWidget(te, 1)
 
         entry_w.setLayout(entry_layout)
 
         self._inner_layout.addWidget(entry_w)
         self._entries.append((entry_w, chk, te))
+        if not self._entry_height:
+            vh = self._scroll.viewport().height()
+            self._entry_height = vh if vh > 0 else 300
+
+        self._sync_entry_sizes()
 
     def clear(self):
         for widget, _, _ in list(self._entries):
@@ -115,6 +159,7 @@ class HistoryContainer(QWidget):
                     elif i == self._editing_index:
                         self._editing_index = None
 
+        self._sync_entry_sizes()
         return
 
     def is_editing(self):

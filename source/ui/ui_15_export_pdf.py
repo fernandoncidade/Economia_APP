@@ -11,34 +11,53 @@ def export_to_pdf(self, text_widget, suggested_name="export.pdf"):
     if not filename.lower().endswith(".pdf"):
         filename += ".pdf"
 
+    # Extrai o texto bruto e exporta como HTML com <pre> monoespaçado
+    if hasattr(text_widget, "toPlainText"):
+        raw_text = text_widget.toPlainText()
+    else:
+        # Fallback: tenta obter documento; se não, converte para string
+        try:
+            raw_text = text_widget.document().toPlainText()
+        except Exception:
+            raw_text = str(text_widget)
+
+    html = f"""
+    <html>
+    <head>
+        <meta charset="utf-8">
+        <style>
+            /* Usa fonte monoespaçada com bom suporte a caracteres Unicode (frações em box-drawing) */
+            body {{ margin: 12px; }}
+            pre.calc {{
+                white-space: pre;              /* preserva espaçamento e quebras */
+                font-family: "Courier New", "Lucida Console", Consolas, "DejaVu Sans Mono", monospace;
+                font-size: 10pt;
+                line-height: 1.25;
+            }}
+        </style>
+    </head>
+    <body>
+        <pre class="calc">{escape(raw_text)}</pre>
+    </body>
+    </html>
+    """
+
     printer = QPrinter()
     try:
         printer.setOutputFormat(QPrinter.PdfFormat)
-
     except Exception:
         pass
 
     printer.setOutputFileName(filename)
 
-    if hasattr(text_widget, "document"):
-        doc = text_widget.document()
-
-    else:
-        if hasattr(text_widget, "toPlainText"):
-            doc = QTextDocument()
-            doc.setPlainText(text_widget.toPlainText())
-
-        else:
-            doc = QTextDocument()
-            doc.setPlainText(str(text_widget))
+    doc = QTextDocument()
+    doc.setHtml(html)
 
     if hasattr(doc, "print_"):
         doc.print_(printer)
-
     else:
         try:
             doc.print(printer)
-
         except Exception:
             pass
 
@@ -63,7 +82,6 @@ def amort_table_to_html(self):
         for c in range(cols):
             it = tw.item(r, c)
             tds.append(escape(it.text() if it else ""))
-
         body_rows.append("<tr>" + "".join(f"<td>{td}</td>" for td in tds) + "</tr>")
 
     table_css = """
@@ -72,7 +90,13 @@ def amort_table_to_html(self):
     th, td { border: 1px solid #444; padding: 4px 6px; text-align: left; }
     thead tr { background: #f0f0f0; }
     h1, h2 { margin: 12px 0 6px 0; }
-    pre { white-space: pre-wrap; font-family: Consolas, monospace; }
+    /* Garante a mesma aparência dos cálculos que usam frações em texto */
+    pre { 
+        white-space: pre; 
+        font-family: "Courier New", "Lucida Console", Consolas, "DejaVu Sans Mono", monospace; 
+        font-size: 10pt; 
+        line-height: 1.25;
+    }
     </style>
     """
 
@@ -104,6 +128,7 @@ def export_amortization_pdf(self, suggested_name="amortizacao.pdf"):
 
     calc_html = ""
     if calc_text:
+        # <pre> com fonte monoespaçada (CSS definido em amort_table_to_html)
         calc_html = f"<h2>Cálculos</h2><pre>{escape(calc_text)}</pre>"
 
     table_html = amort_table_to_html(self)
@@ -122,7 +147,6 @@ def export_amortization_pdf(self, suggested_name="amortizacao.pdf"):
     printer = QPrinter()
     try:
         printer.setOutputFormat(QPrinter.PdfFormat)
-
     except Exception:
         pass
 
@@ -133,10 +157,8 @@ def export_amortization_pdf(self, suggested_name="amortizacao.pdf"):
 
     if hasattr(doc, "print_"):
         doc.print_(printer)
-
     else:
         try:
             doc.print(printer)
-
         except Exception:
             pass

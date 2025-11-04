@@ -1,6 +1,6 @@
 from PySide6.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLineEdit, QPushButton, QComboBox, QTableWidget, QTableWidgetItem, QHeaderView, QSizePolicy
-from PySide6.QtGui import QDoubleValidator
-from PySide6.QtCore import Qt, QCoreApplication
+from PySide6.QtGui import QDoubleValidator, QFontDatabase
+from PySide6.QtCore import QCoreApplication
 from .ui_17_history_container import HistoryContainer
 
 def create_amortization_tab(self):
@@ -31,6 +31,8 @@ def create_amortization_tab(self):
 
     self.amort_result = HistoryContainer(self)
     self.amort_result.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+    fixed_font = QFontDatabase.systemFont(QFontDatabase.FixedFont)
+    self.amort_result.setFont(fixed_font)
 
     layout.addRow(tr("App", "Sistema de Amortização:"), self.amort_system)
     layout.addRow(tr("App", "Valor do Financiamento (P):"), self.amort_p)

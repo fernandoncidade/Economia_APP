@@ -1,4 +1,7 @@
 from PySide6.QtCore import QCoreApplication
+from utils.LogManager import LogManager
+
+logger = LogManager.get_logger()
 
 def calculate_interest(self):
     try:
@@ -195,5 +198,10 @@ def calculate_interest(self):
             self.interest_result.append(result_text)
 
     except Exception as e:
+        logger.error(f"Erro ao calcular juros: {e}", exc_info=True)
         tr = QCoreApplication.translate
-        self.interest_result.append(f"{tr('App', 'Erro')}: {e}")
+        try:
+            self.interest_result.append(f"{tr('App', 'Erro')}: {e}")
+
+        except Exception:
+            pass

@@ -6,7 +6,6 @@ from utils.LogManager import LogManager
 
 logger = LogManager.get_logger()
 
-
 if __name__ == "__main__":
     try:
         app = QApplication(sys.argv)

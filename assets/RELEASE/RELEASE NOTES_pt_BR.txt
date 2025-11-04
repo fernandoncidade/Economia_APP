@@ -1,107 +1,69 @@
-Nota de Lançamento — Financial Calculator App
+NOTAS DE LANÇAMENTO — Economia APP
+Versão: 0.0.3.0
+Data: 22 de outubro de 2025
+Autor: Fernando Nillsson Cidade
+
+---
+
+Resumo do lançamento
+Lançamento de manutenção e melhorias focado em experiência do usuário, configurabilidade de fontes e correção de bugs críticos. Implementação de FontManager, diálogo de configuração de fontes e integração com HistoryContainer e menu principal.
+
+O Que Mudou
+
+**Configuração de Fontes (NOVO)**
+- Agora você pode personalizar o tipo, tamanho e estilo das letras nos resultados dos cálculos.
+- Acesse: **Configuração → Configurar Fontes**
+- Escolha entre:
+  - **Família da Fonte**: selecione de várias opções de fontes do seu computador (recomendado: Courier New para melhor legibilidade).
+  - **Tamanho**: ajuste entre 8pt e 24pt conforme sua preferência de leitura.
+  - **Estilos**: aplique negrito, itálico ou sublinhado individualmente.
+- **Prévia em Tempo Real**: veja como ficará antes de confirmar.
+- **Botão Padrão**: volta para as configurações originais com um clique.
+
+**Histórico Melhorado**
+- O histórico agora exibe os cálculos com as fontes configuradas automaticamente.
+- Ao trocar a configuração de fontes, o histórico se atualiza imediatamente.
+- Edição mais intuitiva: clique no checkbox de uma entrada para marcá-la e depois use o botão "Editar".
+
+**Menu Principal Aprimorado**
+- Novo item: **Configuração → Configurar Fontes** (acesso rápido).
+- Melhor organização dos menus de idioma e exportação.
+
+Como Usar as Novas Funções
+
+1. **Configurar suas Fontes Preferidas:**
+   - Vá em **Configuração → Configurar Fontes**
+   - Ajuste família, tamanho e estilos conforme desejado
+   - Clique **OK** para salvar
+   - Os resultados dos cálculos se atualizam automaticamente
+
+2. **Restaurar Fontes Padrão:**
+   - Abra **Configuração → Configurar Fontes**
+   - Clique no botão **Padrão**
+   - Clique **OK**
+
+3. **Editar Histórico com Novas Fontes:**
+   - Selecione uma entrada no histórico
+   - Clique **Editar**
+   - As fontes configuradas serão aplicadas
+   - Confirme ou cancele a edição
+
+Correções e Melhorias
+
+- **Melhor Renderização de Texto**: resultados e tabelas agora usam monospace (fonte de largura fixa) para alinhamento perfeito.
+- **Suporte a Tema**: as cores do texto e fundo se adaptam ao tema do Windows (claro/escuro).
+- **Performance**: carregamento mais rápido do histórico com muitas entradas.
+- **Estabilidade**: correção de erros na atualização de temas e redimensionamento de janelas.
+
+
+______________________________
+
+
+NOTAS DE LANÇAMENTO — Economia APP
 Data: 21 de outubro de 2025
 Versão: 0.0.2.0
 
 ---
-
-## PARA DESENVOLVEDORES E PROGRAMADORES
-
-Escopo e Arquitetura
-
-* Modularização completa da aplicação:
-
-  * Interface dividida em módulos independentes (ui_01 a ui_19), cada um responsável por uma aba, helper ou componente visual.
-  * Serviços organizados em módulos separados (sv_01 a sv_07), cada um dedicado a um tipo de cálculo financeiro.
-  * Estrutura principal centralizada na classe FinancialCalculatorApp, que importa e vincula dinamicamente as funções de interface e serviços (monkey-patch controlado).
-
-Módulos e Funcionalidades
-
-Interface do Usuário (UI)
-
-* Abas principais criadas dinamicamente:
-
-  * Juros (simples e compostos)
-  * Anuidades (postecipadas e antecipadas)
-  * Gradientes (aritmético e geométrico)
-  * Conversão e equivalência de taxas
-  * Amortização (SAC, Price, SAM)
-  * Investimentos (VPL, VPB, VAUE)
-  * Depreciação (linear e soma dos dígitos)
-
-* Módulos destacados:
-
-  * ui_03 a ui_09: criação das abas de cálculo.
-  * ui_10 a ui_14: geração e leitura de tabelas de amortização.
-  * ui_15_export_pdf.py: exportação de resultados e tabelas para PDF.
-  * ui_16_menu_bar.py: barra de menus com opções de idioma, exportação e diálogo "Sobre".
-  * ui_17_history_container.py: histórico de resultados com suporte a múltiplas entradas, edição e exportação.
-  * ui_18_SobreDialog.py e ui_19_exibir_sobre.py: diálogo "Sobre" multilíngue com abas de histórico, licenças, privacidade e notas de versão.
-
-Lógica e Serviços
-
-* Serviços financeiros autônomos:
-
-  * sv_01_calculate_interest.py: juros simples e compostos.
-  * sv_02_calculate_annuity.py: cálculo de prestação ou valor presente.
-  * sv_03_calculate_gradient.py: gradientes aritmético e geométrico.
-  * sv_04_calculate_real_rate_equivalence.py: equivalência e taxa real/aparente.
-  * sv_05_calculate_amortization.py: cálculo completo de amortizações (SAC, PRICE, SAM).
-  * sv_06_calculate_investment.py: análise de viabilidade (VPL, VPB, VAUE).
-  * sv_07_calculate_depreciation.py: métodos de depreciação linear e soma dos dígitos.
-
-* Cada serviço:
-
-  * Extrai dados diretamente dos widgets (QLineEdit, QComboBox).
-  * Realiza cálculos numéricos robustos.
-  * Gera explicações passo a passo e envia a saída ao HistoryContainer.
-
-Internacionalização e Tradução
-
-* Novo módulo: language/tr_01_gerenciadorTraducao.py
-
-  * Persistência de idioma (language.json) e recarga dinâmica via sinal idioma_alterado.
-  * Suporte completo a pt_BR e en_US.
-  * Compilação de arquivos .ts para .qm via pyside6-lrelease.
-* Novos assets multilíngues: ABOUT, EULA, NOTICE, PRIVACY, RELEASE, COPYRIGHT, CLC.
-
-Exportação e Impressão
-
-* Funções: export_to_pdf e export_amortization_pdf
-
-  * Conversão segura de texto/tabela em HTML com CSS monoespaçado.
-  * Impressão em PDF via QPrinter e QTextDocument.
-
-Validação e UX
-
-* Aplicação de QDoubleValidator em todos os campos numéricos.
-* Formatação monetária em formato brasileiro (1.234,56).
-* Placeholders, resets e feedback visual ao recalcular ou limpar campos.
-* Histórico com controle de edição única e sincronização de redimensionamento.
-
-Testes e Validação Sugeridos
-
-* Idiomas: testar troca e persistência em language.json.
-* Exportação: validar PDF de cálculo atual e de todos os cálculos.
-* SobreDialog: verificar carregamento de abas e links externos.
-* HistoryContainer: testar edição, exclusão e exportação múltipla.
-* Logs: verificar geração em %LOCALAPPDATA%\Economia_APP.
-
-Observações Técnicas
-
-* ui_04_create_annuity_tab.py: corrigir nomes de validadores (annuity_*).
-* Comparações de currentText() devem considerar uso de QCoreApplication.translate.
-* HistoryContainer: garantir commit_edit/cancel_edit no fechamento.
-* Considerar substituição de formatação manual de moeda por locale ou Babel.
-
-Compatibilidade
-
-* Requisitos: PySide6
-* Empacotamento: incluir assets/ e language/translations/ com arquivos .qm compilados.
-* Ambiente: Windows 10/11 (testado) e compatível com Linux via PyInstaller.
-
----
-
-## PARA USUÁRIOS FINAIS (VERSÃO AMIGÁVEL)
 
 Novidades Principais
 
@@ -153,6 +115,8 @@ NOTAS DE LANÇAMENTO — Economia APP
 Versão: 0.0.1.0
 Data: 19 de outubro de 2025
 Autor: Fernando Nillsson Cidade
+
+---
 
 Resumo do lançamento
 - Versão inicial alfa/experimental do Economia APP, ferramenta de apoio ao estudo de Economia de Engenharia (TT007). Automatiza cálculos de juros, anuidades, gradientes, equivalência de taxas, amortização (SAC, Price, SAM), análise de investimentos (VPL/VAUE) e depreciação. Inclui histórico, exportação de tabelas em PDF e suporte a traduções pt_BR / en_US.

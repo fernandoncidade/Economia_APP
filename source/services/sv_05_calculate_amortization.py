@@ -1,5 +1,8 @@
 from PySide6.QtWidgets import QTableWidgetItem
 from PySide6.QtCore import QCoreApplication
+from utils.LogManager import LogManager
+
+logger = LogManager.get_logger()
 
 def calculate_amortization(self):
     try:
@@ -230,8 +233,13 @@ def calculate_amortization(self):
             self.generate_sam_table(p, i, n)
 
     except Exception as e:
+        logger.error(f"Erro ao gerar tabela de amortização: {e}", exc_info=True)
         tr = QCoreApplication.translate
-        self.amort_table.setRowCount(1)
-        self.amort_table.setSpan(0,0,1,5)
-        self.amort_table.setItem(0,0, QTableWidgetItem(f"{tr('App', 'Erro ao gerar tabela')}: {e}"))
-        self.amort_result.append(f"{tr('App', 'Erro')}: {e}")
+        try:
+            self.amort_table.setRowCount(1)
+            self.amort_table.setSpan(0,0,1,5)
+            self.amort_table.setItem(0,0, QTableWidgetItem(f"{tr('App', 'Erro ao gerar tabela')}: {e}"))
+            self.amort_result.append(f"{tr('App', 'Erro')}: {e}")
+
+        except Exception:
+            pass

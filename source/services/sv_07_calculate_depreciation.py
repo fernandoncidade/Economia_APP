@@ -1,4 +1,7 @@
 from PySide6.QtCore import QCoreApplication
+from utils.LogManager import LogManager
+
+logger = LogManager.get_logger()
 
 def calculate_depreciation(self):
     try:
@@ -180,5 +183,10 @@ def calculate_depreciation(self):
             self.deprec_result.append(result_text)
 
     except Exception as e:
+        logger.error(f"Erro ao calcular depreciação: {e}", exc_info=True)
         tr = QCoreApplication.translate
-        self.deprec_result.append(f"{tr('App', 'Erro')}: {e}")
+        try:
+            self.deprec_result.append(f"{tr('App', 'Erro')}: {e}")
+
+        except Exception:
+            pass

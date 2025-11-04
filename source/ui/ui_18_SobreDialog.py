@@ -149,3 +149,4 @@ class SobreDialog(QDialog):
 
         except Exception as e:
             logger.error(f"Erro ao criar dialog sobre: {e}", exc_info=True)
+            raise

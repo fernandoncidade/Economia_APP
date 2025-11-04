@@ -1,114 +1,76 @@
-Release Notes — Financial Calculator App
+RELEASE NOTES — Economia APP
+Version: 0.0.3.0
+Date: October 22, 2025
+Author: Fernando Nillsson Cidade
+
+---
+
+Release summary
+Maintenance and improvements release focused on user experience, font configurability and critical bug fixes. Implementation of FontManager, font configuration dialog and integration with HistoryContainer and main menu.
+
+What Changed
+
+**Font Configuration (NEW)**
+- You can now customize font family, size and styles for calculation results.
+- Access: **Settings → Configure Fonts**
+- Choose from:
+  - **Font Family**: select from available fonts on your computer (recommended: Courier New for best readability).
+  - **Size**: set between 8pt and 24pt according to your reading preference.
+  - **Styles**: apply bold, italic or underline individually.
+- **Real-time Preview**: see how it will look before confirming.
+- **Default Button**: return to original settings with one click.
+
+**Improved History**
+- History now displays calculations using the configured fonts automatically.
+- When changing font settings, the history updates immediately.
+- More intuitive editing: click an entry's checkbox to select it, then use the "Edit" button.
+
+**Improved Main Menu**
+- New item: **Settings → Configure Fonts** (quick access).
+- Better organization of language and export menus.
+
+How to Use the New Features
+
+1. **Configure your Preferred Fonts:**
+   - Go to **Settings → Configure Fonts**
+   - Adjust family, size and styles as desired
+   - Click **OK** to save
+   - Calculation results update automatically
+
+2. **Restore Default Fonts:**
+   - Open **Settings → Configure Fonts**
+   - Click the **Default** button
+   - Click **OK**
+
+3. **Edit History with New Fonts:**
+   - Select an entry in history
+   - Click **Edit**
+   - Configured fonts will be applied
+   - Confirm or cancel the edit
+
+Fixes and Improvements
+
+- **Better Text Rendering**: results and tables now use monospace (fixed-width) font for perfect alignment.
+- **Theme Support**: text and background colors adapt to the Windows theme (light/dark).
+- **Performance**: faster loading of history with many entries.
+- **Stability**: fixed errors in theme updates and window resizing.
+
+
+______________________________
+
+
+RELEASE NOTES — Economia APP
 Date: October 21, 2025
 Version: 0.0.2.0
 
 ---
-
-## FOR DEVELOPERS AND PROGRAMMERS
-
-Scope and Architecture
-
-* Full modularization of the application:
-
-  * Interface split into independent modules (ui_01 to ui_19), each responsible for a tab, helper, or visual component.
-  * Services organized in separate modules (sv_01 to sv_07), each dedicated to a type of financial calculation.
-  * Core structure centralized in the FinancialCalculatorApp class, which dynamically imports and binds UI functions and services (controlled monkey-patching).
-
-Modules and Features
-
-User Interface (UI)
-
-* Main tabs created dynamically:
-
-  * Interest (simple and compound)
-  * Annuities (ordinary and due)
-  * Gradients (arithmetic and geometric)
-  * Rate conversion and equivalence
-  * Amortization (SAC, Price, SAM)
-  * Investments (NPV, PVB, VAUE)
-  * Depreciation (straight-line and sum-of-the-years-digits)
-
-* Highlighted modules:
-
-  * ui_03 to ui_09: creation of calculation tabs.
-  * ui_10 to ui_14: generation and reading of amortization tables.
-  * ui_15_export_pdf.py: exporting results and tables to PDF.
-  * ui_16_menu_bar.py: menu bar with language, export and "About" dialog options.
-  * ui_17_history_container.py: result history with support for multiple entries, editing and exporting.
-  * ui_18_SobreDialog.py and ui_19_exibir_sobre.py: multilingual "About" dialog with tabs for history, licenses, privacy and release notes.
-
-Logic and Services
-
-* Standalone financial services:
-
-  * sv_01_calculate_interest.py: simple and compound interest.
-  * sv_02_calculate_annuity.py: calculation of payment or present value.
-  * sv_03_calculate_gradient.py: arithmetic and geometric gradients.
-  * sv_04_calculate_real_rate_equivalence.py: equivalence and real/apparent rate.
-  * sv_05_calculate_amortization.py: full amortization calculations (SAC, PRICE, SAM).
-  * sv_06_calculate_investment.py: feasibility analysis (NPV, PVB, VAUE).
-  * sv_07_calculate_depreciation.py: straight-line and sum-of-the-years-digits depreciation methods.
-
-* Each service:
-
-  * Extracts data directly from widgets (QLineEdit, QComboBox).
-  * Performs robust numerical calculations.
-  * Produces step-by-step explanatory output and sends it to the HistoryContainer.
-
-Internationalization and Translation
-
-* New module: language/tr_01_gerenciadorTraducao.py
-
-  * Language persistence (language.json) and dynamic reload via idioma_alterado signal.
-  * Full support for pt_BR and en_US.
-  * Compile .ts files to .qm via pyside6-lrelease.
-* New multilingual assets: ABOUT, EULA, NOTICE, PRIVACY, RELEASE, COPYRIGHT, CLC.
-
-Export and Printing
-
-* Functions: export_to_pdf and export_amortization_pdf
-
-  * Safe conversion of text/tables to HTML with monospace CSS.
-  * PDF printing via QPrinter and QTextDocument.
-
-Validation and UX
-
-* QDoubleValidator applied to all numeric fields.
-* Currency formatting in Brazilian style (1.234,56).
-* Placeholders, resets and visual feedback when recalculating or clearing fields.
-* History with single-edit control and resize synchronization.
-
-Suggested Tests and Validation
-
-* Languages: test switching and persistence in language.json.
-* Export: validate PDF for current calculation and all calculations.
-* AboutDialog: verify tab loading and external links.
-* HistoryContainer: test editing, deletion and multiple exports.
-* Logs: verify generation at %LOCALAPPDATA%\Economia_APP.
-
-Technical Notes
-
-* ui_04_create_annuity_tab.py: fix validator variable names (annuity_*).
-* Comparisons of currentText() should consider using QCoreApplication.translate.
-* HistoryContainer: ensure commit_edit/cancel_edit on close.
-* Consider replacing manual currency formatting with locale or Babel.
-
-Compatibility
-
-* Requirements: PySide6
-* Packaging: include assets/ and language/translations/ with compiled .qm files.
-* Environment: Windows 10/11 (tested) and compatible with Linux via PyInstaller.
-
----
-
-## FOR END USERS (FRIENDLY VERSION)
 
 Main Highlights
 
 * Redesigned interface: separate tabs for each type of financial calculation.
 * Languages: now available in Portuguese (Brazil) and English (United States).
 
-  * Change the language in the Settings → Languages menu.
+  * Change the language via Settings → Languages.
   * The choice is saved automatically for next time.
 * Export to PDF: save results and amortization tables with one click.
 * Calculation history: view, edit and export all previous results.
@@ -118,25 +80,25 @@ Main Highlights
 
 How to Use
 
-1. Choose a tab (e.g., Interest, Annuities, Amortization, etc.).
-2. Fill in the requested values.
+1. Choose a tab (for example: Interest, Annuities, Amortization, etc.).
+2. Fill in the fields with the requested values.
 3. Click Calculate.
-4. The result appears in the right panel with step-by-step explanations.
+4. The result appears in the right panel, with step-by-step explanations.
 5. Use the buttons:
 
-   * Clear: clears fields or results.
-   * Edit: allows modifying a saved result.
+   * Clear: clears the fields or results.
+   * Edit: allows changing a saved result.
    * Delete: removes selected entries.
    * Export PDF: generates a PDF file with the calculation.
-6. The Amortization tab also displays a complete table.
+6. In the Amortization tab, a full table is also displayed.
 
-Other Important Functions
+Other Important Features
 
 * Change language:
-  Go to Settings → Languages → Português / English.
+  Go to Settings → Languages → Portuguese / English.
 * Export calculations:
   Go to Files → Export Current or Files → Export All.
-* View app information:
+* View app info:
   Go to Options → About.
 
 Privacy and Security
@@ -154,26 +116,28 @@ Version: 0.0.1.0
 Date: October 19, 2025
 Author: Fernando Nillsson Cidade
 
-Release summary
-- Initial alpha/experimental release of Economia APP, a support tool for studying Engineering Economics (TT007). Automates calculations for interest, annuities, gradients, rate equivalence, amortization (SAC, Price, SAM), investment analysis (VPL/VAUE) and depreciation. Includes history, export of tables to PDF and support for pt_BR / en_US translations.
+---
 
-Main features included
+Release summary
+- Initial alpha/experimental release of Economia APP, a tool to support the study of Engineering Economics (TT007). Automates calculations of interest, annuities, gradients, rate equivalence, amortization (SAC, Price, SAM), investment analysis (VPL/VAUE) and depreciation. Includes history, export of tables to PDF and support for pt_BR / en_US translations.
+
+Key features included
 - Calculation modules: simple/compound interest, annuities, gradients, amortization (SAC/Price/SAM), investments (VPL/VAUE) and depreciation.
 - Generation of amortization tables with preview and option to export to PDF.
 - Editable calculation history.
-- Tabbed interface by topic (implemented with PySide6).
-- Basic internationalization support ( .ts files included in language/translations).
+- Tabbed interface by topic (implemented in PySide6).
+- Basic internationalization support (.ts files included in language/translations).
 
 Files and resources included in this package
-- Code: folder source/
-- Utilities: folder utils/ (logging, paths and helpers)
+- Code: source/ folder
+- Utilities: utils/ folder (logging, paths and helpers)
 - Assets: assets/ (ABOUT, EULA, NOTICES, COPYRIGHT, CLC, RELEASE)
 - Translations: language/translations/*.ts (pt_BR, en_US)
 - Minimal documentation: assets/ABOUT/*.txt, assets/EULA/*.txt, assets/NOTICES/*.txt, assets/COPYRIGHT/*.txt, assets/CLC/*.txt
 
 Installation (Windows — development)
 1. Install Python 3.10+.
-2. In a terminal (PowerShell or cmd):
+2. In the terminal (PowerShell or cmd):
    - python -m venv venv
    - venv\Scripts\activate
    - pip install PySide6
@@ -181,10 +145,10 @@ Installation (Windows — development)
    - python main.py
 
 Packaging for distribution (tips)
-- PyInstaller is recommended to create a Windows executable. Ensure inclusion of the assets/ and language/translations/ directories in the spec:
+- PyInstaller is recommended to create a Windows executable. Ensure inclusion of the assets/ and language/translations/ directories in the .spec:
   - add assets/ and language/translations/ to the datas in the .spec
 - Make sure to include license files (assets/EULA, assets/NOTICES, assets/COPYRIGHT, assets/CLC).
-- If bundling PySide6 binaries, document LGPL compliance procedures as described in NOTICE_pt_BR.txt.
+- If bundling PySide6 binaries, document LGPL compliance procedures according to NOTICE_pt_BR.txt.
 
 Compiling translations
 - Generate .qm from .ts with pyside6-lrelease (or lrelease):
@@ -196,21 +160,21 @@ Data storage location
   %LOCALAPPDATA%\Economia_APP
 
 Technical notes and dependencies
-- Main dependency: PySide6 (LGPL v3 as per version).
+- Main dependency: PySide6 (LGPL v3 depending on version).
 - Check requirements.txt (if present) for additional dependencies.
-- Logging: utils/LogManager.py (log files in %LOCALAPPDATA%\Economia_APP).
-- Tests and validation: initial release — manual testing; adding automated unit tests for calculations is recommended for future releases.
+- Logging: utils/LogManager.py (log files at %LOCALAPPDATA%\Economia_APP).
+- Tests and validation: initial version — manual testing; adding automated tests for financial calculations is recommended for future releases.
 
 Known issues (initial release)
-- Some UI features partially implemented (some files in source/ui contain stubs to be completed).
-- Translations need compilation (.qm) before packaging.
+- Partially implemented UI features (some files in source/ui contain stubs to complete).
+- Translations require compilation (.qm) before packaging.
 - Numeric input validation accepts comma/dot; review handling for edge cases (e.g., empty fields, zeros, negative values where invalid).
 
 Roadmap / next steps
 - Complete and test all UI modules and services (files with stubs in source/ui and source/services).
 - Add unit tests for financial calculations.
-- Improve PDF export and table layouts.
-- Automate the build process and Windows installer generation.
+- Improve PDF export and table layout.
+- Automate build process and installer generation for Windows.
 - Implement opt-in telemetry for diagnostics (only with explicit consent).
 
 Support and contact
@@ -218,4 +182,4 @@ Support and contact
 - Bugs, issues and contributions: open an issue / pull request in the project repository (see README).
 
 Legal compliance notes
-- See assets/EULA/EULA_pt_BR - Economia.txt, assets/NOTICES/NOTICE_pt_BR.txt, assets/COPYRIGHT/AVISO DE COPYRIGHT E MARCA REGISTRA_pt_BR.txt and assets/CLC/CLC_pt_BR - Economia.txt for terms of use, commercial licensing and third‑party attributions.
+- See assets/EULA/EULA_pt_BR - Economia.txt, assets/NOTICES/NOTICE_pt_BR.txt, assets/COPYRIGHT/AVISO DE COPYRIGHT E MARCA REGISTRA_pt_BR.txt and assets/CLC/CLC_pt_BR - Economia.txt for terms of use, commercial licensing and third-party attributions.

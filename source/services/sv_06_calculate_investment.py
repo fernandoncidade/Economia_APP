@@ -1,4 +1,7 @@
 from PySide6.QtCore import QCoreApplication
+from utils.LogManager import LogManager
+
+logger = LogManager.get_logger()
 
 def calculate_investment(self):
     try:
@@ -148,5 +151,10 @@ def calculate_investment(self):
         self.invest_result.append("".join(steps))
 
     except Exception as e:
+        logger.error(f"Erro ao calcular investimento (VPL/VAUE): {e}", exc_info=True)
         tr = QCoreApplication.translate
-        self.invest_result.append(f"{tr('App', 'Erro')}: {e}")
+        try:
+            self.invest_result.append(f"{tr('App', 'Erro')}: {e}")
+
+        except Exception:
+            pass

@@ -1,4 +1,4 @@
-from PySide6.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLineEdit, QPushButton, QComboBox, QTableWidget, QTableWidgetItem, QHeaderView, QSizePolicy
+from PySide6.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLineEdit, QPushButton, QComboBox, QTableWidget, QTableWidgetItem, QHeaderView, QSizePolicy, QCheckBox
 from PySide6.QtGui import QDoubleValidator, QFontDatabase
 from PySide6.QtCore import QCoreApplication
 from .ui_17_history_container import HistoryContainer
@@ -13,15 +13,29 @@ def create_amortization_tab(self):
         self.tabs.addTab(widget, tr("App", "Amortização"))
 
         self.amort_system = QComboBox()
-        self.amort_system.addItems([tr("App", "Sistema Francês (Price)"), tr("App", "Sistema de Amortização Constante (SAC)"), tr("App", "Sistema de Amortização Misto (SAM)")])
+        self.amort_system.addItems([
+            tr("App", "Sistema Francês (Price)"), 
+            tr("App", "Sistema de Amortização Constante (SAC)"), 
+            tr("App", "Sistema de Amortização Misto (SAM)"),
+            tr("App", "Sistema Americano"),
+            tr("App", "Sistema Hamburguês (SAC com Carência)")
+        ])
 
         self.amort_p = QLineEdit()
         self.amort_i = QLineEdit()
         self.amort_n = QLineEdit()
 
+        # Campos específicos para Sistema Hamburguês
+        self.amort_carencia = QLineEdit()
+        self.amort_carencia.setPlaceholderText(tr("App", "Períodos de carência"))
+
+        self.amort_juros_capitalizados = QCheckBox(tr("App", "Capitalizar juros durante carência"))
+        self.amort_juros_capitalizados.setChecked(False)
+
         self.amort_p.setValidator(QDoubleValidator())
         self.amort_i.setValidator(QDoubleValidator())
         self.amort_n.setValidator(QDoubleValidator())
+        self.amort_carencia.setValidator(QDoubleValidator())
 
         calc_button = QPushButton(tr("App", "Gerar Tabela de Amortização"))
         calc_button.clicked.connect(self.calculate_amortization)
@@ -42,6 +56,8 @@ def create_amortization_tab(self):
         layout.addRow(tr("App", "Valor do Financiamento (P):"), self.amort_p)
         layout.addRow(tr("App", "Taxa de Juros (i % ao período):"), self.amort_i)
         layout.addRow(tr("App", "Prazo (n períodos):"), self.amort_n)
+        layout.addRow(tr("App", "Carência (períodos):"), self.amort_carencia)
+        layout.addRow(self.amort_juros_capitalizados)
         layout.addRow(calc_button)
 
         btn_widget = QWidget()
@@ -90,7 +106,9 @@ def create_amortization_tab(self):
             self.amort_p.clear()
             self.amort_i.clear()
             self.amort_n.clear()
+            self.amort_carencia.clear()
             self.amort_system.setCurrentIndex(0)
+            self.amort_juros_capitalizados.setChecked(False)
 
         def clear_output():
             self.amort_table.clearContents()
@@ -107,6 +125,16 @@ def create_amortization_tab(self):
         btn_clear_inputs.clicked.connect(clear_inputs)
         btn_clear_output.clicked.connect(clear_output)
         btn_clear_all.clicked.connect(clear_all)
+
+        # Toggle visibility dos campos de carência
+        def toggle_carencia_fields():
+            system_index = self.amort_system.currentIndex()
+            is_hamburgues = (system_index == 4)  # Sistema Hamburguês
+            self.amort_carencia.setVisible(is_hamburgues)
+            self.amort_juros_capitalizados.setVisible(is_hamburgues)
+
+        self.amort_system.currentIndexChanged.connect(toggle_carencia_fields)
+        toggle_carencia_fields()
 
         right_layout.addWidget(self.amort_result)
         right_layout.addWidget(self.amort_table)

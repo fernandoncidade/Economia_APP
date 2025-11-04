@@ -309,5 +309,234 @@
     <message><source>trial_buy_message</source><translation>Por favor, adquira a versão completa para continuar usando o aplicativo.</translation></message>
     <message><source>trial_uninstall_message</source><translation>Se não desejar comprar, desinstale o aplicativo.</translation></message>
     <message><source>trial_paid_link</source><translation>Comprar Versão Completa</translation></message>
+
+    <!-- Novas Abas -->
+    <message><source>Taxa Efetiva / TIR / Taxa Global</source><translation>Taxa Efetiva / TIR / Taxa Global</translation></message>
+    <message><source>Retorno Mínimo (TMA)</source><translation>Retorno Mínimo (TMA)</translation></message>
+    <message><source>TMA Real e Nominal</source><translation>TMA Real e Nominal</translation></message>
+    <message><source>TMA Mínima de Retorno</source><translation>TMA Mínima de Retorno</translation></message>
+
+    <!-- Sistemas de Amortização -->
+    <message><source>Sistema Americano</source><translation>Sistema Americano</translation></message>
+    <message><source>Sistema Hamburguês (SAC com Carência)</source><translation>Sistema Hamburguês (SAC com Carência)</translation></message>
+
+    <!-- Campos de Amortização (Sistema Hamburguês) -->
+    <message><source>Carência (períodos):</source><translation>Carência (períodos):</translation></message>
+    <message><source>Capitalizar juros durante carência</source><translation>Capitalizar juros durante carência</translation></message>
+    <message><source>Períodos de carência</source><translation>Períodos de carência</translation></message>
+
+    <!-- Gradientes - Novos Modos -->
+    <message><source>Calcular Valor Presente (P)</source><translation>Calcular Valor Presente (P)</translation></message>
+    <message><source>Calcular k-ésimo Termo (X_k)</source><translation>Calcular k-ésimo Termo (X_k)</translation></message>
+    <message><source>Renda Perpétua</source><translation>Renda Perpétua</translation></message>
+    <message><source>Renda Periódica (A):</source><translation>Renda Periódica (A):</translation></message>
+    <message><source>Termo desejado (k):</source><translation>Termo desejado (k):</translation></message>
+    <message><source>Modo de Cálculo:</source><translation>Modo de Cálculo:</translation></message>
+
+    <!-- Taxa Efetiva / TIR / Taxa Global -->
+    <message><source>Taxa Efetiva Anual</source><translation>Taxa Efetiva Anual</translation></message>
+    <message><source>Taxa Interna de Retorno (TIR)</source><translation>Taxa Interna de Retorno (TIR)</translation></message>
+    <message><source>Taxa Global de Juros</source><translation>Taxa Global de Juros</translation></message>
+    <message><source>Taxa Nominal (%):</source><translation>Taxa Nominal (%):</translation></message>
+    <message><source>Período da Taxa Nominal:</source><translation>Período da Taxa Nominal:</translation></message>
+    <message><source>Período de Capitalização:</source><translation>Período de Capitalização:</translation></message>
+    <message><source>Período Desejado:</source><translation>Período Desejado:</translation></message>
+    <message><source>Investimento Inicial:</source><translation>Investimento Inicial:</translation></message>
+    <message><source>Número de Períodos:</source><translation>Número de Períodos:</translation></message>
+    <message><source>Retorno por Período:</source><translation>Retorno por Período:</translation></message>
+    <message><source>Taxa Real Mensal (%):</source><translation>Taxa Real Mensal (%):</translation></message>
+    <message><source>Inflação Mês 1 (%):</source><translation>Inflação Mês 1 (%):</translation></message>
+    <message><source>Inflação Mês 2 (%):</source><translation>Inflação Mês 2 (%):</translation></message>
+    <message><source>Inflação Mês 3 (%):</source><translation>Inflação Mês 3 (%):</translation></message>
+
+    <!-- Análise de Investimentos -->
+    <message><source>Tipo de Análise:</source><translation>Tipo de Análise:</translation></message>
+    <message><source>VPL e VAUE (Fluxo Uniforme)</source><translation>VPL e VAUE (Fluxo Uniforme)</translation></message>
+    <message><source>VPL Detalhado (Receitas e Custos)</source><translation>VPL Detalhado (Receitas e Custos)</translation></message>
+    <message><source>Payback Descontado</source><translation>Payback Descontado</translation></message>
+    <message><source>Análise de Sensibilidade do VPL</source><translation>Análise de Sensibilidade do VPL</translation></message>
+    <message><source>Receita Anual:</source><translation>Receita Anual:</translation></message>
+    <message><source>Custo/Desembolso Anual:</source><translation>Custo/Desembolso Anual:</translation></message>
+    <message><source>Variação Percentual na Receita (%):</source><translation>Variação Percentual na Receita (%):</translation></message>
+    <message><source>Calcular VPL e VAUE</source><translation>Calcular VPL e VAUE</translation></message>
+    <message><source>Calcular VPL Detalhado</source><translation>Calcular VPL Detalhado</translation></message>
+    <message><source>Calcular Payback Descontado</source><translation>Calcular Payback Descontado</translation></message>
+    <message><source>Calcular Análise de Sensibilidade</source><translation>Calcular Análise de Sensibilidade</translation></message>
+
+    <!-- Retorno Mínimo (TMA) -->
+    <message><source>Calcular Retorno Mínimo</source><translation>Calcular Retorno Mínimo</translation></message>
+    <message><source>Aporte (Investimento):</source><translation>Aporte (Investimento):</translation></message>
+    <message><source>TMA Anual (%):</source><translation>TMA Anual (%):</translation></message>
+    <message><source>Períodos por Ano:</source><translation>Períodos por Ano:</translation></message>
+    <message><source>&lt;b&gt;Cálculo de Retorno Mínimo baseado em TMA&lt;/b&gt;</source><translation>&lt;b&gt;Cálculo de Retorno Mínimo baseado em TMA&lt;/b&gt;</translation></message>
+
+    <!-- Fisher / TMA Real e Nominal -->
+    <message><source>Calcular TMA Nominal (a partir da Real)</source><translation>Calcular TMA Nominal (a partir da Real)</translation></message>
+    <message><source>Calcular TMA Real (a partir da Nominal)</source><translation>Calcular TMA Real (a partir da Nominal)</translation></message>
+    <message><source>TMA Real (% ao ano):</source><translation>TMA Real (% ao ano):</translation></message>
+    <message><source>TMA Nominal (% ao ano):</source><translation>TMA Nominal (% ao ano):</translation></message>
+    <message><source>Taxa de Inflação (% ao ano):</source><translation>Taxa de Inflação (% ao ano):</translation></message>
+    <message><source>Tipo de Cálculo:</source><translation>Tipo de Cálculo:</translation></message>
+    <message><source>Calcular TMA Nominal</source><translation>Calcular TMA Nominal</translation></message>
+    <message><source>Calcular TMA Real</source><translation>Calcular TMA Real</translation></message>
+
+    <!-- Mensagens de Erro Específicas -->
+    <message><source>Erro: O período de carência deve ser menor que o prazo total.</source><translation>Erro: O período de carência deve ser menor que o prazo total.</translation></message>
+    <message><source>Erro: Taxa de Inflação é obrigatória</source><translation>Erro: Taxa de Inflação é obrigatória</translation></message>
+    <message><source>Erro: TMA Real é obrigatória</source><translation>Erro: TMA Real é obrigatória</translation></message>
+    <message><source>Erro: TMA Nominal é obrigatória</source><translation>Erro: TMA Nominal é obrigatória</translation></message>
+
+    <!-- Cálculos de Gradientes -->
+    <message><source>RENDA PERPÉTUA (SÉRIE PERPÉTUA)</source><translation>RENDA PERPÉTUA (SÉRIE PERPÉTUA)</translation></message>
+    <message><source>GRADIENTE GEOMÉTRICO - CÁLCULO DO k-ÉSIMO TERMO</source><translation>GRADIENTE GEOMÉTRICO - CÁLCULO DO k-ÉSIMO TERMO</translation></message>
+    <message><source>Renda mensal</source><translation>Renda mensal</translation></message>
+    <message><source>Para gerar juros perpétuos de</source><translation>Para gerar juros perpétuos de</translation></message>
+    <message><source>por período,</source><translation>por período,</translation></message>
+    <message><source>o principal P deve ser tal que:</source><translation>o principal P deve ser tal que:</translation></message>
+    <message><source>RESPOSTA: O capital necessário é R$</source><translation>RESPOSTA: O capital necessário é R$</translation></message>
+    <message><source>CÁLCULO DO PRIMEIRO TERMO</source><translation>CÁLCULO DO PRIMEIRO TERMO</translation></message>
+    <message><source>Como g = i, usa-se a fórmula simplificada:</source><translation>Como g = i, usa-se a fórmula simplificada:</translation></message>
+    <message><source>Isolando</source><translation>Isolando</translation></message>
+    <message><source>Como g ≠ i, usa-se a fórmula:</source><translation>Como g ≠ i, usa-se a fórmula:</translation></message>
+    <message><source>Cálculo de</source><translation>Cálculo de</translation></message>
+    <message><source>CÁLCULO DO TERMO</source><translation>CÁLCULO DO TERMO</translation></message>
+    <message><source>Termo desejado</source><translation>Termo desejado</translation></message>
+    <message><source>Usando a raiz positiva:</source><translation>Usando a raiz positiva:</translation></message>
+    <message><source>Revertendo a substituição:</source><translation>Revertendo a substituição:</translation></message>
+
+    <!-- Cálculos de Amortização (Sistema Hamburguês) -->
+    <message><source>SISTEMA HAMBURGUÊS (SAC COM CARÊNCIA)</source><translation>SISTEMA HAMBURGUÊS (SAC COM CARÊNCIA)</translation></message>
+    <message><source>Características:</source><translation>Características:</translation></message>
+    <message><source>Período de Carência: Sem amortização do principal</source><translation>Período de Carência: Sem amortização do principal</translation></message>
+    <message><source>Juros na Carência: Capitalizados (incorporados ao saldo)</source><translation>Juros na Carência: Capitalizados (incorporados ao saldo)</translation></message>
+    <message><source>Juros na Carência: Pagos mensalmente</source><translation>Juros na Carência: Pagos mensalmente</translation></message>
+    <message><source>Período de Amortização: SAC sobre o saldo devedor</source><translation>Período de Amortização: SAC sobre o saldo devedor</translation></message>
+    <message><source>Prazo total</source><translation>Prazo total</translation></message>
+    <message><source>Carência</source><translation>Carência</translation></message>
+    <message><source>FASE 1: PERÍODO DE CARÊNCIA (JUROS CAPITALIZADOS)</source><translation>FASE 1: PERÍODO DE CARÊNCIA (JUROS CAPITALIZADOS)</translation></message>
+    <message><source>Saldo ao final da carência:</source><translation>Saldo ao final da carência:</translation></message>
+    <message><source>FASE 1: PERÍODO DE CARÊNCIA (JUROS PAGOS)</source><translation>FASE 1: PERÍODO DE CARÊNCIA (JUROS PAGOS)</translation></message>
+    <message><source>Juros pagos mensalmente:</source><translation>Juros pagos mensalmente:</translation></message>
+    <message><source>Saldo devedor permanece constante</source><translation>Saldo devedor permanece constante</translation></message>
+    <message><source>FASE 2: PERÍODO DE AMORTIZAÇÃO (SAC)</source><translation>FASE 2: PERÍODO DE AMORTIZAÇÃO (SAC)</translation></message>
+    <message><source>Amortização constante:</source><translation>Amortização constante:</translation></message>
+    <message><source>Exemplo - Período</source><translation>Exemplo - Período</translation></message>
+    <message><source>primeiro da amortização</source><translation>primeiro da amortização</translation></message>
+    <message><source>COMPARAÇÃO DE CENÁRIOS</source><translation>COMPARAÇÃO DE CENÁRIOS</translation></message>
+    <message><source>Prestação no período 6 (juros capitalizados)</source><translation>Prestação no período 6 (juros capitalizados)</translation></message>
+    <message><source>Prestação no período 6 (juros pagos)</source><translation>Prestação no período 6 (juros pagos)</translation></message>
+    <message><source>Diferença</source><translation>Diferença</translation></message>
+
+    <!-- Cálculos de Amortização (Sistema Americano) -->
+    <message><source>SISTEMA AMERICANO</source><translation>SISTEMA AMERICANO</translation></message>
+    <message><source>Períodos intermediários (k &lt; n): Pagamento apenas de juros</source><translation>Períodos intermediários (k &lt; n): Pagamento apenas de juros</translation></message>
+    <message><source>Amortização: Zero para k &lt; n</source><translation>Amortização: Zero para k &lt; n</translation></message>
+    <message><source>Saldo Devedor: Permanece igual a P até o último período</source><translation>Saldo Devedor: Permanece igual a P até o último período</translation></message>
+    <message><source>Período final (k = n): Pagamento de juros + amortização total</source><translation>Período final (k = n): Pagamento de juros + amortização total</translation></message>
+    <message><source>Para k &lt; n:</source><translation>Para k &lt; n:</translation></message>
+    <message><source>Para k = n:</source><translation>Para k = n:</translation></message>
+    <message><source>Juros por período</source><translation>Juros por período</translation></message>
+    <message><source>Prestação intermediária</source><translation>Prestação intermediária</translation></message>
+    <message><source>Prestação final</source><translation>Prestação final</translation></message>
+    <message><source>Exemplo - Saldo Devedor após Período 6:</source><translation>Exemplo - Saldo Devedor após Período 6:</translation></message>
+    <message><source>Como k=6 &lt; n=</source><translation>Como k=6 &lt; n=</translation></message>
+    <message><source>o saldo devedor permanece inalterado</source><translation>o saldo devedor permanece inalterado</translation></message>
+
+    <!-- Cálculos de Taxa Efetiva -->
+    <message><source>CÁLCULO DE TAXA EFETIVA</source><translation>CÁLCULO DE TAXA EFETIVA</translation></message>
+    <message><source>Taxa Nominal</source><translation>Taxa Nominal</translation></message>
+    <message><source>CÁLCULO DA TAXA EFETIVA DO PERÍODO DE CAPITALIZAÇÃO</source><translation>CÁLCULO DA TAXA EFETIVA DO PERÍODO DE CAPITALIZAÇÃO</translation></message>
+    <message><source>Número de períodos de capitalização</source><translation>Número de períodos de capitalização</translation></message>
+    <message><source>Taxa efetiva por período de capitalização</source><translation>Taxa efetiva por período de capitalização</translation></message>
+    <message><source>por período de capitalização</source><translation>por período de capitalização</translation></message>
+    <message><source>CONVERSÃO PARA O PERÍODO DESEJADO</source><translation>CONVERSÃO PARA O PERÍODO DESEJADO</translation></message>
+    <message><source>Razão de períodos</source><translation>Razão de períodos</translation></message>
+    <message><source>Taxa Efetiva do Período Desejado</source><translation>Taxa Efetiva do Período Desejado</translation></message>
+
+    <!-- Cálculos de TIR -->
+    <message><source>CÁLCULO DA TAXA INTERNA DE RETORNO (TIR)</source><translation>CÁLCULO DA TAXA INTERNA DE RETORNO (TIR)</translation></message>
+    <message><source>Fluxo de Caixa:</source><translation>Fluxo de Caixa:</translation></message>
+    <message><source>Desembolso</source><translation>Desembolso</translation></message>
+    <message><source>Equação de VPL = 0:</source><translation>Equação de VPL = 0:</translation></message>
+    <message><source>Dividindo por</source><translation>Dividindo por</translation></message>
+    <message><source>Substituindo x = 1/(1+TIR):</source><translation>Substituindo x = 1/(1+TIR):</translation></message>
+    <message><source>Usando Fórmula de Bhaskara:</source><translation>Usando Fórmula de Bhaskara:</translation></message>
+    <message><source>Taxa Interna de Retorno</source><translation>Taxa Interna de Retorno</translation></message>
+
+    <!-- Cálculos de Taxa Global -->
+    <message><source>CÁLCULO DA TAXA GLOBAL DE JUROS (APARENTE)</source><translation>CÁLCULO DA TAXA GLOBAL DE JUROS (APARENTE)</translation></message>
+    <message><source>Taxa real mensal</source><translation>Taxa real mensal</translation></message>
+    <message><source>Inflação mês 1</source><translation>Inflação mês 1</translation></message>
+    <message><source>Inflação mês 2</source><translation>Inflação mês 2</translation></message>
+    <message><source>Inflação mês 3</source><translation>Inflação mês 3</translation></message>
+    <message><source>TAXA REAL DO TRIMESTRE</source><translation>TAXA REAL DO TRIMESTRE</translation></message>
+    <message><source>INFLAÇÃO ACUMULADA DO TRIMESTRE</source><translation>INFLAÇÃO ACUMULADA DO TRIMESTRE</translation></message>
+    <message><source>TAXA GLOBAL (APARENTE) DO TRIMESTRE</source><translation>TAXA GLOBAL (APARENTE) DO TRIMESTRE</translation></message>
+    <message><source>Taxa Global de Juros do Trimestre</source><translation>Taxa Global de Juros do Trimestre</translation></message>
+    <message><source>ao mês</source><translation>ao mês</translation></message>
+    <message><source>ao ano</source><translation>ao ano</translation></message>
+
+    <!-- Cálculos de Investimentos (VPL/VAUE) -->
+    <message><source>VPL DETALHADO (RECEITAS E CUSTOS SEPARADOS)</source><translation>VPL DETALHADO (RECEITAS E CUSTOS SEPARADOS)</translation></message>
+    <message><source>Investimento Inicial (C₀)</source><translation>Investimento Inicial (C₀)</translation></message>
+    <message><source>Receita Anual</source><translation>Receita Anual</translation></message>
+    <message><source>Custo/Desembolso Anual</source><translation>Custo/Desembolso Anual</translation></message>
+    <message><source>Fluxo Líquido Anual (A)</source><translation>Fluxo Líquido Anual (A)</translation></message>
+    <message><source>CÁLCULO DO FLUXO LÍQUIDO</source><translation>CÁLCULO DO FLUXO LÍQUIDO</translation></message>
+    <message><source>Receita</source><translation>Receita</translation></message>
+    <message><source>Custo</source><translation>Custo</translation></message>
+    <message><source>CÁLCULO DO FATOR (P/A)</source><translation>CÁLCULO DO FATOR (P/A)</translation></message>
+    <message><source>Fórmula de equivalência:</source><translation>Fórmula de equivalência:</translation></message>
+    <message><source>Onde</source><translation>Onde</translation></message>
+    <message><source>O Valor Presente Líquido é de</source><translation>O Valor Presente Líquido é de</translation></message>
+
+    <!-- Cálculos de Payback Descontado -->
+    <message><source>PAYBACK DESCONTADO (PERÍODO DE RECUPERAÇÃO)</source><translation>PAYBACK DESCONTADO (PERÍODO DE RECUPERAÇÃO)</translation></message>
+    <message><source>Fluxo de Caixa Anual (A)</source><translation>Fluxo de Caixa Anual (A)</translation></message>
+    <message><source>Período máximo analisado</source><translation>Período máximo analisado</translation></message>
+    <message><source>OBJETIVO:</source><translation>OBJETIVO:</translation></message>
+    <message><source>Encontrar k tal que</source><translation>Encontrar k tal que</translation></message>
+    <message><source>Ou seja</source><translation>Ou seja</translation></message>
+    <message><source>CÁLCULO DOS FATORES (P/A) E VP ACUMULADO:</source><translation>CÁLCULO DOS FATORES (P/A) E VP ACUMULADO:</translation></message>
+    <message><source>ANÁLISE:</source><translation>ANÁLISE:</translation></message>
+    <message><source>Investimento inicial</source><translation>Investimento inicial</translation></message>
+    <message><source>VP acumulado até ano</source><translation>VP acumulado até ano</translation></message>
+
+    <!-- Cálculos de Análise de Sensibilidade -->
+    <message><source>ANÁLISE DE SENSIBILIDADE DO VPL</source><translation>ANÁLISE DE SENSIBILIDADE DO VPL</translation></message>
+    <message><source>Variação na Receita</source><translation>Variação na Receita</translation></message>
+    <message><source>CÁLCULO DO VPL BASE (CENÁRIO ORIGINAL)</source><translation>CÁLCULO DO VPL BASE (CENÁRIO ORIGINAL)</translation></message>
+    <message><source>Fluxo Líquido Base</source><translation>Fluxo Líquido Base</translation></message>
+    <message><source>CÁLCULO DO VPL COM VARIAÇÃO NA RECEITA</source><translation>CÁLCULO DO VPL COM VARIAÇÃO NA RECEITA</translation></message>
+    <message><source>Variação aplicada</source><translation>Variação aplicada</translation></message>
+    <message><source>Nova Receita</source><translation>Nova Receita</translation></message>
+    <message><source>Receita Base</source><translation>Receita Base</translation></message>
+    <message><source>Novo Fluxo Líquido</source><translation>Novo Fluxo Líquido</translation></message>
+    <message><source>CÁLCULO DA VARIAÇÃO PERCENTUAL DO VPL</source><translation>CÁLCULO DA VARIAÇÃO PERCENTUAL DO VPL</translation></message>
+    <message><source>Variação do VPL</source><translation>Variação do VPL</translation></message>
+    <message><source>Variação Percentual</source><translation>Variação Percentual</translation></message>
+    <message><source>RESUMO DA ANÁLISE DE SENSIBILIDADE</source><translation>RESUMO DA ANÁLISE DE SENSIBILIDADE</translation></message>
+    <message><source>A respectiva variação percentual do Valor Presente Líquido é de</source><translation>A respectiva variação percentual do Valor Presente Líquido é de</translation></message>
+
+    <!-- Cálculos de Retorno Mínimo (TMA) -->
+    <message><source>CÁLCULO DE RETORNO MÍNIMO BASEADO EM TMA</source><translation>CÁLCULO DE RETORNO MÍNIMO BASEADO EM TMA</translation></message>
+    <message><source>Aporte (Investimento)</source><translation>Aporte (Investimento)</translation></message>
+    <message><source>TMA anual</source><translation>TMA anual</translation></message>
+    <message><source>Períodos por ano</source><translation>Períodos por ano</translation></message>
+    <message><source>CONVERSÃO DA TMA ANUAL PARA TMA DO PERÍODO</source><translation>CONVERSÃO DA TMA ANUAL PARA TMA DO PERÍODO</translation></message>
+    <message><source>CÁLCULO DO RETORNO MÍNIMO POR PERÍODO</source><translation>CÁLCULO DO RETORNO MÍNIMO POR PERÍODO</translation></message>
+    <message><source>Retorno mínimo por período</source><translation>Retorno mínimo por período</translation></message>
+    <message><source>Aporte</source><translation>Aporte</translation></message>
+
+    <!-- Cálculos de Fisher -->
+    <message><source>CÁLCULO DA TMA NOMINAL (RELAÇÃO DE FISHER)</source><translation>CÁLCULO DA TMA NOMINAL (RELAÇÃO DE FISHER)</translation></message>
+    <message><source>CÁLCULO DA TMA REAL (RELAÇÃO DE FISHER)</source><translation>CÁLCULO DA TMA REAL (RELAÇÃO DE FISHER)</translation></message>
+    <message><source>RELAÇÃO DE FISHER</source><translation>RELAÇÃO DE FISHER</translation></message>
+    <message><source>RELAÇÃO DE FISHER (REARRANJADA)</source><translation>RELAÇÃO DE FISHER (REARRANJADA)</translation></message>
+    <message><source>Fórmula original:</source><translation>Fórmula original:</translation></message>
+    <message><source>Rearranjando para isolar a taxa real:</source><translation>Rearranjando para isolar a taxa real:</translation></message>
+    <message><source>Taxa Nominal (ou Aparente)</source><translation>Taxa Nominal (ou Aparente)</translation></message>
+    <message><source>A TMA Nominal para esse ano é de</source><translation>A TMA Nominal para esse ano é de</translation></message>
+    <message><source>A TMA Real para esse ano é de</source><translation>A TMA Real para esse ano é de</translation></message>
   </context>
 </TS>

@@ -134,7 +134,6 @@ class HistoryContainer(QWidget):
                     spacing: 0px;
                     padding: 0px;
                     margin: 0px;
-                    background-color: transparent;
                 }
                 QCheckBox::indicator {
                     width: 18px;
@@ -148,7 +147,7 @@ class HistoryContainer(QWidget):
 
             html_content = self._convert_to_html(text)
             te.setHtml(html_content)
-            
+
             te.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
             entry_layout.setStretch(0, 0)
             entry_layout.setStretch(1, 1)

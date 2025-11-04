@@ -16,15 +16,32 @@ def export_to_pdf(self, text_widget, suggested_name="export.pdf"):
         if not filename.lower().endswith(".pdf"):
             filename += ".pdf"
 
+        # Tentar obter o texto de várias formas
+        raw_text = ""
+
+        # 1. HistoryContainer ou widget com toPlainText
         if hasattr(text_widget, "toPlainText"):
             raw_text = text_widget.toPlainText()
 
-        else:
+        # 2. Widget com document().toPlainText()
+        elif hasattr(text_widget, "document"):
             try:
                 raw_text = text_widget.document().toPlainText()
 
             except Exception:
+                pass
+
+        # 3. Conversão direta para string
+        if not raw_text:
+            try:
                 raw_text = str(text_widget)
+
+            except Exception:
+                raw_text = ""
+
+        if not raw_text.strip():
+            logger.warning("Nenhum conteúdo para exportar")
+            return
 
         font_css = FontManager.get_html_style()
 
@@ -68,6 +85,8 @@ def export_to_pdf(self, text_widget, suggested_name="export.pdf"):
 
             except Exception:
                 pass
+
+        logger.info(f"PDF exportado com sucesso: {filename}")
 
     except Exception as e:
         logger.error(f"Erro ao exportar para PDF: {e}", exc_info=True)
@@ -153,7 +172,14 @@ def export_amortization_pdf(self, suggested_name="amortizacao.pdf"):
 
         full_html = f"""
         <html>
-        <head><meta charset="utf-8">{font_css}</head>
+        <head>
+            <meta charset="utf-8">
+            {font_css}
+            <style>
+                body {{ margin: 12px; }}
+                pre {{ white-space: pre; }}
+            </style>
+        </head>
         <body>
             <h1>Amortização</h1>
             {calc_html}
@@ -183,6 +209,8 @@ def export_amortization_pdf(self, suggested_name="amortizacao.pdf"):
 
             except Exception:
                 pass
+
+        logger.info(f"PDF de amortização exportado com sucesso: {filename}")
 
     except Exception as e:
         logger.error(f"Erro ao exportar amortização para PDF: {e}", exc_info=True)

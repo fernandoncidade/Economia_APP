@@ -1,7 +1,7 @@
 AVISO DE COPYRIGHT E MARCA REGISTRADA — Economia APP
 ======================================
 
-Copyright (C) 2025 Fernando Nillsson Cidade. Todos os direitos reservados.
+Copyright (C) 2026 Fernando Nillsson Cidade. Todos os direitos reservados.
 
 O software "Economia APP" e toda a documentação associada — incluindo código‑fonte, interface gráfica, textos, manuais, ativos visuais (ícones, logos) e demais recursos fornecidos com o projeto — são propriedade intelectual de Fernando Nillsson Cidade, salvo indicação em contrário para componentes de terceiros.
 

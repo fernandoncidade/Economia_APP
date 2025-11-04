@@ -68,15 +68,11 @@ def create_menu_bar(self):
                 from .ui_21_font_config_dialog import FontConfigDialog
                 dialog = FontConfigDialog(self)
                 if dialog.exec():
-                    for i in range(self.tabs.count()):
-                        tab = self.tabs.widget(i)
-                        result_widget = getattr(self, f"interest_result", None) or \
-                                       getattr(self, f"annuity_result", None) or \
-                                       getattr(self, f"grad_result", None) or \
-                                       getattr(self, f"rate_equiv_result", None) or \
-                                       getattr(self, f"rate_real_result", None) or \
-                                       getattr(self, f"invest_result", None) or \
-                                       getattr(self, f"deprec_result", None)
+                    # Atualizar todas as abas
+                    for attr_name in ['interest_result', 'annuity_result', 'grad_result', 
+                                     'rate_equiv_result', 'rate_real_result', 'invest_result', 
+                                     'deprec_result', 'eff_rate_result']:
+                        result_widget = getattr(self, attr_name, None)
 
                         if hasattr(result_widget, 'refresh_all_fonts'):
                             result_widget.refresh_all_fonts()
@@ -118,14 +114,25 @@ def create_menu_bar(self):
             add_section(tr("App", "Gradientes"), getattr(self, "grad_result", None))
             add_section(tr("App", "Equivalência de Taxas"), getattr(self, "rate_equiv_result", None))
             add_section(tr("App", "Taxa Real / Aparente"), getattr(self, "rate_real_result", None))
+            add_section(tr("App", "Taxa Efetiva / TIR / Taxa Global"), getattr(self, "eff_rate_result", None))
             add_section(tr("App", "Amortização"), getattr(self, "amort_result", None))
             add_section(tr("App", "Análise de Investimentos"), getattr(self, "invest_result", None))
             add_section(tr("App", "Depreciação"), getattr(self, "deprec_result", None))
+            add_section(tr("App", "TMA Mínima de Retorno"), getattr(self, "min_return_result", None))
+            add_section(tr("App", "TMA Real e Nominal"), getattr(self, "fisher_result", None))
+
+            from utils.FontManager import FontManager
+            font_css = FontManager.get_html_style()
 
             html_parts = [
-                "<html><head><meta charset='utf-8'></head><body>",
+                f"<html><head><meta charset='utf-8'>{font_css}",
+                "<style>",
+                "body { margin: 12px; }",
+                "pre { white-space: pre; }",
+                "</style>",
+                "</head><body>",
                 f"<h1>{escape(tr('App','Todos os Cálculos'))}</h1>",
-                ]
+            ]
 
             for title, text in sections:
                 html_parts.append(f"<h2>{escape(title)}</h2><pre>{escape(text)}</pre>")
@@ -154,7 +161,10 @@ def create_menu_bar(self):
                 tr("App", "Análise de Investimentos"): (getattr(self, "invest_result", None), "investimento.pdf"),
                 tr("App", "Depreciação"): (getattr(self, "deprec_result", None), "depreciacao.pdf"),
                 tr("App", "Conversão de Taxas"): (None, None),
-                }
+                tr("App", "Taxa Efetiva / TIR / Taxa Global"): (getattr(self, "eff_rate_result", None), "taxa_efetiva_tir.pdf"),
+                tr("App", "TMA Mínima de Retorno"): (getattr(self, "min_return_result", None), "tma_minima.pdf"),
+                tr("App", "TMA Real e Nominal"): (getattr(self, "fisher_result", None), "fisher.pdf"),
+            }
 
             if tab_name == tr("App", "Amortização"):
                 self.export_amortization_pdf("amortizacao.pdf")

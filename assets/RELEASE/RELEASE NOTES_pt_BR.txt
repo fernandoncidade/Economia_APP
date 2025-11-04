@@ -1,3 +1,115 @@
+NOTAS DE LANÇAMENTO — Economia APP  
+Versão: 0.0.4.0  
+Data: 31 de janeiro de 2026  
+Autor: Fernando Nillsson Cidade
+
+---
+
+Resumo do lançamento  
+Atualização de manutenção e novas melhorias funcionais e de robustez nas camadas UI e services. Foco em: exportação (PDF), histórico (HistoryContainer), abas de amortização/investimento/gradientes, tratamento de fontes e internacionalização. Correções de bugs e validações complementares.
+
+O que mudou (principais pontos)
+
+- HistoryContainer (source/ui/ui_17_history_container.py)
+  - Novo método de conversão para HTML que aplica o estilo de fontes via FontManager (get_html_style).
+  - Melhor gerenciamento de tamanho das entradas (_sync_entry_sizes) com ajuste dinâmico ao redimensionamento do viewport.
+  - Suporte a edição inline com commit/cancel, seleção por checkbox e remoção robusta (ajuste de índices de edição).
+  - Atualização de tema via changeEvent e _update_theme, aplicando polish nos widgets.
+  - Melhoria na exportação: toPlainText() centraliza extração de texto para exportação.
+
+- FontManager / Configuração de fontes
+  - Integração do estilo HTML de fontes no export_to_pdf e na conversão de entradas do histórico (uso de FontManager.get_html_style()) para garantir consistência visual entre UI e PDFs.
+  - Ação no menu para abrir diálogo de configuração de fontes (ui_16_menu_bar.py → Configurar Fontes). Após alteração, Widgets com método refresh_all_fonts são atualizados.
+
+- Exportação PDF (source/ui/ui_15_export_pdf.py)
+  - export_to_pdf agora tenta obter texto de múltiplos tipos de widget (toPlainText, document(), str) e incorpora CSS de fontes via FontManager.
+  - Melhor geração de HTML para exportação (pre formatado, escape do conteúdo).
+  - export_amortization_pdf monta documento combinando cálculos e tabela de amortização (usa amort_table_to_html).
+  - amort_table_to_html: exporta QTableWidget para HTML com estilo (bordas, fonte, h1/h2).
+
+- Menu principal (source/ui/ui_16_menu_bar.py)
+  - Ações de exportar atual / exportar todos centralizadas; mapeamento por aba e lógica especial para Amortização e Conversão de Taxas.
+  - Integração com Gerenciador de Tradução: atualização dos checks de idioma e conexão com sinal idioma_alterado.
+  - Abertura do diálogo de configuração de fontes e atualização de widgets resultantes.
+  - Export_all monta HTML combinado de todas as seções e anexa tabela de amortização se presente.
+
+- Abas de Amortização ui_07_create_amortization_tab.py + geradores)
+  - Suporte ampliado a sistemas: Price, SAC, SAM, Americano e Hamburguês (com carência).
+  - Novos campos: carência e checkbox para capitalizar juros durante carência.
+  - Validação: carência não pode ser maior ou igual ao prazo total (mensagem e preenchimento da tabela com erro).
+  - geração de tabelas separadas: generate_price_table, generate_sac_table, generate_sam_table, generate_american_table, generate_hamburgues_table — lógicas implementadas e exportáveis.
+  - Export_amortization_pdf dedicado para gerar PDF com cálculos e tabela.
+
+- Aba de Gradientes ui_05_create_gradient_tab.py + service sv_03)
+  - Suporte a modos: calcular P, calcular X_k (apenas geométrico) e Renda Perpétua.
+  - Separação entre gradiente aritmético e geométrico.
+  - Service sv_03_calculate_gradient: formatação consistente de moeda, representação de frações, sobrescrito/subscrito para fórmulas, tratamento de igualdade i == g e normalizações. Resultado é enviado ao HistoryContainer.
+
+- Aba de Investimentos ui_08_create_investment_tab.py + service sv_06)
+  - UI: múltiplos tipos de análise (VPL/VAUE uniforme, VPL detalhado, Payback descontado, Sensibilidade).
+  - Campos dinâmicos e labels que alternam conforme tipo selecionado.
+  - Serviços implementados (sv_06): funções auxiliares para VPL/VAUE uniforme, VPL detalhado, Payback descontado, análise de sensibilidade — com passos de cálculo e formatação. (Nota: alguns trechos no arquivo estavam esboçados, mas utilitários principais já implementados.)
+  - Formatação e representação textual detalhada para append no HistoryContainer.
+
+- Taxa Efetiva / TIR / Taxa Global ui_25_create_effective_rate_tab.py + sv_08)
+  - UI com modos: taxa efetiva, TIR e taxa global.
+  - sv_08_calculate_effective_rate: cálculo da taxa efetiva por conversão de períodos, implementação de TIR com método Newton-Raphson (método _calculate_tir_newton) e caso especial para 2 períodos, cálculo da taxa global com inflação acumulada.
+  - Saídas formatadas, uso de sobrescrito/subscrito e padronização de moeda.
+
+- Fisher / TMA real/nominal ui_29_create_fisher_tab.py + sv_10)
+  - UI com opção de calcular TMA nominal a partir da real e vice-versa.
+  - Cálculos de Fisher implementados com passos e formatação; validações de campos obrigatórios.
+
+- Retorno Mínimo (TMA) ui_28_create_minimum_return_tab.py + sv_09)
+  - UI e cálculo de conversão da TMA anual para período e cálculo do retorno mínimo (juros mínimos) por período.
+  - Saída detalhada em HistoryContainer.
+
+- Melhorias gerais e correções
+  - Uso consistente de QDoubleValidator nos campos numéricos em várias abas.
+  - Correções para utilizar índices de QComboBox em vez de comparar texto (mais robusto para internacionalização).
+  - Normalização da formatação monetária (troca de separadores para estilo brasileiro) encapsulada em helpers locais.
+  - Log detalhado e tratamento de exceções com LogManager para facilitar diagnóstico.
+  - Uso de fonte monospace (QFontDatabase.FixedFont) nas instâncias de HistoryContainer para alinhamento visual de tabelas/texto.
+  - Responsividade: setSizePolicy e ajuste de comportamento ao redimensionar.
+  - Padronização na construção de strings explicativas (divisores, títulos e seções) para legibilidade nos históricos e PDFs.
+
+Como usar as novas funções
+
+1. Abrir Configuração → Configurar Fontes para ajustar família/tamanho/estilos. Confirmar para atualizar histórico e exportes.
+2. Aba Amortização:
+   - Selecionar sistema (Price/SAC/SAM/Americano/Hamburguês).
+   - Se usar Hamburguês, preencher Carência e marcar se for capitalizar juros.
+   - Gerar tabela e usar "Exportar PDF" para salvar tabela + cálculos.
+3. Aba Gradientes / Taxa Efetiva / Investimentos / Fisher / Retorno Mínimo:
+   - Escolher modo de cálculo no ComboBox; preencher campos visíveis.
+   - Clicar Calcular para adicionar passo-a-passo no histórico (HistoryContainer).
+   - Selecionar entradas no histórico para editar/excluir/exportar.
+4. Menu Arquivos:
+   - Exportar Atual / Exportar Todos: gera PDF com conteúdo das seções visíveis; Amortização é tratada separadamente para incluir tabela.
+
+Observações técnicas / migração
+- Caso tenha exportações automatizadas que dependam de texto puro, revisar uso de FontManager.get_html_style() (agora usado por exportadores).
+- Traduções devem permanecer compatíveis (uso de índices evita problemas por alteração de texto traduzido).
+- Recomenda-se testar cenários com carência >= prazo (agora validados) e revisar logs em %LOCALAPPDATA%\Economia_APP em caso de erro.
+
+Correções e melhorias notáveis
+- Corrigido uso de comparação por texto em ComboBox → agora usa currentIndex() (melhora i18n e robustez).
+- Validação de carência no Sistema Hamburguês.
+- Exportação de tabelas (HTML) e PDF com estilo de fontes consistente.
+- Implementação de TIR por Newton-Raphson para casos gerais e caso especial documentado para 2 períodos.
+- HistoryContainer mais resiliente (redimensionamento, tema, edição, exportação).
+
+---
+
+Pequenas pendências (para próximos releases)
+- Revisar pontos esboçados no sv_06 (trechos com TODOs/linhas vazias) para completar validações e mensagens locais.
+- Adicionar testes unitários automatizados para funções financeiras críticas (TIR, fatores, amortizações).
+- Complementar documentação de API interna e exemplos de entrada/saída para geração automatizada de PDFs.
+
+
+______________________________
+
+
 NOTAS DE LANÇAMENTO — Economia APP
 Versão: 0.0.3.0
 Data: 22 de outubro de 2025

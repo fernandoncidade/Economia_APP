@@ -1,7 +1,7 @@
 COPYRIGHT AND TRADEMARK NOTICE — Economia APP
 ======================================
 
-Copyright (C) 2025 Fernando Nillsson Cidade. All rights reserved.
+Copyright (C) 2026 Fernando Nillsson Cidade. All rights reserved.
 
 The software "Economia APP" and all associated documentation — including source code, graphical user interface, texts, manuals, visual assets (icons, logos) and other resources provided with the project — are the intellectual property of Fernando Nillsson Cidade, unless otherwise indicated for third‑party components.
 

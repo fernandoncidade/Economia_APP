@@ -16,9 +16,14 @@ from .ui import (
     create_amortization_tab,
     create_investment_tab,
     create_depreciation_tab,
+    create_effective_rate_tab,
+    create_minimum_return_tab,
+    create_fisher_tab,
     generate_sac_table,
     generate_price_table,
     generate_sam_table,
+    generate_american_table,
+    generate_hamburgues_table,
     set_amort_table_row,
     get_table_data,
     export_to_pdf,
@@ -38,6 +43,9 @@ from .services import (
     calculate_amortization,
     calculate_investment,
     calculate_depreciation,
+    calculate_effective_rate,
+    calculate_minimum_return,
+    calculate_fisher,
 )
 
 
@@ -83,11 +91,15 @@ class FinancialCalculatorApp(QMainWindow):
             self.create_amortization_tab()
             self.create_investment_tab()
             self.create_depreciation_tab()
+            self.create_effective_rate_tab()
+            self.create_minimum_return_tab()
+            self.create_fisher_tab()
             self.create_menu_bar()
 
         except Exception as e:
             logger.error(f"Erro ao reconstruir UI: {e}", exc_info=True)
 
+# Vinculando métodos de UI
 FinancialCalculatorApp.create_layout = create_layout
 FinancialCalculatorApp.get_float_from_line_edit = get_float_from_line_edit
 
@@ -98,13 +110,19 @@ FinancialCalculatorApp.create_rates_tab = create_rates_tab
 FinancialCalculatorApp.create_amortization_tab = create_amortization_tab
 FinancialCalculatorApp.create_investment_tab = create_investment_tab
 FinancialCalculatorApp.create_depreciation_tab = create_depreciation_tab
+FinancialCalculatorApp.create_effective_rate_tab = create_effective_rate_tab
+FinancialCalculatorApp.create_minimum_return_tab = create_minimum_return_tab
+FinancialCalculatorApp.create_fisher_tab = create_fisher_tab
 
 FinancialCalculatorApp.generate_sac_table = generate_sac_table
 FinancialCalculatorApp.generate_price_table = generate_price_table
 FinancialCalculatorApp.generate_sam_table = generate_sam_table
+FinancialCalculatorApp.generate_american_table = generate_american_table
+FinancialCalculatorApp.generate_hamburgues_table = generate_hamburgues_table
 FinancialCalculatorApp.set_amort_table_row = set_amort_table_row
 FinancialCalculatorApp.get_table_data = get_table_data
 
+# Vinculando métodos de serviços
 FinancialCalculatorApp.calculate_interest = calculate_interest
 FinancialCalculatorApp.calculate_annuity = calculate_annuity
 FinancialCalculatorApp.calculate_gradient = calculate_gradient
@@ -113,6 +131,9 @@ FinancialCalculatorApp.calculate_real_rate = calculate_real_rate
 FinancialCalculatorApp.calculate_amortization = calculate_amortization
 FinancialCalculatorApp.calculate_investment = calculate_investment
 FinancialCalculatorApp.calculate_depreciation = calculate_depreciation
+FinancialCalculatorApp.calculate_effective_rate = calculate_effective_rate
+FinancialCalculatorApp.calculate_minimum_return = calculate_minimum_return
+FinancialCalculatorApp.calculate_fisher = calculate_fisher
 
 FinancialCalculatorApp.export_to_pdf = export_to_pdf
 FinancialCalculatorApp.export_amortization_pdf = export_amortization_pdf

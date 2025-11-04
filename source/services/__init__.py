@@ -5,6 +5,9 @@ from .sv_04_calculate_real_rate_equivalence import calculate_rate_equivalence, c
 from .sv_05_calculate_amortization import calculate_amortization
 from .sv_06_calculate_investment import calculate_investment
 from .sv_07_calculate_depreciation import calculate_depreciation
+from .sv_08_calculate_effective_rate import calculate_effective_rate
+from .sv_09_calculate_minimum_return import calculate_minimum_return
+from .sv_10_calculate_fisher import calculate_fisher
 
 __all__ = [
     "calculate_interest",
@@ -15,4 +18,7 @@ __all__ = [
     "calculate_amortization",
     "calculate_investment",
     "calculate_depreciation",
+    "calculate_effective_rate",
+    "calculate_minimum_return",
+    "calculate_fisher",
 ]

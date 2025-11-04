@@ -9,14 +9,14 @@
 
 ## <a id="ptbr"></a>🇧🇷 Português (BR)
 
-> **Observação:** Este repositório refere-se à versão **v0.0.4.0** do Projeto Economia APP. Apoie o projeto e adquira a versão paga através do link: [Instalar via Microsoft Store](https://apps.microsoft.com/detail/9PLR0KD6KSJJ)
+> **Observação:** Este repositório refere-se à versão **v0.0.5.0** do Projeto Economia APP. Apoie o projeto e adquira a versão paga através do link: [Instalar via Microsoft Store](https://apps.microsoft.com/detail/9PLR0KD6KSJJ)
 
 <details>
 <summary>Clique para expandir o README em português</summary>
 
 # Calculadora de Economia de Engenharia (Economia APP)
 
-Versão: v0.0.4.0  
+Versão: v0.0.5.0  
 Autor: Fernando Nillsson Cidade
 
 Aplicação desktop em Python + PySide6 para cálculos clássicos de economia de engenharia: juros simples/compostos, anuidades, gradientes, equivalência de taxas, amortizações (SAC, Price, SAM), análise de investimentos (VPL e VAUE) e depreciação (linear e soma dos dígitos). Projeto organizado por pacotes `source.ui` (interfaces) e `source.services` (lógica de cálculo), com a classe principal `FinancialCalculatorApp`.
@@ -189,14 +189,14 @@ Funcionalidade:
 
 ## <a id="enus"></a>🇺🇸 English (US)
 
-> **Note:** This repository refers to the **v0.0.4.0** version of the Economia APP Project. Support the project and purchase the paid version through the link: [Instalar via Microsoft Store](https://apps.microsoft.com/detail/9PLR0KD6KSJJ)
+> **Note:** This repository refers to the **v0.0.5.0** version of the Economia APP Project. Support the project and purchase the paid version through the link: [Instalar via Microsoft Store](https://apps.microsoft.com/detail/9PLR0KD6KSJJ)
 
 <details>
 <summary>Click to expand the README in English</summary>
 
 # Engineering Economy Calculator (Economia APP)
 
-Version: v0.0.4.0  
+Version: v0.0.5.0  
 Author: Fernando Nillsson Cidade
 
 Desktop application in Python + PySide6 for classic engineering economy calculations: simple/compound interest, annuities, gradients, rate equivalence, amortizations (SAC, Price, SAM), investment analysis (NPV and annualized value) and depreciation (straight-line and sum-of-years-digits). Project organized into `source.ui` (interfaces) and `source.services` (calculation logic) packages, with the main class `FinancialCalculatorApp`.

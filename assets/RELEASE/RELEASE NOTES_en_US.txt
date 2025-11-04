@@ -1,0 +1,70 @@
+RELEASE NOTES — Economia APP
+Version: 0.0.1.0
+Date: October 19, 2025
+Author: Fernando Nillsson Cidade
+
+Release summary
+- Initial alpha/experimental release of Economia APP, a support tool for studying Engineering Economics (TT007). Automates calculations for interest, annuities, gradients, rate equivalence, amortization (SAC, Price, SAM), investment analysis (VPL/VAUE) and depreciation. Includes history, export of tables to PDF and support for pt_BR / en_US translations.
+
+Main features included
+- Calculation modules: simple/compound interest, annuities, gradients, amortization (SAC/Price/SAM), investments (VPL/VAUE) and depreciation.
+- Generation of amortization tables with preview and option to export to PDF.
+- Editable calculation history.
+- Tabbed interface by topic (implemented with PySide6).
+- Basic internationalization support ( .ts files included in language/translations).
+
+Files and resources included in this package
+- Code: folder source/
+- Utilities: folder utils/ (logging, paths and helpers)
+- Assets: assets/ (ABOUT, EULA, NOTICES, COPYRIGHT, CLC, RELEASE)
+- Translations: language/translations/*.ts (pt_BR, en_US)
+- Minimal documentation: assets/ABOUT/*.txt, assets/EULA/*.txt, assets/NOTICES/*.txt, assets/COPYRIGHT/*.txt, assets/CLC/*.txt
+
+Installation (Windows — development)
+1. Install Python 3.10+.
+2. In a terminal (PowerShell or cmd):
+   - python -m venv venv
+   - venv\Scripts\activate
+   - pip install PySide6
+3. Run in development:
+   - python main.py
+
+Packaging for distribution (tips)
+- PyInstaller is recommended to create a Windows executable. Ensure inclusion of the assets/ and language/translations/ directories in the spec:
+  - add assets/ and language/translations/ to the datas in the .spec
+- Make sure to include license files (assets/EULA, assets/NOTICES, assets/COPYRIGHT, assets/CLC).
+- If bundling PySide6 binaries, document LGPL compliance procedures as described in NOTICE_pt_BR.txt.
+
+Compiling translations
+- Generate .qm from .ts with pyside6-lrelease (or lrelease):
+  - pyside6-lrelease language/translations/economia_pt_BR.ts -qm language/translations/economia_pt_BR.qm
+- Place the generated .qm files in language/translations/ before packaging.
+
+Data storage location
+- Settings, history and generated files are saved at:
+  %LOCALAPPDATA%\Economia_APP
+
+Technical notes and dependencies
+- Main dependency: PySide6 (LGPL v3 as per version).
+- Check requirements.txt (if present) for additional dependencies.
+- Logging: utils/LogManager.py (log files in %LOCALAPPDATA%\Economia_APP).
+- Tests and validation: initial release — manual testing; adding automated unit tests for calculations is recommended for future releases.
+
+Known issues (initial release)
+- Some UI features partially implemented (some files in source/ui contain stubs to be completed).
+- Translations need compilation (.qm) before packaging.
+- Numeric input validation accepts comma/dot; review handling for edge cases (e.g., empty fields, zeros, negative values where invalid).
+
+Roadmap / next steps
+- Complete and test all UI modules and services (files with stubs in source/ui and source/services).
+- Add unit tests for financial calculations.
+- Improve PDF export and table layouts.
+- Automate the build process and Windows installer generation.
+- Implement opt-in telemetry for diagnostics (only with explicit consent).
+
+Support and contact
+- Author: Fernando Nillsson Cidade
+- Bugs, issues and contributions: open an issue / pull request in the project repository (see README).
+
+Legal compliance notes
+- See assets/EULA/EULA_pt_BR - Economia.txt, assets/NOTICES/NOTICE_pt_BR.txt, assets/COPYRIGHT/AVISO DE COPYRIGHT E MARCA REGISTRA_pt_BR.txt and assets/CLC/CLC_pt_BR - Economia.txt for terms of use, commercial licensing and third‑party attributions.

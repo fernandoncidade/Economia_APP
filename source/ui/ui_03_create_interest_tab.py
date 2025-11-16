@@ -1,7 +1,7 @@
 from PySide6.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLineEdit, QPushButton, QComboBox, QSizePolicy
 from PySide6.QtGui import QDoubleValidator, QFontDatabase
 from PySide6.QtCore import QCoreApplication
-from .ui_20_history_container import HistoryContainer
+from .ui_23_history_container import HistoryContainer
 from utils.LogManager import LogManager
 
 logger = LogManager.get_logger()

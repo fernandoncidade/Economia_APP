@@ -135,6 +135,8 @@
     <message><source>Vida Útil (N anos):</source><translation>Vida Útil (N anos):</translation></message>
     <message><source>Analisar ano específico (k):</source><translation>Analisar ano específico (k):</translation></message>
     <message><source>Método Linear</source><translation>Método Linear</translation></message>
+    <message><source>Soma dos Dígitos (Crescente)</source><translation>Soma dos Dígitos (Crescente)</translation></message>
+    <message><source>Soma dos Dígitos (Decrescente)</source><translation>Soma dos Dígitos (Decrescente)</translation></message>
     <message><source>Método da Soma dos Dígitos dos Anos</source><translation>Método da Soma dos Dígitos dos Anos</translation></message>
     <message><source>Opcional: para cálculo específico do ano k</source><translation>Opcional: para cálculo específico do ano k</translation></message>
 
@@ -669,5 +671,73 @@
     <message><source>Disposição da visualização:</source><translation>Disposição da visualização:</translation></message>
     <message><source>Lado a lado</source><translation>Lado a lado</translation></message>
     <message><source>Empilhadas (acima e abaixo)</source><translation>Empilhadas (acima e abaixo)</translation></message>
+
+    <!-- Cálculo VPL com Taxas Detalhadas -->
+    <message><source>VPL COM IMPOSTOS, DEPRECIAÇÃO E FINANCIAMENTO</source><translation>VPL COM IMPOSTOS, DEPRECIAÇÃO E FINANCIAMENTO</translation></message>
+    <message><source>DADOS DO PROBLEMA:</source><translation>DADOS DO PROBLEMA:</translation></message>
+    <message><source>Lucro antes impostos e juros</source><translation>Lucro antes impostos e juros</translation></message>
+    <message><source>Vida útil para depreciação</source><translation>Vida útil para depreciação</translation></message>
+    <message><source>Forma de pagamento</source><translation>Forma de pagamento</translation></message>
+    <message><source>Financiamento pelo Sistema SAC</source><translation>Financiamento pelo Sistema SAC</translation></message>
+    <message><source>Taxa de juros do financiamento</source><translation>Taxa de juros do financiamento</translation></message>
+    <message><source>Número de parcelas</source><translation>Número de parcelas</translation></message>
+    <message><source>ETAPA 1: CÁLCULO DA DEPRECIAÇÃO CONTÁBIL ANUAL</source><translation>ETAPA 1: CÁLCULO DA DEPRECIAÇÃO CONTÁBIL ANUAL</translation></message>
+    <message><source>A depreciação contábil (DC) é calculada pelo método linear:</source><translation>A depreciação contábil (DC) é calculada pelo método linear:</translation></message>
+    <message><source>ETAPA 2: TABELA DE AMORTIZAÇÃO PELO SISTEMA SAC (Sistema de Amortização Constante)</source><translation>ETAPA 2: TABELA DE AMORTIZAÇÃO PELO SISTEMA SAC (Sistema de Amortização Constante)</translation></message>
+    <message><source>No Sistema SAC, a amortização é constante em todos os períodos:</source><translation>No Sistema SAC, a amortização é constante em todos os períodos:</translation></message>
+    <message><source>Amortização constante</source><translation>Amortização constante</translation></message>
+    <message><source>Os juros de cada período são calculados sobre o saldo devedor do período anterior:</source><translation>Os juros de cada período são calculados sobre o saldo devedor do período anterior:</translation></message>
+    <message><source>A prestação é a soma da amortização constante com os juros:</source><translation>A prestação é a soma da amortização constante com os juros:</translation></message>
+    <message><source>Cálculos detalhados por período:</source><translation>Cálculos detalhados por período:</translation></message>
+    <message><source>IMPORTANTE: Os juros do financiamento são dedutíveis da base tributável.</source><translation>IMPORTANTE: Os juros do financiamento são dedutíveis da base tributável.</translation></message>
+    <message><source>ETAPA 3: CÁLCULO DO FLUXO DE CAIXA COM IMPOSTOS</source><translation>ETAPA 3: CÁLCULO DO FLUXO DE CAIXA COM IMPOSTOS</translation></message>
+    <message><source>Fórmula da Renda Tributável (com financiamento):</source><translation>Fórmula da Renda Tributável (com financiamento):</translation></message>
+    <message><source>Fórmula da Renda Tributável (sem financiamento):</source><translation>Fórmula da Renda Tributável (sem financiamento):</translation></message>
+    <message><source>Onde:</source><translation>Onde:</translation></message>
+    <message><source>Diferença Contábil</source><translation>Diferença Contábil</translation></message>
+    <message><source>Valor Contábil</source><translation>Valor Contábil</translation></message>
+    <message><source>Se Diferença Contábil &lt; 0</source><translation>Se Diferença Contábil &lt; 0</translation></message>
+    <message><source>Se Diferença Contábil &gt; 0</source><translation>Se Diferença Contábil &gt; 0</translation></message>
+    <message><source>Cálculo do Imposto:</source><translation>Cálculo do Imposto:</translation></message>
+    <message><source>Cálculo do Fluxo de Caixa Líquido:</source><translation>Cálculo do Fluxo de Caixa Líquido:</translation></message>
+    <message><source>CÁLCULOS DETALHADOS POR ANO:</source><translation>CÁLCULOS DETALHADOS POR ANO:</translation></message>
+    <message><source>Investimento inicial pago à vista</source><translation>Investimento inicial pago à vista</translation></message>
+    <message><source>Investimento 100% financiado - sem desembolso inicial</source><translation>Investimento 100% financiado - sem desembolso inicial</translation></message>
+    <message><source>Lucro bruto operacional</source><translation>Lucro bruto operacional</translation></message>
+    <message><source>Venda do ativo</source><translation>Venda do ativo</translation></message>
+    <message><source>Fluxo bruto total</source><translation>Fluxo bruto total</translation></message>
+    <message><source>Cálculo da Diferença Contábil</source><translation>Cálculo da Diferença Contábil</translation></message>
+    <message><source>Perda de capital de</source><translation>Perda de capital de</translation></message>
+    <message><source>Ganho de capital de</source><translation>Ganho de capital de</translation></message>
+    <message><source>Sem ganho ou perda de capital</source><translation>Sem ganho ou perda de capital</translation></message>
+    <message><source>Cálculo da Renda Tributável</source><translation>Cálculo da Renda Tributável</translation></message>
+    <message><source>Cálculo do Imposto</source><translation>Cálculo do Imposto</translation></message>
+    <message><source>Cálculo do Fluxo de Caixa Líquido</source><translation>Cálculo do Fluxo de Caixa Líquido</translation></message>
+    <message><source>ETAPA 4: CÁLCULO DO VALOR PRESENTE LÍQUIDO (VPL)</source><translation>ETAPA 4: CÁLCULO DO VALOR PRESENTE LÍQUIDO (VPL)</translation></message>
+    <message><source>Fórmula do VPL:</source><translation>Fórmula do VPL:</translation></message>
+    <message><source>CÁLCULO DETALHADO DO VPL:</source><translation>CÁLCULO DETALHADO DO VPL:</translation></message>
+    <message><source>SOMATÓRIO DOS VALORES PRESENTES:</source><translation>SOMATÓRIO DOS VALORES PRESENTES:</translation></message>
+    <message><source>RESPOSTA: O Valor Presente Líquido (VPL) é de</source><translation>RESPOSTA: O Valor Presente Líquido (VPL) é de</translation></message>
+    <message><source>VPL com Impostos</source><translation>VPL com Impostos</translation></message>
+    <message><source>&lt;b&gt;Dados Obrigatórios&lt;/b&gt;</source><translation>&lt;b&gt;Dados Obrigatórios&lt;/b&gt;</translation></message>
+    <message><source>Investimento Inicial (R$):</source><translation>Investimento Inicial (R$):</translation></message>
+    <message><source>Lucro Antes dos Impostos (R$/ano):</source><translation>Lucro Antes dos Impostos (R$/ano):</translation></message>
+    <message><source>Vida Útil (anos):</source><translation>Vida Útil (anos):</translation></message>
+    <message><source>IRPJ (%):</source><translation>IRPJ (%):</translation></message>
+    <message><source>CSLL (%):</source><translation>CSLL (%):</translation></message>
+    <message><source>TMA (% ao ano):</source><translation>TMA (% ao ano):</translation></message>
+    <message><source>&lt;b&gt;Financiamento (Opcional)&lt;/b&gt;</source><translation>&lt;b&gt;Financiamento (Opcional)&lt;/b&gt;</translation></message>
+    <message><source>Investimento Financiado (SAC)</source><translation>Investimento Financiado (SAC)</translation></message>
+    <message><source>Taxa de Juros (%):</source><translation>Taxa de Juros (%):</translation></message>
+    <message><source>Taxa de Juros (%)</source><translation>Taxa de Juros (%)</translation></message>
+    <message><source>Número de Parcelas:</source><translation>Número de Parcelas:</translation></message>
+    <message><source>&lt;b&gt;Venda Antecipada (Opcional)&lt;/b&gt;</source><translation>&lt;b&gt;Venda Antecipada (Opcional)&lt;/b&gt;</translation></message>
+    <message><source>Valor Residual (R$):</source><translation>Valor Residual (R$):</translation></message>
+    <message><source>Ano de Venda:</source><translation>Ano de Venda:</translation></message>
+    <message><source>Valor de Venda (R$):</source><translation>Valor de Venda (R$):</translation></message>
+    <message><source>Calcular VPL</source><translation>Calcular VPL</translation></message>
+    <message><source>Padrão: 0</source><translation>Padrão: 0</translation></message>
+    <message><source>Padrão: último ano</source><translation>Padrão: último ano</translation></message>
+
   </context>
 </TS>

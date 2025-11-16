@@ -2,8 +2,8 @@ from PySide6.QtWidgets import QMenuBar, QTextEdit
 from PySide6.QtGui import QAction, QActionGroup
 from PySide6.QtCore import QCoreApplication
 from html import escape
-from .ui_22_export_pdf import amort_table_to_html
-from .ui_25_exibir_sobre import exibir_sobre
+from .ui_25_export_pdf import amort_table_to_html
+from .ui_28_exibir_sobre import exibir_sobre
 from utils.LogManager import LogManager
 
 logger = LogManager.get_logger()
@@ -65,7 +65,7 @@ def create_menu_bar(self):
         font_config_action = QAction(tr("App", "Configurar Fontes"), self)
         def open_font_config():
             try:
-                from .ui_21_font_config_dialog import FontConfigDialog
+                from .ui_24_font_config_dialog import FontConfigDialog
                 dialog = FontConfigDialog(self)
                 dialog.exec()
 

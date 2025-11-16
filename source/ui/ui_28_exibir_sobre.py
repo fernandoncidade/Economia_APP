@@ -1,6 +1,6 @@
 from PySide6.QtCore import QCoreApplication
-from source.ui.ui_24_SobreDialog import SobreDialog
-from source.ui.ui_26_opcoes_sobre import (SITE_LICENSES, 
+from source.ui.ui_27_SobreDialog import SobreDialog
+from source.ui.ui_29_opcoes_sobre import (SITE_LICENSES, 
                                           LICENSE_TEXT_PT_BR, LICENSE_TEXT_EN_US, 
                                           NOTICE_TEXT_PT_BR, NOTICE_TEXT_EN_US, 
                                           ABOUT_TEXT_PT_BR, ABOUT_TEXT_EN_US, 

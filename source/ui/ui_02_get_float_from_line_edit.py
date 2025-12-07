@@ -1,4 +1,4 @@
-from utils.LogManager import LogManager
+from source.utils.LogManager import LogManager
 logger = LogManager.get_logger()
 
 def get_float_from_line_edit(self, line_edit, is_percentage=False, default=None):

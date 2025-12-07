@@ -1,7 +1,7 @@
 from PySide6.QtWidgets import QTableWidgetItem
 from PySide6.QtCore import QCoreApplication
-from utils.LogManager import LogManager
-from utils.TextFormat import format_currency, to_superscript, to_subscript, format_fraction
+from source.utils.LogManager import LogManager
+from source.utils.TextFormat import format_currency, to_superscript, to_subscript, format_fraction
 
 logger = LogManager.get_logger()
 

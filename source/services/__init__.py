@@ -9,6 +9,8 @@ from .sv_08_calculate_effective_rate import calculate_effective_rate
 from .sv_09_calculate_minimum_return import calculate_minimum_return
 from .sv_10_calculate_fisher import calculate_fisher
 from .sv_11_calculate_value_at_k import calculate_value_at_k
+from .sv_12_calculate_vpl_with_taxes import calculate_vpl_with_taxes
+from .sv_13_calculate_caue import calculate_caue
 
 __all__ = [
     "calculate_interest",
@@ -23,4 +25,6 @@ __all__ = [
     "calculate_minimum_return",
     "calculate_fisher",
     "calculate_value_at_k",
+    "calculate_vpl_with_taxes",
+    "calculate_caue",
 ]

@@ -1,6 +1,6 @@
 from PySide6.QtCore import QCoreApplication
-from utils.LogManager import LogManager
-from utils.TextFormat import to_superscript, to_subscript, to_superscript_parens, format_currency, format_fraction
+from source.utils.LogManager import LogManager
+from source.utils.TextFormat import to_superscript, to_subscript, to_superscript_parens, format_currency, format_fraction
 
 logger = LogManager.get_logger()
 

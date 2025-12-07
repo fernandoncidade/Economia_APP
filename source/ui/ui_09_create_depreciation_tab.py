@@ -1,8 +1,8 @@
-from PySide6.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLineEdit, QPushButton, QComboBox, QSizePolicy
+from PySide6.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLineEdit, QPushButton, QComboBox, QSizePolicy, QLabel
 from PySide6.QtGui import QDoubleValidator, QFontDatabase
 from PySide6.QtCore import QCoreApplication
-from .ui_20_history_container import HistoryContainer
-from utils.LogManager import LogManager
+from .ui_23_history_container import HistoryContainer
+from source.utils.LogManager import LogManager
 
 logger = LogManager.get_logger()
 
@@ -13,7 +13,11 @@ def create_depreciation_tab(self):
         self.tabs.addTab(widget, tr("App", "Depreciação"))
 
         self.deprec_method = QComboBox()
-        self.deprec_method.addItems([tr("App", "Método Linear"), tr("App", "Método da Soma dos Dígitos dos Anos")])
+        self.deprec_method.addItems([
+            tr("App", "Método Linear"), 
+            tr("App", "Soma dos Dígitos (Decrescente)"),
+            tr("App", "Soma dos Dígitos (Crescente)")
+        ])
 
         self.deprec_p = QLineEdit()
         self.deprec_vre = QLineEdit()

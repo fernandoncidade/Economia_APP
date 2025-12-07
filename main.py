@@ -1,8 +1,8 @@
 import sys
 from PySide6.QtWidgets import QApplication
 from source import FinancialCalculatorApp
-from utils.LogManager import LogManager
-# from utils.TrialManager import TrialManager
+from source.utils.LogManager import LogManager
+# from source.utils.TrialManager import TrialManager
 
 logger = LogManager.get_logger()
 

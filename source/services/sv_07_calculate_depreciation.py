@@ -1,5 +1,6 @@
 from PySide6.QtCore import QCoreApplication
-from utils.LogManager import LogManager
+from source.utils.LogManager import LogManager
+from source.utils.TextFormat import format_currency, format_fraction, to_subscript
 
 logger = LogManager.get_logger()
 
@@ -11,39 +12,22 @@ def calculate_depreciation(self):
         n = int(self.get_float_from_line_edit(self.deprec_n))
         if n <= 0: raise ValueError(tr("App", "Vida útil deve ser positiva."))
 
-        # Corrigido: usar índice ao invés de comparação de texto
-        is_linear = self.deprec_method.currentIndex() == 0  # 0 = Método Linear, 1 = Soma dos Dígitos
+        # 0 = Linear, 1 = Soma Decrescente, 2 = Soma Crescente
+        method_index = self.deprec_method.currentIndex()
         result_text = ""
 
         k_text = self.deprec_k.text().strip()
         k = int(k_text) if k_text else None
 
         if k is not None and (k < 1 or k > n):
-                raise ValueError(tr("App", "O ano 'k' deve estar entre 1 e a Vida Útil (N)."))
-
-        # Normalização da formatação numérica/monetária
-        def format_currency(value, decimals=2):
-            s = f"{value:,.{decimals}f}"         # ex: "15,000.00"
-            s = s.replace(",", "T")             # "15T000.00"
-            s = s.replace(".", ",")             # "15T000,00"
-            s = s.replace("T", ".")             # "15.000,00"
-            return s
-
-        # Função auxiliar para formatar frações com numerador centralizado sobre o traço
-        def format_fraction(numer_str, denom_str, prefix=""):
-            # prefix é aplicado somente na linha do traço
-            numer = str(numer_str)
-            denom = str(denom_str)
-            width = max(len(numer), len(denom), 3)
-            pad = " " * len(prefix)
-            numer_line = pad + numer.center(width)
-            divider_line = prefix + "─" * width
-            denom_line = pad + denom.center(width)
-            return numer_line, divider_line, denom_line
+            raise ValueError(tr("App", "O ano 'k' deve estar entre 1 e a Vida Útil (N)."))
 
         steps = []
 
-        if is_linear:
+        # ============================================================
+        # MÉTODO LINEAR
+        # ============================================================
+        if method_index == 0:
             dr_anual = (p - vre) / n
 
             steps.append("═" * 60 + "\n")
@@ -68,43 +52,37 @@ def calculate_depreciation(self):
             steps.append(cf3 + f" = R$ {format_currency(dr_anual)}\n\n")
 
             if k is not None:
+                deprec_acum = dr_anual * k
+                vc_k = p - deprec_acum
+
                 steps.append("─" * 60 + "\n")
-                steps.append(tr("App", "CÁLCULO PARA O ANO") + f" {k}\n")
+                steps.append(f"{tr('App', 'Análise no ano')} k = {k}\n")
                 steps.append("─" * 60 + "\n\n")
 
-                vc_k = p - (k * dr_anual)
-                dep_acumulada = k * dr_anual
-
-                steps.append(tr("App", "Fórmula do Valor Contábil:") + "\n")
-                steps.append("  VC_k = P - (k × DR)\n\n")
-
-                steps.append(tr("App", "Cálculo:") + "\n")
-                steps.append(f"  {tr('App', 'Depreciação acumulada até o ano')} {format_currency(k,0)}:\n")
-                steps.append(f"    {tr('App', 'Dep. Acum.')} = {format_currency(k,0)} × {format_currency(dr_anual)} = R$ {format_currency(dep_acumulada)}\n\n")
-
-                steps.append(f"  {tr('App', 'Valor Contábil ao final do ano')} {format_currency(k,0)}:\n")
-                steps.append(f"    VC_{k} = P - {tr('App', 'Dep. Acum.')}\n")
-                steps.append(f"    VC_{k} = {format_currency(p)} - {format_currency(dep_acumulada)}\n")
-                steps.append(f"    VC_{k} = R$ {format_currency(vc_k)}\n\n")
+                steps.append(f"  {tr('App', 'Depreciação anual')}:      DR = R$ {format_currency(dr_anual)}\n")
+                steps.append(f"  {tr('App', 'Depreciação acumulada')}: DR{to_subscript('acum')} = {k} × {format_currency(dr_anual)} = R$ {format_currency(deprec_acum)}\n")
+                steps.append(f"  {tr('App', 'Valor Contábil')}: VC{to_subscript(k)} = P - DR{to_subscript('acum')} = {format_currency(p)} - {format_currency(deprec_acum)} = R$ {format_currency(vc_k)}\n\n")
 
             steps.append("─" * 60 + "\n")
             steps.append(tr("App", "RESPOSTA: Depreciação anual =") + f" R$ {format_currency(dr_anual)}\n")
             if k is not None:
-                steps.append(f"          {tr('App', 'Valor contábil')} ({tr('App', 'ano')} {k}) = R$ {format_currency(vc_k)}\n")
-
+                steps.append(f"          {tr('App', 'Valor Contábil no ano')} {k} = R$ {format_currency(vc_k)}\n")
             steps.append("─" * 60 + "\n")
 
-        else: # Soma dos Dígitos
+        # ============================================================
+        # SOMA DOS DÍGITOS - DECRESCENTE
+        # ============================================================
+        elif method_index == 1:
             soma_digitos = (n * (n + 1)) / 2
 
             steps.append("═" * 60 + "\n")
-            steps.append(tr("App", "DEPRECIAÇÃO - SOMA DOS DÍGITOS DOS ANOS") + "\n")
+            steps.append(tr("App", "DEPRECIAÇÃO - SOMA DOS DÍGITOS (DECRESCENTE)") + "\n")
             steps.append("═" * 60 + "\n\n")
 
-            steps.append(tr("App", "Fórmula:") + "\n")
-            f1, f2, f3 = format_fraction("(N - k + 1)", tr("App", "Soma"), prefix="  DR_k = ")
-            steps.append(f1 + "\n")
-            steps.append(f2 + " × (P - VRE)\n")
+            steps.append(tr("App", "Fórmula da depreciação no ano n:") + "\n")
+            f1, f2, f3 = format_fraction("(N - n + 1)", "S", prefix=f"  DR{to_subscript('n')} = ")
+            steps.append(f1 + " × (P - VRE)\n")
+            steps.append(f2 + "\n")
             steps.append(f3 + "\n\n")
 
             steps.append(tr("App", "Dados do problema:") + "\n")
@@ -113,69 +91,172 @@ def calculate_depreciation(self):
             steps.append(f"  N ({tr('App', 'Vida útil')})          = {format_currency(n,0)} {tr('App', 'anos')}\n\n")
 
             steps.append(tr("App", "Cálculo da Soma dos Dígitos:") + "\n")
-            s1, s2, s3 = format_fraction("N × (N + 1)", "2", prefix=f"  {tr('App', 'Soma')} = ")
-            steps.append(f"  {tr('App', 'Soma')} = 1 + 2 + 3 + ... + N\n")
+            s1, s2, s3 = format_fraction("N × (N + 1)", "2", prefix=f"  S = ")
             steps.append(s1 + "\n")
             steps.append(s2 + "\n")
             steps.append(s3 + "\n")
-            sn1, sn2, sn3 = format_fraction(f"{format_currency(n,0)} × ({format_currency(n,0)} + 1)", "2", prefix=f"  {tr('App', 'Soma')} = ")
-            steps.append(sn1 + "\n")
-            steps.append(sn2 + "\n")
-            steps.append(sn3 + f" = {format_currency(soma_digitos,0)}\n\n")
+            steps.append(f"  S = {format_currency(n,0)} × {format_currency(n+1,0)} / 2\n")
+            steps.append(f"  S = {format_currency(soma_digitos,0)}\n\n")
 
-            steps.append(tr("App", "Total a depreciar:") + "\n")
-            steps.append(f"  P - VRE = {format_currency(p)} - {format_currency(vre)} = R$ {format_currency(p - vre)}\n\n")
+            depreciavel = p - vre
 
             if k is not None:
+                # Cálculo para ano específico k
                 steps.append("─" * 60 + "\n")
-                steps.append(tr("App", "CÁLCULO PARA O ANO") + f" {k}\n")
+                steps.append(f"{tr('App', 'Análise no ano')} k = {k}\n")
                 steps.append("─" * 60 + "\n\n")
 
-                fator_k = (n - k + 1) / soma_digitos
-                dr_k = fator_k * (p - vre)
+                # DR_k
+                dr_k = ((n - k + 1) / soma_digitos) * depreciavel
+                steps.append(f"{tr('App', 'Depreciação no ano')} {k}:\n")
+                f1, f2, f3 = format_fraction(f"({n} - {k} + 1)", format_currency(soma_digitos,0), prefix=f"  DR{to_subscript(k)} = ")
+                steps.append(f1 + f" × {format_currency(depreciavel)}\n")
+                steps.append(f2 + "\n")
+                steps.append(f3 + "\n")
+                steps.append(f"  DR{to_subscript(k)} = R$ {format_currency(dr_k)}\n\n")
 
-                steps.append(tr("App", "Quota de depreciação no ano") + f" {format_currency(k,0)}:\n")
-                ftk1, ftk2, ftk3 = format_fraction("(N - k + 1)", tr("App", "Soma"), prefix=f"  {tr('App', 'Fator')} = ")
-                steps.append(ftk1 + "\n")
-                steps.append(ftk2 + "\n")
-                steps.append(ftk3 + "\n")
-                ftn1, ftn2, ftn3 = format_fraction(f"({format_currency(n,0)} - {format_currency(k,0)} + 1)", format_currency(soma_digitos,0), prefix=f"  {tr('App', 'Fator')} = ")
-                steps.append(ftn1 + "\n")
-                steps.append(ftn2 + "\n")
-                steps.append(ftn3 + f" = {format_currency(fator_k,6)}\n\n")
+                # Depreciação acumulada até k
+                soma_parcial = sum(n - j + 1 for j in range(1, k + 1))
+                deprec_acum = (soma_parcial / soma_digitos) * depreciavel
 
-                steps.append(f"  DR_{k} = {tr('App', 'Fator')} × (P - VRE)\n")
-                steps.append(f"  DR_{k} = {format_currency(fator_k,6)} × {format_currency(p - vre)}\n")
-                steps.append(f"  DR_{k} = R$ {format_currency(dr_k)}\n\n")
+                steps.append(f"{tr('App', 'Depreciação acumulada até o ano')} {k}:\n")
+                formula_str = " + ".join([f"({n}-{j}+1)" for j in range(1, k + 1)])
+                steps.append(f"  {tr('App', 'Soma dos fatores')}: {formula_str} = {format_currency(soma_parcial,0)}\n")
+                
+                f1, f2, f3 = format_fraction(format_currency(soma_parcial,0), format_currency(soma_digitos,0), prefix=f"  DR{to_subscript('acum')} = ")
+                steps.append(f1 + f" × {format_currency(depreciavel)}\n")
+                steps.append(f2 + "\n")
+                steps.append(f3 + "\n")
+                steps.append(f"  DR{to_subscript('acum')} = R$ {format_currency(deprec_acum)}\n\n")
 
-                # Calcular depreciação acumulada
-                dep_acumulada = 0
-                for j in range(1, k + 1):
-                    dep_acumulada += ((n - j + 1) / soma_digitos) * (p - vre)
+                # Valor Contábil (Valor Real)
+                vc_k = p - deprec_acum
+                steps.append(f"{tr('App', 'Valor Contábil (Valor Real) ao final do ano')} {k}:\n")
+                steps.append(f"  VR{to_subscript(k)} = P - DR{to_subscript('acum')}\n")
+                steps.append(f"  VR{to_subscript(k)} = {format_currency(p)} - {format_currency(deprec_acum)}\n")
+                steps.append(f"  VR{to_subscript(k)} = R$ {format_currency(vc_k)}\n\n")
 
-                vc_k = p - dep_acumulada
-
-                steps.append(tr("App", "Depreciação acumulada até o ano") + f" {format_currency(k,0)}:\n")
-                for j in range(1, k + 1):
-                    dr_j = ((n - j + 1) / soma_digitos) * (p - vre)
-                    steps.append(f"  {tr('App', 'Ano')} {format_currency(j,0)}: DR_{j} = R$ {format_currency(dr_j)}\n")
-
-                steps.append(f"  {tr('App', 'Total acumulado')} = R$ {format_currency(dep_acumulada)}\n\n")
-
-                steps.append(tr("App", "Valor Contábil ao final do ano") + f" {format_currency(k,0)}:\n")
-                steps.append(f"  VC_{k} = P - {tr('App', 'Dep. Acum.')}\n")
-                steps.append(f"  VC_{k} = {format_currency(p)} - {format_currency(dep_acumulada)}\n")
-                steps.append(f"  VC_{k} = R$ {format_currency(vc_k)}\n\n")
-
-            steps.append("─" * 60 + "\n")
-            if k is not None:
-                steps.append(tr("App", "RESPOSTA: Depreciação no ano") + f" {format_currency(k,0)} = R$ {format_currency(dr_k)}\n")
-                steps.append(f"          {tr('App', 'Valor contábil')} ({tr('App', 'ano')} {format_currency(k,0)}) = R$ {format_currency(vc_k)}\n")
+                steps.append("═" * 60 + "\n")
+                steps.append(tr("App", "RESPOSTA:") + "\n")
+                steps.append(f"  {tr('App', 'Depreciação no ano')} {k}: R$ {format_currency(dr_k)}\n")
+                steps.append(f"  {tr('App', 'Depreciação acumulada')}: R$ {format_currency(deprec_acum)}\n")
+                steps.append(f"  {tr('App', 'Valor Real ao final do ano')} {k}: R$ {format_currency(vc_k)}\n")
+                steps.append("═" * 60 + "\n")
 
             else:
-                steps.append(tr("App", "RESPOSTA: Soma dos dígitos =") + f" {format_currency(soma_digitos,0)}\n")
+                # Tabela completa
+                steps.append("─" * 60 + "\n")
+                steps.append(tr("App", "Tabela de Depreciação Completa") + "\n")
+                steps.append("─" * 60 + "\n\n")
 
-            steps.append("─" * 60 + "\n")
+                steps.append(f"{'Ano':>4} | {'Fator':>10} | {'DR (R$)':>15} | {'DR Acum (R$)':>15} | {'VC (R$)':>15}\n")
+                steps.append("─" * 80 + "\n")
+
+                deprec_acum = 0
+                for j in range(1, n + 1):
+                    fator = n - j + 1
+                    dr_j = (fator / soma_digitos) * depreciavel
+                    deprec_acum += dr_j
+                    vc_j = p - deprec_acum
+
+                    steps.append(f"{j:4} | {fator:10} | {format_currency(dr_j):>15} | {format_currency(deprec_acum):>15} | {format_currency(vc_j):>15}\n")
+
+                steps.append("─" * 80 + "\n")
+
+        # ============================================================
+        # SOMA DOS DÍGITOS - CRESCENTE
+        # ============================================================
+        elif method_index == 2:
+            soma_digitos = (n * (n + 1)) / 2
+
+            steps.append("═" * 60 + "\n")
+            steps.append(tr("App", "DEPRECIAÇÃO - SOMA DOS DÍGITOS (CRESCENTE)") + "\n")
+            steps.append("═" * 60 + "\n\n")
+
+            steps.append(tr("App", "Fórmula da depreciação no ano n:") + "\n")
+            f1, f2, f3 = format_fraction("n", "S", prefix=f"  DR{to_subscript('n')} = ")
+            steps.append(f1 + " × (P - VRE)\n")
+            steps.append(f2 + "\n")
+            steps.append(f3 + "\n\n")
+
+            steps.append(tr("App", "Dados do problema:") + "\n")
+            steps.append(f"  P ({tr('App', 'Valor inicial')})      = R$ {format_currency(p)}\n")
+            steps.append(f"  VRE ({tr('App', 'Valor residual')})   = R$ {format_currency(vre)}\n")
+            steps.append(f"  N ({tr('App', 'Vida útil')})          = {format_currency(n,0)} {tr('App', 'anos')}\n\n")
+
+            steps.append(tr("App", "Cálculo da Soma dos Dígitos:") + "\n")
+            s1, s2, s3 = format_fraction("N × (N + 1)", "2", prefix=f"  S = ")
+            steps.append(s1 + "\n")
+            steps.append(s2 + "\n")
+            steps.append(s3 + "\n")
+            steps.append(f"  S = {format_currency(n,0)} × {format_currency(n+1,0)} / 2\n")
+            steps.append(f"  S = {format_currency(soma_digitos,0)}\n\n")
+
+            depreciavel = p - vre
+
+            if k is not None:
+                # Cálculo para ano específico k
+                steps.append("─" * 60 + "\n")
+                steps.append(f"{tr('App', 'Análise no ano')} k = {k}\n")
+                steps.append("─" * 60 + "\n\n")
+
+                # DR_k
+                dr_k = (k / soma_digitos) * depreciavel
+                steps.append(f"{tr('App', 'Depreciação no ano')} {k}:\n")
+                f1, f2, f3 = format_fraction(str(k), format_currency(soma_digitos,0), prefix=f"  DR{to_subscript(k)} = ")
+                steps.append(f1 + f" × {format_currency(depreciavel)}\n")
+                steps.append(f2 + "\n")
+                steps.append(f3 + "\n")
+                steps.append(f"  DR{to_subscript(k)} = {k} / {format_currency(soma_digitos,0)} × {format_currency(depreciavel)}\n")
+                steps.append(f"  DR{to_subscript(k)} = R$ {format_currency(dr_k)}\n\n")
+
+                # Depreciação acumulada até k
+                soma_parcial = sum(j for j in range(1, k + 1))
+                deprec_acum = (soma_parcial / soma_digitos) * depreciavel
+
+                steps.append(f"{tr('App', 'Depreciação acumulada até o ano')} {k}:\n")
+                formula_str = " + ".join([str(j) for j in range(1, k + 1)])
+                steps.append(f"  {tr('App', 'Soma dos fatores')}: {formula_str} = {format_currency(soma_parcial,0)}\n")
+                
+                f1, f2, f3 = format_fraction(format_currency(soma_parcial,0), format_currency(soma_digitos,0), prefix=f"  DR{to_subscript('acum')} = ")
+                steps.append(f1 + f" × {format_currency(depreciavel)}\n")
+                steps.append(f2 + "\n")
+                steps.append(f3 + "\n")
+                steps.append(f"  DR{to_subscript('acum')} = R$ {format_currency(deprec_acum)}\n\n")
+
+                # Valor Contábil (Valor Real)
+                vc_k = p - deprec_acum
+                steps.append(f"{tr('App', 'Valor Contábil (Valor Real) ao final do ano')} {k}:\n")
+                steps.append(f"  VR{to_subscript(k)} = P - DR{to_subscript('acum')}\n")
+                steps.append(f"  VR{to_subscript(k)} = {format_currency(p)} - {format_currency(deprec_acum)}\n")
+                steps.append(f"  VR{to_subscript(k)} = R$ {format_currency(vc_k)}\n\n")
+
+                steps.append("═" * 60 + "\n")
+                steps.append(tr("App", "RESPOSTA:") + "\n")
+                steps.append(f"  {tr('App', 'Depreciação no ano')} {k}: R$ {format_currency(dr_k)}\n")
+                steps.append(f"  {tr('App', 'Depreciação acumulada')}: R$ {format_currency(deprec_acum)}\n")
+                steps.append(f"  {tr('App', 'Valor Real ao final do ano')} {k}: R$ {format_currency(vc_k)}\n")
+                steps.append("═" * 60 + "\n")
+
+            else:
+                # Tabela completa
+                steps.append("─" * 60 + "\n")
+                steps.append(tr("App", "Tabela de Depreciação Completa") + "\n")
+                steps.append("─" * 60 + "\n\n")
+
+                steps.append(f"{'Ano':>4} | {'Fator':>10} | {'DR (R$)':>15} | {'DR Acum (R$)':>15} | {'VC (R$)':>15}\n")
+                steps.append("─" * 80 + "\n")
+
+                deprec_acum = 0
+                for j in range(1, n + 1):
+                    fator = j
+                    dr_j = (fator / soma_digitos) * depreciavel
+                    deprec_acum += dr_j
+                    vc_j = p - deprec_acum
+
+                    steps.append(f"{j:4} | {fator:10} | {format_currency(dr_j):>15} | {format_currency(deprec_acum):>15} | {format_currency(vc_j):>15}\n")
+
+                steps.append("─" * 80 + "\n")
 
         result_text = "".join(steps)
 
@@ -187,6 +268,5 @@ def calculate_depreciation(self):
         tr = QCoreApplication.translate
         try:
             self.deprec_result.append(f"{tr('App', 'Erro')}: {e}")
-
         except Exception:
             pass

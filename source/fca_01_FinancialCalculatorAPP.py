@@ -1,7 +1,7 @@
 from PySide6.QtWidgets import QMainWindow, QTabWidget
-from language.tr_01_gerenciadorTraducao import GerenciadorTraducao
-from utils.IconUtils import get_icon_path
-from utils.LogManager import LogManager
+from source.language.tr_01_gerenciadorTraducao import GerenciadorTraducao
+from source.utils.IconUtils import get_icon_path
+from source.utils.LogManager import LogManager
 from PySide6.QtCore import QCoreApplication
 
 logger = LogManager.get_logger()
@@ -19,6 +19,9 @@ from .ui import (
     create_effective_rate_tab,
     create_minimum_return_tab,
     create_fisher_tab,
+    create_vpl_tax_tab,
+    create_caue_tab,
+    generate_caue_input_table,
     generate_sac_table,
     generate_price_table,
     generate_sam_table,
@@ -47,6 +50,8 @@ from .services import (
     calculate_minimum_return,
     calculate_fisher,
     calculate_value_at_k,
+    calculate_vpl_with_taxes,
+    calculate_caue,
 )
 
 
@@ -95,6 +100,8 @@ class FinancialCalculatorApp(QMainWindow):
             self.create_effective_rate_tab()
             self.create_minimum_return_tab()
             self.create_fisher_tab()
+            self.create_vpl_tax_tab()
+            self.create_caue_tab()
             self.create_menu_bar()
 
         except Exception as e:
@@ -114,6 +121,8 @@ FinancialCalculatorApp.create_depreciation_tab = create_depreciation_tab
 FinancialCalculatorApp.create_effective_rate_tab = create_effective_rate_tab
 FinancialCalculatorApp.create_minimum_return_tab = create_minimum_return_tab
 FinancialCalculatorApp.create_fisher_tab = create_fisher_tab
+FinancialCalculatorApp.create_vpl_tax_tab = create_vpl_tax_tab
+FinancialCalculatorApp.create_caue_tab = create_caue_tab
 
 FinancialCalculatorApp.generate_sac_table = generate_sac_table
 FinancialCalculatorApp.generate_price_table = generate_price_table
@@ -122,6 +131,7 @@ FinancialCalculatorApp.generate_american_table = generate_american_table
 FinancialCalculatorApp.generate_hamburgues_table = generate_hamburgues_table
 FinancialCalculatorApp.set_amort_table_row = set_amort_table_row
 FinancialCalculatorApp.get_table_data = get_table_data
+FinancialCalculatorApp.generate_caue_input_table = generate_caue_input_table
 
 # Vinculando métodos de serviços
 FinancialCalculatorApp.calculate_interest = calculate_interest
@@ -136,6 +146,8 @@ FinancialCalculatorApp.calculate_effective_rate = calculate_effective_rate
 FinancialCalculatorApp.calculate_minimum_return = calculate_minimum_return
 FinancialCalculatorApp.calculate_fisher = calculate_fisher
 FinancialCalculatorApp.calculate_value_at_k = calculate_value_at_k
+FinancialCalculatorApp.calculate_vpl_with_taxes = calculate_vpl_with_taxes
+FinancialCalculatorApp.calculate_caue = calculate_caue
 
 FinancialCalculatorApp.export_to_pdf = export_to_pdf
 FinancialCalculatorApp.export_amortization_pdf = export_amortization_pdf

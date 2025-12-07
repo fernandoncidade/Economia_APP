@@ -1,10 +1,9 @@
-from PySide6.QtWidgets import QLineEdit, QPushButton, QComboBox, QSizePolicy, QHBoxLayout, QVBoxLayout, QWidget
+from PySide6.QtWidgets import QLineEdit, QPushButton, QComboBox, QSizePolicy, QHBoxLayout, QVBoxLayout, QWidget, QLabel
 from PySide6.QtGui import QDoubleValidator, QFontDatabase
 from PySide6.QtCore import QCoreApplication
-from .ui_20_history_container import HistoryContainer
-from utils.LogManager import LogManager
-from PySide6.QtWidgets import QLabel
-from utils.TextFormat import to_html_subscripts, to_unicode_subscripts
+from .ui_23_history_container import HistoryContainer
+from source.utils.LogManager import LogManager
+from source.utils.TextFormat import to_html_subscripts, to_unicode_subscripts
 
 logger = LogManager.get_logger()
 
